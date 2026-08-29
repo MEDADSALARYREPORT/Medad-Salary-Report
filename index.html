@@ -1,772 +1,1726 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>نظام إدارة المدارس</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --navy:#12243F; --navy-2:#1B3358; --gold:#C9A24B; --gold-light:#E4C979;
-  --paper:#F7F4EE; --ink:#1B1B1B; --slate:#5B6472; --line:#E4DFD3; --white:#FFFFFF;
-  --success:#2F7A4F; --success-bg:#E9F4EC; --danger:#B3432E; --danger-bg:#FBEAE6;
-  --radius:14px; --shadow:0 10px 30px -12px rgba(18,36,63,.25);
+:root{
+--n:#12243f;--g:#c9a24b;--p:#f7f4ee;--w:#fff;
+--l:#e4dfd3;--s:#5b6472;--d:#b3432e;--ok:#2f7a4f
 }
-* { box-sizing:border-box; }
-html,body { margin:0; padding:0; background:var(--paper); color:var(--ink); font-family:'Tajawal','Segoe UI',sans-serif; direction:rtl; }
-h1,h2,h3 { font-family:'Cairo','Tajawal',sans-serif; color:var(--navy); margin:0; }
-.hidden { display:none !important; }
-.site-header { padding:36px 20px 20px; text-align:center; }
-.seal { width:86px; height:86px; margin:0 auto 12px; border-radius:50%; background:var(--white); border:3px solid var(--gold);
-  box-shadow:0 0 0 4px var(--navy), var(--shadow); display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.seal::after { content:"شعار"; font-family:'Cairo',sans-serif; font-size:13px; color:var(--slate); }
-.school-name { font-size:22px; font-weight:800; }
-.page-title { margin-top:12px; font-size:14.5px; color:var(--gold); font-weight:700; }
-.wrap { max-width:440px; margin:0 auto; padding:0 18px 60px; }
-.wrap.wide { max-width:1050px; }
-.card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:18px; }
-label { display:block; font-size:13.5px; font-weight:700; color:var(--navy); margin:13px 0 6px; }
-input[type=text],input[type=date],input[type=month],input[type=number],input[type=password],input[type=email],select {
-  width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:10px; font-family:'Tajawal',sans-serif;
-  font-size:14.5px; background:var(--paper); color:var(--ink);
+*{box-sizing:border-box}
+body{
+margin:0;background:var(--p);color:#1b1b1b;
+font-family:Tajawal,Arial;direction:rtl
 }
-input:focus,select:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,162,75,.25); }
-.checkbox-row { display:flex; align-items:center; gap:8px; }
-.checkbox-row input { width:auto; }
-.file-drop { border:1.5px dashed var(--line); border-radius:10px; padding:16px; text-align:center; background:var(--paper); cursor:pointer; position:relative; }
-.file-drop.has-file { border-color:var(--success); background:var(--success-bg); }
-.file-drop input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
-.file-drop-text { font-size:13px; color:var(--slate); }
-.file-drop-text b { color:var(--navy); }
-.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border:none; border-radius:10px;
-  background:var(--navy); color:var(--white); font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px; cursor:pointer; }
-.btn.full { width:100%; margin-top:18px; }
-.btn:hover { background:var(--navy-2); }
-.btn:disabled { background:#9aa4b2; cursor:not-allowed; }
-.btn.gold { background:var(--gold); color:var(--navy); } .btn.gold:hover { background:var(--gold-light); }
-.btn.outline { background:transparent; color:var(--navy); border:1.5px solid var(--navy); }
-.btn.small { padding:7px 13px; font-size:12.5px; }
-.alert { padding:12px 14px; border-radius:10px; font-size:13.5px; margin-top:14px; display:none; }
-.alert.show { display:block; }
-.alert.error { background:var(--danger-bg); color:var(--danger); }
-.alert.success { background:var(--success-bg); color:var(--success); }
-.center { text-align:center; } .foot-note { text-align:center; font-size:12px; color:var(--slate); margin-top:10px; }
-.topbar { background:var(--navy); color:var(--white); padding:14px 22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
-.topbar .brand { display:flex; align-items:center; gap:10px; font-family:'Cairo',sans-serif; font-weight:700; }
-.topbar .seal-mini { width:28px; height:28px; border-radius:50%; background:var(--white); border:2px solid var(--gold); }
-.topbar nav { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-.topbar nav a { color:var(--white); text-decoration:none; font-size:13.5px; padding:7px 12px; border-radius:8px; background:rgba(255,255,255,.08); cursor:pointer; }
-.topbar nav a.active { background:var(--gold); color:var(--navy); font-weight:700; }
-.table-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); overflow-x:auto; box-shadow:var(--shadow); }
-table { width:100%; border-collapse:collapse; font-size:13px; min-width:640px; }
-thead th { background:var(--paper); color:var(--navy); font-family:'Cairo',sans-serif; text-align:center; padding:10px 8px; border-bottom:2px solid var(--line); white-space:nowrap; font-size:12.5px; }
-thead th.group-head { background:var(--gold-light); }
-tbody td { padding:8px; border-bottom:1px solid var(--line); vertical-align:middle; text-align:center; }
-tbody tr:hover { background:rgba(201,162,75,.06); }
-tbody td input,tbody td select { padding:6px 8px; font-size:12.5px; min-width:70px; }
-tbody td.name-cell { text-align:right; font-weight:700; color:var(--navy); min-width:140px; }
-.empty-state { text-align:center; padding:46px 20px; color:var(--slate); }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
-.entity-card { background:var(--white); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px; }
-.entity-card .logo-mini { width:44px; height:44px; border-radius:50%; background:var(--paper); border:2px solid var(--gold); overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.entity-card .logo-mini img { width:100%; height:100%; object-fit:contain; }
-.entity-card .name { font-family:'Cairo',sans-serif; font-weight:700; color:var(--navy); }
-.modal-bg { position:fixed; inset:0; background:rgba(18,36,63,.55); display:none; align-items:center; justify-content:center; padding:20px; z-index:50; }
-.modal-bg.show { display:flex; }
-.modal { background:var(--white); border-radius:var(--radius); padding:22px; max-width:400px; width:100%; }
-.cred-box { background:var(--paper); border:1.5px dashed var(--gold); border-radius:10px; padding:14px; margin-top:12px; font-family:monospace; direction:ltr; text-align:left; }
-.cred-box .row { display:flex; justify-content:space-between; padding:4px 0; font-size:14px; }
-.toolbar { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
-.toolbar select,.toolbar input { max-width:230px; }
-#printArea { display:none; }
-@media print {
-  body.printing > *:not(#printArea) { display:none !important; }
-  body.printing #printArea { display:block !important; direction:rtl; padding:10px; }
-  body.printing #printArea table { width:100%; border-collapse:collapse; font-size:10.5px; }
-  body.printing #printArea th, body.printing #printArea td { border:1px solid #999; padding:4px 6px; text-align:center; }
-  body.printing #printArea th { background:#eee2c2 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+h1,h2,h3{font-family:Cairo;color:var(--n)}
+.hidden{display:none!important}
+.wrap{max-width:1100px;margin:25px auto;padding:0 18px}
+.login{max-width:440px;margin:auto}
+.card,.entity{
+background:var(--w);border:1px solid var(--l);border-radius:14px;
+padding:20px;margin-bottom:18px;
+box-shadow:0 10px 30px -12px #12243f40
 }
-@media (max-width:560px){ .card{padding:18px} }
+label{
+display:block;margin:12px 0 6px;color:var(--n);font-weight:700
+}
+input,select{
+width:100%;padding:11px;border:1px solid var(--l);
+border-radius:9px;background:var(--p);font:14px Tajawal
+}
+.btn{
+border:0;border-radius:9px;padding:11px 16px;
+background:var(--n);color:#fff;font:700 14px Cairo;cursor:pointer
+}
+.btn.gold{background:var(--g);color:var(--n)}
+.btn.outline{
+background:transparent;color:var(--n);border:1px solid var(--n)
+}
+.btn.full{width:100%;margin-top:16px}
+.btn:disabled{opacity:.6}
+.top{
+background:var(--n);color:#fff;padding:13px 20px;
+display:flex;justify-content:space-between;align-items:center;
+gap:10px;flex-wrap:wrap
+}
+.top nav{display:flex;gap:7px;flex-wrap:wrap}
+.top a{
+cursor:pointer;padding:7px 11px;border-radius:7px;
+background:#ffffff14
+}
+.top a.active{background:var(--g);color:var(--n)}
+.alert{
+display:none;padding:11px;border-radius:9px;margin-top:12px
+}
+.alert.show{display:block}
+.err{background:#fbeae6;color:var(--d)}
+.ok{background:#e9f4ec;color:var(--ok)}
+table{
+width:100%;border-collapse:collapse;min-width:650px
+}
+th,td{
+padding:8px;border-bottom:1px solid var(--l);
+text-align:center
+}
+th{background:#eee2c2;color:var(--n)}
+.table{
+overflow:auto;background:#fff;border:1px solid var(--l);
+border-radius:12px
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+gap:14px
+}
+.entity{margin:0}
+.modal{
+position:fixed;inset:0;background:#12243f99;
+display:none;align-items:center;justify-content:center;
+padding:20px
+}
+.modal.show{display:flex}
+.modal>div{
+background:#fff;padding:22px;border-radius:14px;
+width:100%;max-width:400px
+}
+.cred{
+background:var(--p);padding:14px;margin-top:12px;
+font-family:monospace;direction:ltr;text-align:left
+}
+.toolbar{
+display:flex;gap:8px;align-items:center;
+flex-wrap:wrap;margin-bottom:15px
+}
+.toolbar input{max-width:180px}
+.empty{text-align:center;padding:35px;color:var(--s)}
+
+@media(max-width:600px){
+.wrap{padding:0 10px}
+.card{padding:16px}
+}
 </style>
 </head>
+
 <body>
 
-<!-- ============ شاشة تسجيل الدخول ============ -->
-<div id="loginView">
-  <header class="site-header">
-    <div class="seal"></div>
-    <div class="school-name">نظام إدارة المدارس</div>
-    <div class="page-title">تسجيل الدخول</div>
-  </header>
-  <div class="wrap">
-    <div class="card">
-      <label for="userInput">اسم المستخدم</label>
-      <input type="text" id="userInput" placeholder="اسم مستخدم القسم، أو بريد الأدمن العام">
-      <label for="passInput">كلمة المرور</label>
-      <input type="password" id="passInput" placeholder="••••••••">
-      <button class="btn full gold" id="loginBtn">دخول</button>
-      <div class="alert error" id="loginError"></div>
-    </div>
-    <div class="foot-note">حسابات الأقسام تُنشأ من قِبل أدمن المدرسة العام</div>
-  </div>
+<!-- تسجيل الدخول -->
+<div id="login">
+
+<header style="text-align:center;padding:40px 15px 20px">
+<h1>نظام إدارة المدارس</h1>
+<div style="color:var(--g);font-weight:700">تسجيل الدخول</div>
+</header>
+
+<div class="wrap login">
+<div class="card">
+
+<label>اسم المستخدم أو البريد</label>
+<input id="user" placeholder="اسم مستخدم القسم أو بريد الأدمن">
+
+<label>كلمة المرور</label>
+<input id="pass" type="password" placeholder="••••••••">
+
+<button class="btn gold full" id="loginBtn">دخول</button>
+
+<div id="loginErr" class="alert err"></div>
+
+</div>
+</div>
 </div>
 
-<!-- ============ لوحة الأدمن العام ============ -->
-<div id="adminView" class="hidden">
-  <div class="topbar">
-    <div class="brand"><div class="seal-mini"></div><span>لوحة الأدمن العام</span></div>
-    <nav>
-      <a data-tab="schools" class="admin-tab active">المدارس</a>
-      <a data-tab="departments" class="admin-tab">الأقسام</a>
-      <button class="btn small gold" id="adminLogoutBtn">تسجيل الخروج</button>
-    </nav>
-  </div>
 
-  <div class="wrap wide" style="margin-top:24px">
+<!-- لوحة الأدمن -->
+<div id="admin" class="hidden">
 
-    <!-- تبويب المدارس -->
-    <div id="tab-schools">
-      <div class="card">
-        <h3 style="margin-bottom:14px">إضافة مدرسة جديدة</h3>
-        <label for="schoolName">اسم المدرسة</label>
-        <input type="text" id="schoolName" placeholder="مثال: مدارس مداد البيان الأهلية">
-        <label>شعار المدرسة</label>
-        <div class="file-drop" id="logoDrop">
-          <input type="file" id="logoFile" accept="image/*">
-          <div class="file-drop-text" id="logoDropText"><b>اضغط لاختيار الشعار</b></div>
-        </div>
-        <button class="btn full" id="addSchoolBtn">إضافة المدرسة</button>
-        <div class="alert error" id="schoolError"></div>
-        <div class="alert success" id="schoolSuccess">تمت إضافة المدرسة بنجاح.</div>
-      </div>
-      <h3 style="margin:10px 0 14px">المدارس الحالية</h3>
-      <div class="grid" id="schoolsGrid"></div>
-      <div class="empty-state" id="schoolsEmpty" style="display:none">لا توجد مدارس بعد</div>
-    </div>
+<div class="top">
+<b>لوحة الأدمن العام</b>
 
-    <!-- تبويب الأقسام -->
-    <div id="tab-departments" class="hidden">
-      <div class="card">
-        <h3 style="margin-bottom:14px">إضافة قسم جديد</h3>
-        <label for="deptSchoolSelect">المدرسة</label>
-        <select id="deptSchoolSelect"></select>
-        <label for="deptName">اسم القسم</label>
-        <input type="text" id="deptName" placeholder="مثال: الابتدائي بنين">
-        <button class="btn full" id="addDeptBtn">إضافة القسم وتوليد بيانات الدخول</button>
-        <div class="alert error" id="deptError"></div>
-      </div>
-      <h3 style="margin:10px 0 14px">أقسام المدرسة المختارة</h3>
-      <div class="table-card">
-        <table>
-          <thead><tr><th>اسم القسم</th><th>اسم المستخدم</th></tr></thead>
-          <tbody id="deptBody"></tbody>
-        </table>
-        <div class="empty-state" id="deptEmpty" style="display:none">لا توجد أقسام لهذه المدرسة بعد</div>
-      </div>
-    </div>
-
-  </div>
+<nav>
+<a class="at active" data-t="schools">المدارس</a>
+<a class="at" data-t="departments">الأقسام</a>
+<button class="btn gold" id="logout1">خروج</button>
+</nav>
 </div>
 
-<!-- ============ لوحة القسم ============ -->
-<div id="deptView" class="hidden">
-  <div class="topbar">
-    <div class="brand"><div class="seal-mini"></div><span>حساب القسم</span></div>
-    <nav>
-      <a data-tab="employees" class="dept-tab active">قائمة الموظفين</a>
-      <a data-tab="sheet" class="dept-tab">المسير الشهري</a>
-      <button class="btn small gold" id="deptLogoutBtn">تسجيل الخروج</button>
-    </nav>
-  </div>
+<div class="wrap">
 
-  <div class="wrap wide" style="margin-top:24px">
+<section id="schoolsTab">
 
-    <!-- تبويب الموظفين -->
-    <div id="tab-employees">
-      <div class="card">
-        <h3 style="margin-bottom:14px">إضافة موظف</h3>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px">
-          <div><label for="empName">اسم الموظف</label><input type="text" id="empName" placeholder="الاسم الكامل"></div>
-          <div><label for="empJob">المسمى الوظيفي</label><input type="text" id="empJob" placeholder="مثال: معلم لغة عربية"></div>
-        </div>
-        <label for="empStart">تاريخ المباشرة</label>
-        <input type="date" id="empStart">
-        <button class="btn full" id="addEmpBtn">إضافة الموظف</button>
-        <div class="alert error" id="empError"></div>
-      </div>
-      <h3 style="margin:10px 0 14px">قائمة الموظفين</h3>
-      <div class="table-card">
-        <table>
-          <thead><tr><th>م</th><th>اسم الموظف</th><th>المسمى الوظيفي</th><th>تاريخ المباشرة</th><th>تعديل</th></tr></thead>
-          <tbody id="empBody"></tbody>
-        </table>
-        <div class="empty-state" id="empEmpty" style="display:none">لا يوجد موظفون بعد</div>
-      </div>
-    </div>
+<div class="card">
 
-    <!-- تبويب المسير -->
-    <div id="tab-sheet" class="hidden">
-      <div class="toolbar">
-        <label style="margin:0">الشهر:</label>
-        <input type="month" id="monthPicker">
-        <button class="btn small outline" id="loadSheetBtn">تحميل / تحديث</button>
-        <button class="btn small outline" id="exportPdfBtn">تصدير / طباعة PDF</button>
-        <button class="btn small gold" id="saveAllBtn" style="margin-inline-start:auto">حفظ الكل</button>
-      </div>
-      <div class="alert error" id="sheetError"></div>
-      <div class="alert success" id="sheetSuccess">تم حفظ المسير بنجاح.</div>
-      <div class="table-card">
-        <table>
-          <thead>
-            <tr>
-              <th rowspan="2">م</th><th rowspan="2">اسم الموظف</th><th rowspan="2">المسمى الوظيفي</th><th rowspan="2">تاريخ المباشرة</th>
-              <th colspan="3" class="group-head">عدد أيام الغياب</th>
-              <th rowspan="2">تاريخ الغياب<br>(ميلادي)</th>
-              <th rowspan="2">عدد دقائق<br>التأخير</th>
-              <th rowspan="2">عدد دقائق<br>الانصراف المبكر</th>
-              <th rowspan="2">عدد أيام<br>عدم البصمة</th>
-              <th rowspan="2">عدد أيام<br>الاستئذان</th>
-              <th rowspan="2">حصص إضافية</th>
-              <th rowspan="2">توقيع المعلم<br>بالعلم</th>
-              <th rowspan="2">ملاحظات</th>
-            </tr>
-            <tr><th class="group-head">بعذر</th><th class="group-head">بدون عذر</th><th class="group-head">مجموع</th></tr>
-          </thead>
-          <tbody id="sheetBody"></tbody>
-        </table>
-        <div class="empty-state" id="sheetEmpty" style="display:none">لا يوجد موظفون بعد — أضيفوهم أولًا من "قائمة الموظفين"</div>
-      </div>
-      <button class="btn full gold" id="saveAllBtn2" style="margin-top:16px">حفظ الكل</button>
-    </div>
+<h3>إضافة مدرسة</h3>
 
-  </div>
+<label>اسم المدرسة</label>
+<input id="schoolName">
+
+<label>شعار المدرسة</label>
+<input id="logo" type="file" accept="image/*">
+
+<button class="btn full" id="addSchool">
+إضافة المدرسة
+</button>
+
+<div id="schoolErr" class="alert err"></div>
+
+<div id="schoolOk" class="alert ok">
+تمت الإضافة.
 </div>
 
-<!-- منطقة الطباعة (تظهر فقط عند الطباعة/تصدير PDF) -->
-<div id="printArea"></div>
-
-<!-- نافذة بيانات دخول القسم الجديد -->
-<div class="modal-bg" id="credModal">
-  <div class="modal">
-    <h3>تم إنشاء القسم بنجاح</h3>
-    <p style="color:var(--slate); font-size:13.5px">احفظوا هذه البيانات الآن وسلّموها للقسم — لن تظهر كلمة المرور مرة أخرى.</p>
-    <div class="cred-box">
-      <div class="row"><span>اسم المستخدم:</span><b id="credUser"></b></div>
-      <div class="row"><span>كلمة المرور:</span><b id="credPass"></b></div>
-    </div>
-    <button class="btn full gold" id="closeModalBtn" style="margin-top:16px">تم، أغلق النافذة</button>
-  </div>
 </div>
+
+<h3>المدارس الحالية</h3>
+
+<div id="schools" class="grid"></div>
+
+</section>
+
+
+<section id="departmentsTab" class="hidden">
+
+<div class="card">
+
+<h3>إضافة قسم</h3>
+
+<label>المدرسة</label>
+<select id="schoolSelect"></select>
+
+<label>اسم القسم</label>
+<input id="deptName">
+
+<button class="btn full" id="addDept">
+إضافة القسم وتوليد بيانات الدخول
+</button>
+
+<div id="deptErr" class="alert err"></div>
+
+</div>
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>القسم</th>
+<th>اسم المستخدم</th>
+</tr>
+</thead>
+
+<tbody id="depts"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+
+<!-- لوحة القسم -->
+<div id="department" class="hidden">
+
+<div class="top">
+
+<b>حساب القسم</b>
+
+<nav>
+
+<a class="dt active" data-t="employees">
+الموظفون
+</a>
+
+<a class="dt" data-t="sheet">
+المسير الشهري
+</a>
+
+<button class="btn gold" id="logout2">
+خروج
+</button>
+
+</nav>
+
+</div>
+
+<div class="wrap">
+
+
+<section id="employeesTab">
+
+<div class="card">
+
+<h3>إضافة موظف</h3>
+
+<label>اسم الموظف</label>
+<input id="empName">
+
+<label>المسمى الوظيفي</label>
+<input id="empJob">
+
+<label>تاريخ المباشرة</label>
+<input id="empStart" type="date">
+
+<button class="btn full" id="addEmp">
+إضافة الموظف
+</button>
+
+<div id="empErr" class="alert err"></div>
+
+</div>
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+<th>م</th>
+<th>الاسم</th>
+<th>الوظيفة</th>
+<th>المباشرة</th>
+<th>حفظ</th>
+</tr>
+</thead>
+
+<tbody id="emps"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section id="sheetTab" class="hidden">
+
+<div class="toolbar">
+
+<label>الشهر</label>
+
+<input id="month" type="month">
+
+<button class="btn outline" id="loadSheet">
+تحميل
+</button>
+
+<button class="btn gold" id="saveSheet">
+حفظ الكل
+</button>
+
+<button class="btn outline" id="print">
+PDF / طباعة
+</button>
+
+</div>
+
+<div id="sheetErr" class="alert err"></div>
+
+<div id="sheetOk" class="alert ok">
+تم الحفظ.
+</div>
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>م</th>
+<th>الموظف</th>
+<th>الوظيفة</th>
+<th>بعذر</th>
+<th>بدون عذر</th>
+<th>المجموع</th>
+<th>التأخير</th>
+<th>الانصراف المبكر</th>
+<th>عدم البصمة</th>
+<th>الاستئذان</th>
+<th>إضافي</th>
+<th>العلم</th>
+<th>ملاحظات</th>
+</tr>
+
+</thead>
+
+<tbody id="sheet"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+
+<!-- نافذة بيانات القسم -->
+<div id="modal" class="modal">
+
+<div>
+
+<h3>بيانات القسم</h3>
+
+<p>احفظ البيانات الآن.</p>
+
+<div class="cred">
+
+اسم المستخدم:
+<b id="credU"></b>
+
+<br>
+
+كلمة المرور:
+<b id="credP"></b>
+
+</div>
+
+<button class="btn gold full" id="close">
+تم
+</button>
+
+</div>
+
+</div>
+
 
 <script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-/* ============================================================
-   الإعدادات — عدّلوا فقط رابط المشروع (URL) أدناه
-   تجدونه في: Supabase Dashboard → Settings → API → Project URL
-   ============================================================ */
-const SUPABASE_URL = "ضع-هنا-رابط-مشروعك.supabase.co";
-const SUPABASE_KEY = "sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW";
+import {
+createClient
+} from "https://esm.sh/@supabase/supabase-js@2";
 
-const url = SUPABASE_URL.startsWith("http") ? SUPABASE_URL : `https://${SUPABASE_URL}`;
-const supabase = createClient(url, SUPABASE_KEY);
 
-/* ---------- عناصر الشاشات ---------- */
-const loginView = document.getElementById("loginView");
-const adminView = document.getElementById("adminView");
-const deptView = document.getElementById("deptView");
+/* =====================================================
+   إعداد Supabase
+   ===================================================== */
 
-function showView(view) {
-  loginView.classList.add("hidden");
-  adminView.classList.add("hidden");
-  deptView.classList.add("hidden");
-  view.classList.remove("hidden");
+const SUPABASE_URL =
+"https://zlqlxneqjtmgfocmyqwi.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW";
+
+
+const sb = createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* =====================================================
+   أدوات مساعدة
+   ===================================================== */
+
+const $ = id => document.getElementById(id);
+
+const show = e =>
+e.classList.remove("hidden");
+
+const hide = e =>
+e.classList.add("hidden");
+
+function alertBox(id,msg){
+
+$(id).textContent = msg;
+
+$(id).classList.add("show");
+
 }
 
-/* ---------- تسجيل الدخول ---------- */
-async function bootstrap() {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session) {
-    await routeByRole(session.user.id);
-  } else {
-    showView(loginView);
-  }
+
+/* =====================================================
+   تحديد صلاحية المستخدم
+   ===================================================== */
+
+async function route(uid){
+
+const {
+data:p,
+error
+} = await sb
+.from("profiles")
+.select("role,department_id")
+.eq("id",uid)
+.single();
+
+
+if(error || !p){
+
+alertBox(
+"loginErr",
+"لم يتم العثور على صلاحية لهذا الحساب."
+);
+
+return;
+
 }
 
-async function routeByRole(userId) {
-  const { data: profile } = await supabase.from("profiles").select("role, department_id").eq("id", userId).single();
-  if (profile?.role === "super_admin") {
-    showView(adminView);
-    await initAdmin();
-  } else if (profile?.role === "department") {
-    showView(deptView);
-    await initDept(profile.department_id);
-  } else {
-    document.getElementById("loginError").textContent = "لم يتم العثور على صلاحية لهذا الحساب.";
-    document.getElementById("loginError").classList.add("show");
-    showView(loginView);
-  }
+
+hide($("login"));
+
+
+if(p.role === "super_admin"){
+
+show($("admin"));
+
+await initAdmin();
+
 }
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  const errBox = document.getElementById("loginError");
-  errBox.classList.remove("show");
-  let user = document.getElementById("userInput").value.trim();
-  const password = document.getElementById("passInput").value;
-  if (!user || !password) {
-    errBox.textContent = "يرجى تعبئة اسم المستخدم وكلمة المرور.";
-    errBox.classList.add("show");
-    return;
-  }
-  const email = user.includes("@") ? user : `${user}@dept.internal`;
-  const btn = document.getElementById("loginBtn");
-  btn.disabled = true; btn.textContent = "جارٍ الدخول...";
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  btn.disabled = false; btn.textContent = "دخول";
-  if (error) {
-    errBox.textContent = "بيانات الدخول غير صحيحة.";
-    errBox.classList.add("show");
-    return;
-  }
-  await routeByRole(data.user.id);
+else if(p.role === "department"){
+
+show($("department"));
+
+await initDept(p.department_id);
+
+}
+
+else{
+
+show($("login"));
+
+alertBox(
+"loginErr",
+"نوع الحساب غير معروف."
+);
+
+}
+
+}
+
+
+/* =====================================================
+   تسجيل الدخول
+   ===================================================== */
+
+$("loginBtn").onclick = async()=>{
+
+$("loginErr").classList.remove("show");
+
+let u =
+$("user").value.trim();
+
+let pw =
+$("pass").value;
+
+
+if(!u || !pw){
+
+return alertBox(
+"loginErr",
+"يرجى تعبئة البيانات."
+);
+
+}
+
+
+const email =
+u.includes("@")
+? u
+: `${u}@dept.internal`;
+
+
+$("loginBtn").disabled = true;
+
+$("loginBtn").textContent =
+"جارٍ الدخول...";
+
+
+const {
+data,
+error
+} =
+await sb.auth.signInWithPassword({
+
+email:email,
+
+password:pw
+
 });
 
-document.getElementById("adminLogoutBtn").addEventListener("click", doLogout);
-document.getElementById("deptLogoutBtn").addEventListener("click", doLogout);
-async function doLogout() {
-  await supabase.auth.signOut();
-  location.reload();
+
+$("loginBtn").disabled = false;
+
+$("loginBtn").textContent =
+"دخول";
+
+
+if(error){
+
+return alertBox(
+"loginErr",
+"بيانات الدخول غير صحيحة: " +
+error.message
+);
+
 }
 
-/* ============================================================
-   لوحة الأدمن العام
-   ============================================================ */
-let adminInitialized = false;
-async function initAdmin() {
-  document.querySelectorAll(".admin-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById("tab-schools").classList.toggle("hidden", tab.dataset.tab !== "schools");
-      document.getElementById("tab-departments").classList.toggle("hidden", tab.dataset.tab !== "departments");
-    });
-  });
 
-  if (adminInitialized) return;
-  adminInitialized = true;
+await route(data.user.id);
 
-  const logoFile = document.getElementById("logoFile");
-  const logoDrop = document.getElementById("logoDrop");
-  const logoDropText = document.getElementById("logoDropText");
-  logoFile.addEventListener("change", () => {
-    const f = logoFile.files[0];
-    if (!f) return;
-    logoDrop.classList.add("has-file");
-    logoDropText.innerHTML = `<b>تم اختيار:</b> ${f.name}`;
-  });
+};
 
-  document.getElementById("addSchoolBtn").addEventListener("click", async () => {
-    const errorBox = document.getElementById("schoolError");
-    const successBox = document.getElementById("schoolSuccess");
-    errorBox.classList.remove("show"); successBox.classList.remove("show");
-    const name = document.getElementById("schoolName").value.trim();
-    if (!name) {
-      errorBox.textContent = "يرجى إدخال اسم المدرسة.";
-      errorBox.classList.add("show");
-      return;
-    }
-    const btn = document.getElementById("addSchoolBtn");
-    btn.disabled = true; btn.textContent = "جارٍ الحفظ...";
-    try {
-      let logo_url = null;
-      const file = logoFile.files[0];
-      if (file) {
-        const path = `${Date.now()}_${file.name}`;
-        const { error: upErr } = await supabase.storage.from("logos").upload(path, file);
-        if (upErr) throw upErr;
-        const { data: pub } = supabase.storage.from("logos").getPublicUrl(path);
-        logo_url = pub.publicUrl;
-      }
-      const { error: insErr } = await supabase.from("schools").insert({ name, logo_url });
-      if (insErr) throw insErr;
-      successBox.classList.add("show");
-      document.getElementById("schoolName").value = "";
-      logoFile.value = "";
-      logoDrop.classList.remove("has-file");
-      logoDropText.innerHTML = "<b>اضغط لاختيار الشعار</b>";
-      await loadSchools();
-    } catch (err) {
-      errorBox.textContent = "حدث خطأ: " + err.message;
-      errorBox.classList.add("show");
-    } finally {
-      btn.disabled = false; btn.textContent = "إضافة المدرسة";
-    }
-  });
 
-  document.getElementById("addDeptBtn").addEventListener("click", addDepartment);
-  document.getElementById("deptSchoolSelect").addEventListener("change", loadDepartments);
-  document.getElementById("closeModalBtn").addEventListener("click", () => {
-    document.getElementById("credModal").classList.remove("show");
-  });
+/* =====================================================
+   تسجيل الخروج
+   ===================================================== */
 
-  await loadSchools();
-  await loadSchoolOptions();
+async function logout(){
+
+await sb.auth.signOut();
+
+location.reload();
+
 }
 
-async function loadSchools() {
-  const grid = document.getElementById("schoolsGrid");
-  const emptyState = document.getElementById("schoolsEmpty");
-  const { data, error } = await supabase.from("schools").select("*").order("created_at", { ascending: false });
-  if (error || !data || !data.length) {
-    grid.innerHTML = "";
-    emptyState.style.display = "block";
-    return;
-  }
-  emptyState.style.display = "none";
-  grid.innerHTML = data.map(s => `
-    <div class="entity-card">
-      <div class="logo-mini">${s.logo_url ? `<img src="${s.logo_url}" style="width:100%;height:100%;object-fit:contain">` : ""}</div>
-      <div class="name">${s.name}</div>
-      <button class="btn small outline goto-dept" data-id="${s.id}">إدارة الأقسام</button>
-    </div>
-  `).join("");
-  grid.querySelectorAll(".goto-dept").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelector('.admin-tab[data-tab="departments"]').click();
-      document.getElementById("deptSchoolSelect").value = btn.dataset.id;
-      loadDepartments();
-    });
-  });
+$("logout1").onclick = logout;
+
+$("logout2").onclick = logout;
+
+
+/* =====================================================
+   تبويبات الأدمن
+   ===================================================== */
+
+document
+.querySelectorAll(".at")
+.forEach(a=>{
+
+a.onclick = ()=>{
+
+document
+.querySelectorAll(".at")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+a.classList.add("active");
+
+
+$("schoolsTab")
+.classList.toggle(
+"hidden",
+a.dataset.t !== "schools"
+);
+
+
+$("departmentsTab")
+.classList.toggle(
+"hidden",
+a.dataset.t !== "departments"
+);
+
+};
+
+});
+
+
+/* =====================================================
+   تبويبات القسم
+   ===================================================== */
+
+document
+.querySelectorAll(".dt")
+.forEach(a=>{
+
+a.onclick = ()=>{
+
+document
+.querySelectorAll(".dt")
+.forEach(x =>
+x.classList.remove("active")
+);
+
+a.classList.add("active");
+
+
+$("employeesTab")
+.classList.toggle(
+"hidden",
+a.dataset.t !== "employees"
+);
+
+
+$("sheetTab")
+.classList.toggle(
+"hidden",
+a.dataset.t !== "sheet"
+);
+
+
+if(a.dataset.t === "sheet"){
+
+loadSheet();
+
 }
 
-async function loadSchoolOptions() {
-  const { data: schools } = await supabase.from("schools").select("*").order("created_at", { ascending: false });
-  const select = document.getElementById("deptSchoolSelect");
-  select.innerHTML = (schools || []).map(s => `<option value="${s.id}">${s.name}</option>`).join("");
-  if (schools && schools.length) await loadDepartments();
+};
+
+});
+
+
+/* =====================================================
+   لوحة الأدمن
+   ===================================================== */
+
+async function initAdmin(){
+
+await loadSchools();
+
+$("schoolSelect").onchange =
+loadDepts;
+
+$("addSchool").onclick =
+addSchool;
+
+$("addDept").onclick =
+addDept;
+
 }
 
-async function loadDepartments() {
-  const schoolId = document.getElementById("deptSchoolSelect").value;
-  const body = document.getElementById("deptBody");
-  const emptyState = document.getElementById("deptEmpty");
-  if (!schoolId) return;
-  const { data, error } = await supabase.from("departments").select("*").eq("school_id", schoolId).order("created_at", { ascending: false });
-  if (error || !data || !data.length) {
-    body.innerHTML = "";
-    emptyState.style.display = "block";
-    return;
-  }
-  emptyState.style.display = "none";
-  body.innerHTML = data.map(d => `<tr><td>${d.name}</td><td style="direction:ltr">${d.username}</td></tr>`).join("");
+
+/* =====================================================
+   تحميل المدارس
+   ===================================================== */
+
+async function loadSchools(){
+
+const {
+data,
+error
+} =
+await sb
+.from("schools")
+.select("*")
+.order(
+"created_at",
+{ascending:false}
+);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
 }
 
-// إنشاء حساب قسم جديد مباشرة من المتصفح، دون أي سيرفر إضافي:
-// نستخدم عميل Supabase منفصل ومؤقت (لا يحفظ الجلسة) لإنشاء المستخدم،
-// حتى لا تنقطع جلسة دخول الأدمن الحالية.
-async function addDepartment() {
-  const errorBox = document.getElementById("deptError");
-  errorBox.classList.remove("show");
-  const schoolId = document.getElementById("deptSchoolSelect").value;
-  const deptName = document.getElementById("deptName").value.trim();
-  if (!schoolId || !deptName) {
-    errorBox.textContent = "يرجى اختيار المدرسة وإدخال اسم القسم.";
-    errorBox.classList.add("show");
-    return;
-  }
-  const btn = document.getElementById("addDeptBtn");
-  btn.disabled = true; btn.textContent = "جارٍ الإنشاء...";
 
-  try {
-    const username = "d" + Math.random().toString(36).slice(2, 8);
-    const password = Math.random().toString(36).slice(2, 6) + Math.random().toString(36).slice(2, 6) + "A1";
-    const email = `${username}@dept.internal`;
+$("schools").innerHTML =
+(data || [])
+.map(s=>`
 
-    // عميل مؤقت منفصل — persistSession:false يمنعه من الكتابة فوق جلسة الأدمن الحالية
-    const tempClient = createClient(url, SUPABASE_KEY, {
-      auth: { persistSession: false, autoRefreshToken: false }
-    });
+<div class="entity">
 
-    const { data: signUpData, error: signUpErr } = await tempClient.auth.signUp({ email, password });
-    if (signUpErr) throw signUpErr;
-    if (!signUpData.user) throw new Error("لم يتم إنشاء المستخدم — تأكدوا أن خيار 'Confirm email' مُعطَّل في إعدادات Supabase.");
+<b>${s.name}</b>
 
-    const newUserId = signUpData.user.id;
+<button
+class="btn outline"
+style="margin-top:10px;width:100%"
+data-school="${s.id}"
+>
+إدارة الأقسام
+</button>
 
-    const { data: dept, error: deptErr } = await supabase.from("departments").insert({
-      school_id: schoolId, name: deptName, username, auth_user_id: newUserId
-    }).select().single();
-    if (deptErr) throw deptErr;
+</div>
 
-    const { error: profErr } = await supabase.from("profiles").insert({
-      id: newUserId, role: "department", department_id: dept.id
-    });
-    if (profErr) throw profErr;
+`)
+.join("");
 
-    document.getElementById("credUser").textContent = username;
-    document.getElementById("credPass").textContent = password;
-    document.getElementById("credModal").classList.add("show");
-    document.getElementById("deptName").value = "";
-    await loadDepartments();
-  } catch (err) {
-    errorBox.textContent = "حدث خطأ: " + err.message;
-    errorBox.classList.add("show");
-  } finally {
-    btn.disabled = false; btn.textContent = "إضافة القسم وتوليد بيانات الدخول";
-  }
+
+document
+.querySelectorAll("[data-school]")
+.forEach(btn=>{
+
+btn.onclick = ()=>{
+
+document
+.querySelector('[data-t="departments"]')
+.click();
+
+$("schoolSelect").value =
+btn.dataset.school;
+
+loadDepts();
+
+};
+
+});
+
+
+$("schoolSelect").innerHTML =
+(data || [])
+.map(s=>`
+
+<option value="${s.id}">
+${s.name}
+</option>
+
+`)
+.join("");
+
+
+if(data?.length){
+
+await loadDepts();
+
 }
 
-/* ============================================================
+}
+
+
+/* =====================================================
+   إضافة مدرسة
+   ===================================================== */
+
+async function addSchool(){
+
+$("schoolErr")
+.classList.remove("show");
+
+let name =
+$("schoolName")
+.value.trim();
+
+
+if(!name){
+
+return alertBox(
+"schoolErr",
+"أدخل اسم المدرسة."
+);
+
+}
+
+
+let logo_url = null;
+
+let file =
+$("logo").files[0];
+
+
+if(file){
+
+let path =
+Date.now() + "_" + file.name;
+
+
+const {
+error
+} =
+await sb
+.storage
+.from("logos")
+.upload(path,file);
+
+
+if(error){
+
+return alertBox(
+"schoolErr",
+error.message
+);
+
+}
+
+
+logo_url =
+sb
+.storage
+.from("logos")
+.getPublicUrl(path)
+.data.publicUrl;
+
+}
+
+
+const {
+error
+} =
+await sb
+.from("schools")
+.insert({
+name,
+logo_url
+});
+
+
+if(error){
+
+return alertBox(
+"schoolErr",
+error.message
+);
+
+}
+
+
+$("schoolName").value = "";
+
+$("logo").value = "";
+
+$("schoolOk")
+.classList.add("show");
+
+
+await loadSchools();
+
+}
+
+
+/* =====================================================
+   تحميل الأقسام
+   ===================================================== */
+
+async function loadDepts(){
+
+let sid =
+$("schoolSelect").value;
+
+
+if(!sid)return;
+
+
+const {
+data,
+error
+} =
+await sb
+.from("departments")
+.select("*")
+.eq("school_id",sid)
+.order(
+"created_at",
+{ascending:false}
+);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+$("depts").innerHTML =
+(data || [])
+.map(d=>`
+
+<tr>
+
+<td>
+${d.name}
+</td>
+
+<td dir="ltr">
+${d.username}
+</td>
+
+</tr>
+
+`)
+.join("");
+
+}
+
+
+/* =====================================================
+   إنشاء قسم جديد
+   ===================================================== */
+
+async function addDept(){
+
+$("deptErr")
+.classList.remove("show");
+
+
+let sid =
+$("schoolSelect").value;
+
+let name =
+$("deptName")
+.value.trim();
+
+
+if(!sid || !name){
+
+return alertBox(
+"deptErr",
+"اختر المدرسة واكتب اسم القسم."
+);
+
+}
+
+
+let username =
+"d" +
+Math.random()
+.toString(36)
+.slice(2,8);
+
+
+let password =
+Math.random()
+.toString(36)
+.slice(2,10) +
+"A1";
+
+
+let email =
+username +
+"@dept.internal";
+
+
+/*
+  عميل منفصل حتى لا يتم تسجيل خروج الأدمن
+*/
+
+let temp =
+createClient(
+SUPABASE_URL,
+SUPABASE_KEY,
+{
+auth:{
+persistSession:false,
+autoRefreshToken:false
+}
+}
+);
+
+
+let {
+data,
+error
+} =
+await temp.auth.signUp({
+email,
+password
+});
+
+
+if(error){
+
+return alertBox(
+"deptErr",
+error.message
+);
+
+}
+
+
+if(!data.user){
+
+return alertBox(
+"deptErr",
+"لم يتم إنشاء حساب القسم. تأكد من إعدادات البريد في Supabase."
+);
+
+}
+
+
+let {
+data:dept,
+error:de
+} =
+await sb
+.from("departments")
+.insert({
+
+school_id:sid,
+
+name:name,
+
+username:username,
+
+auth_user_id:data.user.id
+
+})
+.select()
+.single();
+
+
+if(de){
+
+return alertBox(
+"deptErr",
+de.message
+);
+
+}
+
+
+let {
+error:pe
+} =
+await sb
+.from("profiles")
+.insert({
+
+id:data.user.id,
+
+role:"department",
+
+department_id:dept.id
+
+});
+
+
+if(pe){
+
+return alertBox(
+"deptErr",
+pe.message
+);
+
+}
+
+
+$("credU").textContent =
+username;
+
+$("credP").textContent =
+password;
+
+$("modal")
+.classList.add("show");
+
+$("deptName").value = "";
+
+await loadDepts();
+
+}
+
+
+/* =====================================================
+   إغلاق نافذة بيانات القسم
+   ===================================================== */
+
+$("close").onclick =
+() => {
+
+$("modal")
+.classList.remove("show");
+
+};
+
+
+/* =====================================================
    لوحة القسم
-   ============================================================ */
-let deptInitialized = false;
-let myDepartmentId = null;
-let mySchoolInfo = null;
+   ===================================================== */
 
-async function initDept(departmentId) {
-  myDepartmentId = departmentId;
+let myDept = null;
 
-  const { data: deptRow } = await supabase.from("departments").select("school_id, name").eq("id", departmentId).single();
-  if (deptRow?.school_id) {
-    const { data: schoolRow } = await supabase.from("schools").select("name, logo_url").eq("id", deptRow.school_id).single();
-    mySchoolInfo = schoolRow || null;
-  }
 
-  document.querySelectorAll(".dept-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".dept-tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById("tab-employees").classList.toggle("hidden", tab.dataset.tab !== "employees");
-      document.getElementById("tab-sheet").classList.toggle("hidden", tab.dataset.tab !== "sheet");
-      if (tab.dataset.tab === "sheet") loadSheet();
-    });
-  });
+async function initDept(id){
 
-  if (deptInitialized) { await loadEmployees(); return; }
-  deptInitialized = true;
+myDept = id;
 
-  const monthPicker = document.getElementById("monthPicker");
-  const now = new Date();
-  monthPicker.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 
-  document.getElementById("addEmpBtn").addEventListener("click", addEmployee);
-  document.getElementById("loadSheetBtn").addEventListener("click", loadSheet);
-  document.getElementById("saveAllBtn").addEventListener("click", saveSheet);
-  document.getElementById("saveAllBtn2").addEventListener("click", saveSheet);
-  document.getElementById("exportPdfBtn").addEventListener("click", exportPDF);
+let now =
+new Date();
 
-  await loadEmployees();
+
+$("month").value =
+now.getFullYear() +
+"-" +
+String(
+now.getMonth()+1
+).padStart(2,"0");
+
+
+$("addEmp").onclick =
+addEmp;
+
+$("loadSheet").onclick =
+loadSheet;
+
+$("saveSheet").onclick =
+saveSheet;
+
+$("print").onclick =
+printSheet;
+
+
+await loadEmployees();
+
 }
 
-async function addEmployee() {
-  const errorBox = document.getElementById("empError");
-  errorBox.classList.remove("show");
-  const full_name = document.getElementById("empName").value.trim();
-  const job_title = document.getElementById("empJob").value.trim();
-  const start_date = document.getElementById("empStart").value || null;
-  if (!full_name) {
-    errorBox.textContent = "يرجى إدخال اسم الموظف.";
-    errorBox.classList.add("show");
-    return;
-  }
-  const btn = document.getElementById("addEmpBtn");
-  btn.disabled = true;
-  const { error } = await supabase.from("employees").insert({ department_id: myDepartmentId, full_name, job_title, start_date });
-  btn.disabled = false;
-  if (error) {
-    errorBox.textContent = "حدث خطأ: " + error.message;
-    errorBox.classList.add("show");
-    return;
-  }
-  document.getElementById("empName").value = "";
-  document.getElementById("empJob").value = "";
-  document.getElementById("empStart").value = "";
-  await loadEmployees();
+
+/* =====================================================
+   تحميل الموظفين
+   ===================================================== */
+
+async function loadEmployees(){
+
+let {
+data,
+error
+} =
+await sb
+.from("employees")
+.select("*")
+.eq(
+"department_id",
+myDept
+)
+.order("created_at");
+
+
+if(error){
+
+console.error(error);
+
+return;
+
 }
 
-async function loadEmployees() {
-  const body = document.getElementById("empBody");
-  const emptyState = document.getElementById("empEmpty");
-  const { data, error } = await supabase.from("employees").select("*").order("created_at", { ascending: true });
-  if (error || !data || !data.length) {
-    body.innerHTML = "";
-    emptyState.style.display = "block";
-    return;
-  }
-  emptyState.style.display = "none";
-  body.innerHTML = data.map((e, i) => `
-    <tr data-id="${e.id}">
-      <td>${i + 1}</td>
-      <td class="name-cell"><input type="text" class="f-name" value="${e.full_name || ""}"></td>
-      <td><input type="text" class="f-job" value="${e.job_title || ""}"></td>
-      <td><input type="date" class="f-date" value="${e.start_date || ""}"></td>
-      <td><button class="btn small outline save-btn">حفظ</button></td>
-    </tr>`).join("");
-  body.querySelectorAll(".save-btn").forEach(saveBtn => {
-    saveBtn.addEventListener("click", async (ev) => {
-      const tr = ev.target.closest("tr");
-      const id = tr.dataset.id;
-      const full_name = tr.querySelector(".f-name").value.trim();
-      const job_title = tr.querySelector(".f-job").value.trim();
-      const start_date = tr.querySelector(".f-date").value || null;
-      saveBtn.disabled = true; saveBtn.textContent = "...";
-      const { error } = await supabase.from("employees").update({ full_name, job_title, start_date, updated_at: new Date().toISOString() }).eq("id", id);
-      saveBtn.disabled = false; saveBtn.textContent = error ? "خطأ" : "تم ✓";
-      setTimeout(() => (saveBtn.textContent = "حفظ"), 1500);
-    });
-  });
+
+$("emps").innerHTML =
+(data || [])
+.map((e,i)=>`
+
+<tr data-id="${e.id}">
+
+<td>
+${i+1}
+</td>
+
+<td>
+<input
+class="n"
+value="${e.full_name || ""}"
+>
+</td>
+
+<td>
+<input
+class="j"
+value="${e.job_title || ""}"
+>
+</td>
+
+<td>
+<input
+class="d"
+type="date"
+value="${e.start_date || ""}"
+>
+</td>
+
+<td>
+
+<button
+class="btn outline save"
+>
+حفظ
+</button>
+
+</td>
+
+</tr>
+
+`)
+.join("");
+
+
+$("emps")
+.querySelectorAll(".save")
+.forEach(b=>{
+
+b.onclick = async()=>{
+
+let r =
+b.closest("tr");
+
+
+const full_name =
+r.querySelector(".n")
+.value
+.trim();
+
+
+const job_title =
+r.querySelector(".j")
+.value
+.trim();
+
+
+const start_date =
+r.querySelector(".d")
+.value ||
+null;
+
+
+const {
+error
+} =
+await sb
+.from("employees")
+.update({
+
+full_name,
+
+job_title,
+
+start_date,
+
+updated_at:
+new Date().toISOString()
+
+})
+.eq(
+"id",
+r.dataset.id
+);
+
+
+if(error){
+
+b.textContent =
+"خطأ";
+
+}else{
+
+b.textContent =
+"تم ✓";
+
 }
 
-function monthToDate(monthStr) { return `${monthStr}-01`; }
 
-async function loadSheet() {
-  const errorBox = document.getElementById("sheetError");
-  const successBox = document.getElementById("sheetSuccess");
-  errorBox.classList.remove("show"); successBox.classList.remove("show");
-  const body = document.getElementById("sheetBody");
-  const emptyState = document.getElementById("sheetEmpty");
+setTimeout(
+()=>b.textContent="حفظ",
+1200
+);
 
-  const { data: employees, error: empErr } = await supabase.from("employees").select("*").order("created_at", { ascending: true });
-  if (empErr || !employees || !employees.length) {
-    body.innerHTML = "";
-    emptyState.style.display = "block";
-    return;
-  }
-  emptyState.style.display = "none";
+};
 
-  const monthDate = monthToDate(document.getElementById("monthPicker").value);
-  const { data: entries } = await supabase.from("attendance_entries").select("*").eq("month", monthDate).in("employee_id", employees.map(e => e.id));
-  const entryMap = {};
-  (entries || []).forEach(e => (entryMap[e.employee_id] = e));
+});
 
-  body.innerHTML = employees.map((emp, i) => {
-    const en = entryMap[emp.id] || {};
-    return `
-    <tr data-emp="${emp.id}">
-      <td>${i + 1}</td>
-      <td class="name-cell">${emp.full_name}</td>
-      <td>${emp.job_title || "-"}</td>
-      <td>${emp.start_date || "-"}</td>
-      <td><input type="number" min="0" class="f-exc" value="${en.absence_excused ?? 0}"></td>
-      <td><input type="number" min="0" class="f-unexc" value="${en.absence_unexcused ?? 0}"></td>
-      <td class="f-total">${(en.absence_excused ?? 0) + (en.absence_unexcused ?? 0)}</td>
-      <td><input type="text" class="f-absdates" value="${en.absence_dates || ""}" placeholder="مثال: 2026-06-05"></td>
-      <td><input type="number" min="0" class="f-late" value="${en.late_minutes ?? 0}"></td>
-      <td><input type="number" min="0" class="f-early" value="${en.early_leave_minutes ?? 0}"></td>
-      <td><input type="number" min="0" class="f-nofp" value="${en.no_fingerprint_days ?? 0}"></td>
-      <td><input type="number" min="0" class="f-perm" value="${en.permission_days ?? 0}"></td>
-      <td><input type="number" min="0" class="f-extra" value="${en.extra_classes ?? 0}"></td>
-      <td><input type="checkbox" class="f-ack" ${en.teacher_ack ? "checked" : ""}></td>
-      <td><input type="text" class="f-notes" value="${en.notes || ""}"></td>
-    </tr>`;
-  }).join("");
-
-  body.querySelectorAll("tr").forEach(tr => {
-    const exc = tr.querySelector(".f-exc"), unexc = tr.querySelector(".f-unexc"), total = tr.querySelector(".f-total");
-    function updateTotal() { total.textContent = (Number(exc.value) || 0) + (Number(unexc.value) || 0); }
-    exc.addEventListener("input", updateTotal);
-    unexc.addEventListener("input", updateTotal);
-  });
 }
 
-async function saveSheet() {
-  const errorBox = document.getElementById("sheetError");
-  const successBox = document.getElementById("sheetSuccess");
-  errorBox.classList.remove("show"); successBox.classList.remove("show");
 
-  const monthDate = monthToDate(document.getElementById("monthPicker").value);
-  const rows = document.getElementById("sheetBody").querySelectorAll("tr");
-  if (!rows.length) return;
+/* =====================================================
+   إضافة موظف
+   ===================================================== */
 
-  const payload = Array.from(rows).map(tr => ({
-    employee_id: tr.dataset.emp,
-    month: monthDate,
-    absence_excused: Number(tr.querySelector(".f-exc").value) || 0,
-    absence_unexcused: Number(tr.querySelector(".f-unexc").value) || 0,
-    absence_dates: tr.querySelector(".f-absdates").value.trim(),
-    late_minutes: Number(tr.querySelector(".f-late").value) || 0,
-    early_leave_minutes: Number(tr.querySelector(".f-early").value) || 0,
-    no_fingerprint_days: Number(tr.querySelector(".f-nofp").value) || 0,
-    permission_days: Number(tr.querySelector(".f-perm").value) || 0,
-    extra_classes: Number(tr.querySelector(".f-extra").value) || 0,
-    teacher_ack: tr.querySelector(".f-ack").checked,
-    notes: tr.querySelector(".f-notes").value.trim(),
-    updated_at: new Date().toISOString()
-  }));
+async function addEmp(){
 
-  const { error } = await supabase.from("attendance_entries").upsert(payload, { onConflict: "employee_id,month" });
-  if (error) {
-    errorBox.textContent = "حدث خطأ أثناء الحفظ: " + error.message;
-    errorBox.classList.add("show");
-    return;
-  }
-  successBox.classList.add("show");
+$("empErr")
+.classList.remove("show");
+
+
+let n =
+$("empName")
+.value.trim();
+
+
+if(!n){
+
+return alertBox(
+"empErr",
+"أدخل اسم الموظف."
+);
+
 }
 
-const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 
-function exportPDF() {
-  const rows = document.getElementById("sheetBody").querySelectorAll("tr");
-  if (!rows.length) {
-    alert("لا يوجد بيانات لتصديرها — حمّلوا المسير أولاً.");
-    return;
-  }
+let {
+error
+} =
+await sb
+.from("employees")
+.insert({
 
-  const [y, m] = document.getElementById("monthPicker").value.split("-");
-  const monthLabel = `${arabicMonths[parseInt(m, 10) - 1]} ${y}`;
+department_id:myDept,
 
-  let rowsHtml = "";
-  rows.forEach((tr, i) => {
-    const name = tr.querySelector(".name-cell").textContent;
-    const job = tr.children[2].textContent;
-    const start = tr.children[3].textContent;
-    const exc = tr.querySelector(".f-exc").value || "0";
-    const unexc = tr.querySelector(".f-unexc").value || "0";
-    const total = tr.querySelector(".f-total").textContent;
-    const absdates = tr.querySelector(".f-absdates").value;
-    const late = tr.querySelector(".f-late").value || "0";
-    const early = tr.querySelector(".f-early").value || "0";
-    const nofp = tr.querySelector(".f-nofp").value || "0";
-    const perm = tr.querySelector(".f-perm").value || "0";
-    const extra = tr.querySelector(".f-extra").value || "0";
-    const ack = tr.querySelector(".f-ack").checked ? "✓" : "";
-    const notes = tr.querySelector(".f-notes").value;
-    rowsHtml += `<tr>
-      <td>${i + 1}</td><td>${name}</td><td>${job}</td><td>${start}</td>
-      <td>${exc}</td><td>${unexc}</td><td>${total}</td><td>${absdates}</td>
-      <td>${late}</td><td>${early}</td><td>${nofp}</td><td>${perm}</td>
-      <td>${extra}</td><td>${ack}</td><td>${notes}</td>
-    </tr>`;
-  });
+full_name:n,
 
-  const printArea = document.getElementById("printArea");
-  printArea.innerHTML = `
-    <div style="text-align:center; margin-bottom:14px">
-      ${mySchoolInfo?.logo_url ? `<img src="${mySchoolInfo.logo_url}" style="width:64px;height:64px;object-fit:contain">` : ""}
-      <h2 style="margin:8px 0 2px; font-size:18px">${mySchoolInfo?.name || ""}</h2>
-      <h3 style="margin:0; font-size:15px">مسير شهر ${monthLabel}</h3>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>م</th><th>اسم الموظف</th><th>المسمى الوظيفي</th><th>تاريخ المباشرة</th>
-          <th>بعذر</th><th>بدون عذر</th><th>مجموع</th><th>تاريخ الغياب (ميلادي)</th>
-          <th>دقائق التأخير</th><th>دقائق الانصراف المبكر</th><th>أيام عدم البصمة</th>
-          <th>أيام الاستئذان</th><th>حصص إضافية</th><th>توقيع العلم</th><th>ملاحظات</th>
-        </tr>
-      </thead>
-      <tbody>${rowsHtml}</tbody>
-    </table>
-  `;
+job_title:
+$("empJob")
+.value.trim(),
 
-  document.body.classList.add("printing");
-  window.print();
+start_date:
+$("empStart")
+.value || null
+
+});
+
+
+if(error){
+
+return alertBox(
+"empErr",
+error.message
+);
+
 }
 
-window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
 
-bootstrap();
+$("empName").value = "";
+
+$("empJob").value = "";
+
+$("empStart").value = "";
+
+
+await loadEmployees();
+
+}
+
+
+/* =====================================================
+   تحميل المسير الشهري
+   ===================================================== */
+
+async function loadSheet(){
+
+let {
+data:es,
+error
+} =
+await sb
+.from("employees")
+.select("*")
+.eq(
+"department_id",
+myDept
+)
+.order("created_at");
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+let md =
+$("month").value +
+"-01";
+
+
+let ids =
+(es || []).map(
+e=>e.id
+);
+
+
+let as = [];
+
+
+if(ids.length){
+
+const result =
+await sb
+.from("attendance_entries")
+.select("*")
+.eq("month",md)
+.in(
+"employee_id",
+ids
+);
+
+as =
+result.data || [];
+
+}
+
+
+let map = {};
+
+(as || [])
+.forEach(x =>
+map[x.employee_id] = x
+);
+
+
+$("sheet").innerHTML =
+(es || [])
+.map((e,i)=>{
+
+let a =
+map[e.id] || {};
+
+
+return `
+
+<tr data-id="${e.id}">
+
+<td>${i+1}</td>
+
+<td>${e.full_name}</td>
+
+<td>${e.job_title || "-"}</td>
+
+<td>
+<input
+class="ex"
+type="number"
+min="0"
+value="${a.absence_excused || 0}"
+>
+</td>
+
+<td>
+<input
+class="un"
+type="number"
+min="0"
+value="${a.absence_unexcused || 0}"
+>
+</td>
+
+<td class="tot">
+${(a.absence_excused || 0) +
+(a.absence_unexcused || 0)}
+</td>
+
+<td>
+<input
+class="late"
+type="number"
+min="0"
+value="${a.late_minutes || 0}"
+>
+</td>
+
+<td>
+<input
+class="early"
+type="number"
+min="0"
+value="${a.early_leave_minutes || 0}"
+>
+</td>
+
+<td>
+<input
+class="nfp"
+type="number"
+min="0"
+value="${a.no_fingerprint_days || 0}"
+>
+</td>
+
+<td>
+<input
+class="perm"
+type="number"
+min="0"
+value="${a.permission_days || 0}"
+>
+</td>
+
+<td>
+<input
+class="extra"
+type="number"
+min="0"
+value="${a.extra_classes || 0}"
+>
+</td>
+
+<td>
+<input
+class="ack"
+type="checkbox"
+${a.teacher_ack ? "checked" : ""}
+>
+</td>
+
+<td>
+<input
+class="notes"
+value="${a.notes || ""}"
+>
+</td>
+
+</tr>
+
+`;
+
+})
+.join("");
+
+
+$("sheet")
+.querySelectorAll("tr")
+.forEach(r=>{
+
+let f = ()=>{
+
+r.querySelector(".tot")
+.textContent =
+(+r.querySelector(".ex").value || 0) +
+(+r.querySelector(".un").value || 0);
+
+};
+
+
+r.querySelector(".ex")
+.oninput = f;
+
+r.querySelector(".un")
+.oninput = f;
+
+});
+
+}
+
+
+/* =====================================================
+   حفظ المسير
+   ===================================================== */
+
+async function saveSheet(){
+
+$("sheetErr")
+.classList.remove("show");
+
+
+let md =
+$("month").value +
+"-01";
+
+
+let rows =
+[
+...$("sheet")
+.querySelectorAll("tr")
+];
+
+
+if(!rows.length){
+
+return;
+
+}
+
+
+let payload =
+rows.map(r=>({
+
+employee_id:
+r.dataset.id,
+
+month:md,
+
+absence_excused:
++r.querySelector(".ex").value || 0,
+
+absence_unexcused:
++r.querySelector(".un").value || 0,
+
+late_minutes:
++r.querySelector(".late").value || 0,
+
+early_leave_minutes:
++r.querySelector(".early").value || 0,
+
+no_fingerprint_days:
++r.querySelector(".nfp").value || 0,
+
+permission_days:
++r.querySelector(".perm").value || 0,
+
+extra_classes:
++r.querySelector(".extra").value || 0,
+
+teacher_ack:
+r.querySelector(".ack").checked,
+
+notes:
+r.querySelector(".notes")
+.value
+.trim(),
+
+updated_at:
+new Date().toISOString()
+
+}));
+
+
+let {
+error
+} =
+await sb
+.from("attendance_entries")
+.upsert(
+payload,
+{
+onConflict:
+"employee_id,month"
+}
+);
+
+
+if(error){
+
+return alertBox(
+"sheetErr",
+error.message
+);
+
+}
+
+
+$("sheetOk")
+.classList.add("show");
+
+}
+
+
+/* =====================================================
+   طباعة / PDF
+   ===================================================== */
+
+function printSheet(){
+
+window.print();
+
+}
+
+
+/* =====================================================
+   تشغيل الموقع
+   ===================================================== */
+
+async function boot(){
+
+const {
+data:{
+session
+}
+} =
+await sb.auth.getSession();
+
+
+if(session){
+
+await route(
+session.user.id
+);
+
+}
+
+}
+
+
+boot();
+
 </script>
 
 </body>
