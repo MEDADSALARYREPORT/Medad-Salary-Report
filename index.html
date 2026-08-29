@@ -62,7 +62,7 @@ h1,h2,h3 {
   border-radius:50%;
   background:var(--white);
   border:3px solid var(--gold);
-  box-shadow:0 0 0 4px var(--navy),var(--shadow);
+  box-shadow:0 0 0 4px var(--navy), var(--shadow);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -520,59 +520,38 @@ tbody td.name-cell {
 
 <body>
 
-<!-- ================= شاشة تسجيل الدخول ================= -->
-
+<!-- ============ شاشة تسجيل الدخول ============ -->
 <div id="loginView">
 
   <header class="site-header">
-
     <div class="seal"></div>
-
-    <div class="school-name">
-      نظام إدارة المدارس
-    </div>
-
-    <div class="page-title">
-      تسجيل الدخول
-    </div>
-
+    <div class="school-name">نظام إدارة المدارس</div>
+    <div class="page-title">تسجيل الدخول</div>
   </header>
 
   <div class="wrap">
 
     <div class="card">
 
-      <label for="userInput">
-        اسم المستخدم
-      </label>
-
+      <label for="userInput">اسم المستخدم</label>
       <input
         type="text"
         id="userInput"
         placeholder="اسم مستخدم القسم، أو بريد الأدمن العام"
       >
 
-      <label for="passInput">
-        كلمة المرور
-      </label>
-
+      <label for="passInput">كلمة المرور</label>
       <input
         type="password"
         id="passInput"
         placeholder="••••••••"
       >
 
-      <button
-        class="btn full gold"
-        id="loginBtn"
-      >
+      <button class="btn full gold" id="loginBtn">
         دخول
       </button>
 
-      <div
-        class="alert error"
-        id="loginError"
-      ></div>
+      <div class="alert error" id="loginError"></div>
 
     </div>
 
@@ -581,12 +560,10 @@ tbody td.name-cell {
     </div>
 
   </div>
-
 </div>
 
 
-<!-- ================= لوحة الأدمن العام ================= -->
-
+<!-- ============ لوحة الأدمن العام ============ -->
 <div id="adminView" class="hidden">
 
   <div class="topbar">
@@ -598,24 +575,15 @@ tbody td.name-cell {
 
     <nav>
 
-      <a
-        data-tab="schools"
-        class="admin-tab active"
-      >
+      <a data-tab="schools" class="admin-tab active">
         المدارس
       </a>
 
-      <a
-        data-tab="departments"
-        class="admin-tab"
-      >
+      <a data-tab="departments" class="admin-tab">
         الأقسام
       </a>
 
-      <button
-        class="btn small gold"
-        id="adminLogoutBtn"
-      >
+      <button class="btn small gold" id="adminLogoutBtn">
         تسجيل الخروج
       </button>
 
@@ -624,13 +592,9 @@ tbody td.name-cell {
   </div>
 
 
-  <div
-    class="wrap wide"
-    style="margin-top:24px"
-  >
+  <div class="wrap wide" style="margin-top:24px">
 
-    <!-- المدارس -->
-
+    <!-- تبويب المدارس -->
     <div id="tab-schools">
 
       <div class="card">
@@ -653,10 +617,7 @@ tbody td.name-cell {
           شعار المدرسة
         </label>
 
-        <div
-          class="file-drop"
-          id="logoDrop"
-        >
+        <div class="file-drop" id="logoDrop">
 
           <input
             type="file"
@@ -664,44 +625,30 @@ tbody td.name-cell {
             accept="image/*"
           >
 
-          <div
-            class="file-drop-text"
-            id="logoDropText"
-          >
+          <div class="file-drop-text" id="logoDropText">
             <b>اضغط لاختيار الشعار</b>
           </div>
 
         </div>
 
-        <button
-          class="btn full"
-          id="addSchoolBtn"
-        >
+        <button class="btn full" id="addSchoolBtn">
           إضافة المدرسة
         </button>
 
-        <div
-          class="alert error"
-          id="schoolError"
-        ></div>
+        <div class="alert error" id="schoolError"></div>
 
-        <div
-          class="alert success"
-          id="schoolSuccess"
-        >
+        <div class="alert success" id="schoolSuccess">
           تمت إضافة المدرسة بنجاح.
         </div>
 
       </div>
 
+
       <h3 style="margin:10px 0 14px">
         المدارس الحالية
       </h3>
 
-      <div
-        class="grid"
-        id="schoolsGrid"
-      ></div>
+      <div class="grid" id="schoolsGrid"></div>
 
       <div
         class="empty-state"
@@ -714,12 +661,8 @@ tbody td.name-cell {
     </div>
 
 
-    <!-- الأقسام -->
-
-    <div
-      id="tab-departments"
-      class="hidden"
-    >
+    <!-- تبويب الأقسام -->
+    <div id="tab-departments" class="hidden">
 
       <div class="card">
 
@@ -743,19 +686,14 @@ tbody td.name-cell {
           placeholder="مثال: الابتدائي بنين"
         >
 
-        <button
-          class="btn full"
-          id="addDeptBtn"
-        >
+        <button class="btn full" id="addDeptBtn">
           إضافة القسم وتوليد بيانات الدخول
         </button>
 
-        <div
-          class="alert error"
-          id="deptError"
-        ></div>
+        <div class="alert error" id="deptError"></div>
 
       </div>
+
 
       <h3 style="margin:10px 0 14px">
         أقسام المدرسة المختارة
@@ -789,12 +727,10 @@ tbody td.name-cell {
     </div>
 
   </div>
-
 </div>
 
 
-<!-- ================= لوحة القسم ================= -->
-
+<!-- ============ لوحة القسم ============ -->
 <div id="deptView" class="hidden">
 
   <div class="topbar">
@@ -806,24 +742,15 @@ tbody td.name-cell {
 
     <nav>
 
-      <a
-        data-tab="employees"
-        class="dept-tab active"
-      >
+      <a data-tab="employees" class="dept-tab active">
         قائمة الموظفين
       </a>
 
-      <a
-        data-tab="sheet"
-        class="dept-tab"
-      >
+      <a data-tab="sheet" class="dept-tab">
         المسير الشهري
       </a>
 
-      <button
-        class="btn small gold"
-        id="deptLogoutBtn"
-      >
+      <button class="btn small gold" id="deptLogoutBtn">
         تسجيل الخروج
       </button>
 
@@ -832,13 +759,9 @@ tbody td.name-cell {
   </div>
 
 
-  <div
-    class="wrap wide"
-    style="margin-top:24px"
-  >
+  <div class="wrap wide" style="margin-top:24px">
 
-    <!-- الموظفين -->
-
+    <!-- تبويب الموظفين -->
     <div id="tab-employees">
 
       <div class="card">
@@ -847,13 +770,7 @@ tbody td.name-cell {
           إضافة موظف
         </h3>
 
-        <div
-          style="
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:0 16px
-          "
-        >
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px">
 
           <div>
 
@@ -868,6 +785,7 @@ tbody td.name-cell {
             >
 
           </div>
+
 
           <div>
 
@@ -885,6 +803,7 @@ tbody td.name-cell {
 
         </div>
 
+
         <label for="empStart">
           تاريخ المباشرة
         </label>
@@ -894,17 +813,12 @@ tbody td.name-cell {
           id="empStart"
         >
 
-        <button
-          class="btn full"
-          id="addEmpBtn"
-        >
+
+        <button class="btn full" id="addEmpBtn">
           إضافة الموظف
         </button>
 
-        <div
-          class="alert error"
-          id="empError"
-        ></div>
+        <div class="alert error" id="empError"></div>
 
       </div>
 
@@ -912,6 +826,7 @@ tbody td.name-cell {
       <h3 style="margin:10px 0 14px">
         قائمة الموظفين
       </h3>
+
 
       <div class="table-card">
 
@@ -934,6 +849,7 @@ tbody td.name-cell {
 
         </table>
 
+
         <div
           class="empty-state"
           id="empEmpty"
@@ -947,12 +863,8 @@ tbody td.name-cell {
     </div>
 
 
-    <!-- المسير -->
-
-    <div
-      id="tab-sheet"
-      class="hidden"
-    >
+    <!-- تبويب المسير -->
+    <div id="tab-sheet" class="hidden">
 
       <div class="toolbar">
 
@@ -989,17 +901,13 @@ tbody td.name-cell {
 
       </div>
 
-      <div
-        class="alert error"
-        id="sheetError"
-      ></div>
 
-      <div
-        class="alert success"
-        id="sheetSuccess"
-      >
+      <div class="alert error" id="sheetError"></div>
+
+      <div class="alert success" id="sheetSuccess">
         تم حفظ المسير بنجاح.
       </div>
+
 
       <div class="table-card">
 
@@ -1023,36 +931,28 @@ tbody td.name-cell {
                 تاريخ المباشرة
               </th>
 
-              <th
-                colspan="3"
-                class="group-head"
-              >
+              <th colspan="3" class="group-head">
                 عدد أيام الغياب
               </th>
 
               <th rowspan="2">
-                تاريخ الغياب<br>
-                (ميلادي)
+                تاريخ الغياب<br>(ميلادي)
               </th>
 
               <th rowspan="2">
-                عدد دقائق<br>
-                التأخير
+                عدد دقائق<br>التأخير
               </th>
 
               <th rowspan="2">
-                عدد دقائق<br>
-                الانصراف المبكر
+                عدد دقائق<br>الانصراف المبكر
               </th>
 
               <th rowspan="2">
-                عدد أيام<br>
-                عدم البصمة
+                عدد أيام<br>عدم البصمة
               </th>
 
               <th rowspan="2">
-                عدد أيام<br>
-                الاستئذان
+                عدد أيام<br>الاستئذان
               </th>
 
               <th rowspan="2">
@@ -1060,8 +960,7 @@ tbody td.name-cell {
               </th>
 
               <th rowspan="2">
-                توقيع المعلم<br>
-                بالعلم
+                توقيع المعلم<br>بالعلم
               </th>
 
               <th rowspan="2">
@@ -1069,6 +968,7 @@ tbody td.name-cell {
               </th>
 
             </tr>
+
 
             <tr>
 
@@ -1088,9 +988,11 @@ tbody td.name-cell {
 
           </thead>
 
+
           <tbody id="sheetBody"></tbody>
 
         </table>
+
 
         <div
           class="empty-state"
@@ -1101,6 +1003,7 @@ tbody td.name-cell {
         </div>
 
       </div>
+
 
       <button
         class="btn full gold"
@@ -1113,21 +1016,15 @@ tbody td.name-cell {
     </div>
 
   </div>
-
 </div>
 
 
-<!-- ================= منطقة الطباعة ================= -->
-
+<!-- منطقة الطباعة -->
 <div id="printArea"></div>
 
 
-<!-- ================= نافذة بيانات القسم ================= -->
-
-<div
-  class="modal-bg"
-  id="credModal"
->
+<!-- نافذة بيانات دخول القسم الجديد -->
+<div class="modal-bg" id="credModal">
 
   <div class="modal">
 
@@ -1135,39 +1032,24 @@ tbody td.name-cell {
       تم إنشاء القسم بنجاح
     </h3>
 
-    <p
-      style="
-        color:var(--slate);
-        font-size:13.5px
-      "
-    >
-      احفظوا هذه البيانات الآن وسلّموها للقسم —
-      لن تظهر كلمة المرور مرة أخرى.
+    <p style="color:var(--slate); font-size:13.5px">
+      احفظوا هذه البيانات الآن وسلّموها للقسم — لن تظهر كلمة المرور مرة أخرى.
     </p>
 
     <div class="cred-box">
 
       <div class="row">
-
-        <span>
-          اسم المستخدم:
-        </span>
-
+        <span>اسم المستخدم:</span>
         <b id="credUser"></b>
-
       </div>
 
       <div class="row">
-
-        <span>
-          كلمة المرور:
-        </span>
-
+        <span>كلمة المرور:</span>
         <b id="credPass"></b>
-
       </div>
 
     </div>
+
 
     <button
       class="btn full gold"
@@ -1190,7 +1072,7 @@ import {
 
 
 /* ============================================================
-   SUPABASE
+   إعدادات Supabase
    ============================================================ */
 
 const SUPABASE_URL =
@@ -1200,17 +1082,20 @@ const SUPABASE_KEY =
   "sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW";
 
 
-const url = SUPABASE_URL;
-
-const supabase = createClient(
-  url,
-  SUPABASE_KEY
-);
+const url =
+  SUPABASE_URL.startsWith("http")
+    ? SUPABASE_URL
+    : `https://${SUPABASE_URL}`;
 
 
-/* ============================================================
-   عناصر الشاشات
-   ============================================================ */
+const supabase =
+  createClient(
+    url,
+    SUPABASE_KEY
+  );
+
+
+/* ---------- عناصر الشاشات ---------- */
 
 const loginView =
   document.getElementById("loginView");
@@ -1235,9 +1120,7 @@ function showView(view) {
 }
 
 
-/* ============================================================
-   تسجيل الدخول
-   ============================================================ */
+/* ---------- تسجيل الدخول ---------- */
 
 async function bootstrap() {
 
@@ -1246,6 +1129,7 @@ async function bootstrap() {
       session
     }
   } = await supabase.auth.getSession();
+
 
   if (session) {
 
@@ -1266,11 +1150,12 @@ async function routeByRole(userId) {
 
   const {
     data: profile
-  } = await supabase
-    .from("profiles")
-    .select("role, department_id")
-    .eq("id", userId)
-    .single();
+  } =
+    await supabase
+      .from("profiles")
+      .select("role, department_id")
+      .eq("id", userId)
+      .single();
 
 
   if (profile?.role === "super_admin") {
@@ -1293,13 +1178,11 @@ async function routeByRole(userId) {
 
   else {
 
-    const err =
-      document.getElementById("loginError");
-
-    err.textContent =
+    document.getElementById("loginError").textContent =
       "لم يتم العثور على صلاحية لهذا الحساب.";
 
-    err.classList.add("show");
+    document.getElementById("loginError")
+      .classList.add("show");
 
     showView(loginView);
 
@@ -1326,7 +1209,9 @@ document
 
 
     const password =
-      document.getElementById("passInput").value;
+      document
+        .getElementById("passInput")
+        .value;
 
 
     if (!user || !password) {
@@ -1360,10 +1245,11 @@ document
     const {
       data,
       error
-    } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+    } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
 
     btn.disabled = false;
@@ -1417,7 +1303,7 @@ async function doLogout() {
 
 
 /* ============================================================
-   لوحة الأدمن
+   لوحة الأدمن العام
    ============================================================ */
 
 let adminInitialized = false;
@@ -1429,42 +1315,41 @@ async function initAdmin() {
     .querySelectorAll(".admin-tab")
     .forEach(tab => {
 
-      tab.addEventListener(
-        "click",
-        () => {
+      tab.addEventListener("click", () => {
 
-          document
-            .querySelectorAll(".admin-tab")
-            .forEach(t =>
-              t.classList.remove("active")
-            );
+        document
+          .querySelectorAll(".admin-tab")
+          .forEach(t =>
+            t.classList.remove("active")
+          );
 
 
-          tab.classList.add("active");
+        tab.classList.add("active");
 
 
-          document
-            .getElementById("tab-schools")
-            .classList.toggle(
-              "hidden",
-              tab.dataset.tab !== "schools"
-            );
+        document
+          .getElementById("tab-schools")
+          .classList.toggle(
+            "hidden",
+            tab.dataset.tab !== "schools"
+          );
 
 
-          document
-            .getElementById("tab-departments")
-            .classList.toggle(
-              "hidden",
-              tab.dataset.tab !== "departments"
-            );
+        document
+          .getElementById("tab-departments")
+          .classList.toggle(
+            "hidden",
+            tab.dataset.tab !== "departments"
+          );
 
-        }
-      );
+      });
 
     });
 
 
-  if (adminInitialized) return;
+  if (adminInitialized)
+    return;
+
 
   adminInitialized = true;
 
@@ -1488,11 +1373,14 @@ async function initAdmin() {
       const f =
         logoFile.files[0];
 
-      if (!f) return;
+      if (!f)
+        return;
+
 
       logoDrop.classList.add(
         "has-file"
       );
+
 
       logoDropText.innerHTML =
         `<b>تم اختيار:</b> ${f.name}`;
@@ -1509,7 +1397,6 @@ async function initAdmin() {
 
         const errorBox =
           document.getElementById("schoolError");
-
 
         const successBox =
           document.getElementById("schoolSuccess");
@@ -1552,6 +1439,7 @@ async function initAdmin() {
         try {
 
           let logo_url = null;
+
 
           const file =
             logoFile.files[0];
@@ -1621,6 +1509,7 @@ async function initAdmin() {
 
           logoFile.value = "";
 
+
           logoDrop.classList.remove(
             "has-file"
           );
@@ -1631,7 +1520,6 @@ async function initAdmin() {
 
 
           await loadSchools();
-
 
         }
 
@@ -1693,10 +1581,6 @@ async function initAdmin() {
 
 }
 
-
-/* ============================================================
-   المدارس
-   ============================================================ */
 
 async function loadSchools() {
 
@@ -1816,10 +1700,6 @@ async function loadSchools() {
 }
 
 
-/* ============================================================
-   قائمة المدارس
-   ============================================================ */
-
 async function loadSchoolOptions() {
 
   const {
@@ -1844,10 +1724,11 @@ async function loadSchoolOptions() {
 
   select.innerHTML =
     (schools || [])
-      .map(s =>
-        `<option value="${s.id}">
-          ${s.name}
-        </option>`
+      .map(
+        s =>
+          `<option value="${s.id}">
+             ${s.name}
+           </option>`
       )
       .join("");
 
@@ -1864,16 +1745,14 @@ async function loadSchoolOptions() {
 }
 
 
-/* ============================================================
-   الأقسام
-   ============================================================ */
-
 async function loadDepartments() {
 
   const schoolId =
-    document.getElementById(
-      "deptSchoolSelect"
-    ).value;
+    document
+      .getElementById(
+        "deptSchoolSelect"
+      )
+      .value;
 
 
   const body =
@@ -1933,29 +1812,21 @@ async function loadDepartments() {
 
   body.innerHTML =
     data
-      .map(d => `
-
-        <tr>
-
-          <td>
-            ${d.name}
-          </td>
-
-          <td style="direction:ltr">
-            ${d.username}
-          </td>
-
-        </tr>
-
-      `)
+      .map(
+        d =>
+          `<tr>
+            <td>${d.name}</td>
+            <td style="direction:ltr">
+              ${d.username}
+            </td>
+          </tr>`
+      )
       .join("");
 
 }
 
 
-/* ============================================================
-   إنشاء قسم جديد
-   ============================================================ */
+/* ---------- إنشاء حساب قسم ---------- */
 
 async function addDepartment() {
 
@@ -1971,14 +1842,18 @@ async function addDepartment() {
 
 
   const schoolId =
-    document.getElementById(
-      "deptSchoolSelect"
-    ).value;
+    document
+      .getElementById(
+        "deptSchoolSelect"
+      )
+      .value;
 
 
   const deptName =
     document
-      .getElementById("deptName")
+      .getElementById(
+        "deptName"
+      )
       .value
       .trim();
 
@@ -2042,7 +1917,7 @@ async function addDepartment() {
         url,
         SUPABASE_KEY,
         {
-          auth:{
+          auth: {
             persistSession:false,
             autoRefreshToken:false
           }
@@ -2064,13 +1939,10 @@ async function addDepartment() {
       throw signUpErr;
 
 
-    if (!signUpData.user) {
-
+    if (!signUpData.user)
       throw new Error(
-        "لم يتم إنشاء المستخدم — تأكد من إعدادات تأكيد البريد الإلكتروني في Supabase."
+        "لم يتم إنشاء المستخدم — تأكدوا أن خيار Confirm email مُعطَّل في إعدادات Supabase."
       );
-
-    }
 
 
     const newUserId =
@@ -2113,26 +1985,28 @@ async function addDepartment() {
       throw profErr;
 
 
-    document
-      .getElementById("credUser")
-      .textContent =
-        username;
+    document.getElementById(
+      "credUser"
+    ).textContent =
+      username;
 
 
-    document
-      .getElementById("credPass")
-      .textContent =
-        password;
+    document.getElementById(
+      "credPass"
+    ).textContent =
+      password;
 
 
-    document
-      .getElementById("credModal")
-      .classList.add("show");
+    document.getElementById(
+      "credModal"
+    ).classList.add(
+      "show"
+    );
 
 
-    document
-      .getElementById("deptName")
-      .value = "";
+    document.getElementById(
+      "deptName"
+    ).value = "";
 
 
     await loadDepartments();
@@ -2247,7 +2121,8 @@ async function initDept(
             )
             .classList.toggle(
               "hidden",
-              tab.dataset.tab !== "employees"
+              tab.dataset.tab !==
+                "employees"
             );
 
 
@@ -2257,7 +2132,8 @@ async function initDept(
             )
             .classList.toggle(
               "hidden",
-              tab.dataset.tab !== "sheet"
+              tab.dataset.tab !==
+                "sheet"
             );
 
 
@@ -2300,7 +2176,7 @@ async function initDept(
 
   monthPicker.value =
     `${now.getFullYear()}-${String(
-      now.getMonth()+1
+      now.getMonth() + 1
     ).padStart(2,"0")}`;
 
 
@@ -2349,10 +2225,6 @@ async function initDept(
 }
 
 
-/* ============================================================
-   إضافة موظف
-   ============================================================ */
-
 async function addEmployee() {
 
   const errorBox =
@@ -2368,22 +2240,29 @@ async function addEmployee() {
 
   const full_name =
     document
-      .getElementById("empName")
+      .getElementById(
+        "empName"
+      )
       .value
       .trim();
 
 
   const job_title =
     document
-      .getElementById("empJob")
+      .getElementById(
+        "empJob"
+      )
       .value
       .trim();
 
 
   const start_date =
     document
-      .getElementById("empStart")
-      .value || null;
+      .getElementById(
+        "empStart"
+      )
+      .value ||
+    null;
 
 
   if (!full_name) {
@@ -2429,8 +2308,7 @@ async function addEmployee() {
   if (error) {
 
     errorBox.textContent =
-      "حدث خطأ: " +
-      error.message;
+      "حدث خطأ: " + error.message;
 
     errorBox.classList.add(
       "show"
@@ -2441,29 +2319,25 @@ async function addEmployee() {
   }
 
 
-  document
-    .getElementById("empName")
-    .value = "";
+  document.getElementById(
+    "empName"
+  ).value = "";
 
 
-  document
-    .getElementById("empJob")
-    .value = "";
+  document.getElementById(
+    "empJob"
+  ).value = "";
 
 
-  document
-    .getElementById("empStart")
-    .value = "";
+  document.getElementById(
+    "empStart"
+  ).value = "";
 
 
   await loadEmployees();
 
 }
 
-
-/* ============================================================
-   تحميل الموظفين
-   ============================================================ */
 
 async function loadEmployees() {
 
@@ -2486,10 +2360,6 @@ async function loadEmployees() {
     await supabase
       .from("employees")
       .select("*")
-      .eq(
-        "department_id",
-        myDepartmentId
-      )
       .order(
         "created_at",
         {
@@ -2519,383 +2389,378 @@ async function loadEmployees() {
 
 
   body.innerHTML =
-    data
-      .map((e,i) => `
+    data.map(
+      (e,i) => `
 
-        <tr
-          data-id="${e.id}"
-          style="${
-            e.is_active === false
-              ? "opacity:.55"
-              : ""
-          }"
-        >
+      <tr
+        data-id="${e.id}"
+        style="${
+          e.is_active === false
+            ? "opacity:.55"
+            : ""
+        }"
+      >
 
-          <td>
-            ${i+1}
-          </td>
+        <td>
+          ${i + 1}
+        </td>
 
+        <td class="name-cell">
 
-          <td class="name-cell">
-
-            <input
-              type="text"
-              class="f-name"
-              value="${
-                e.full_name || ""
-              }"
-            >
-
-          </td>
-
-
-          <td>
-
-            <input
-              type="text"
-              class="f-job"
-              value="${
-                e.job_title || ""
-              }"
-            >
-
-          </td>
-
-
-          <td>
-
-            <input
-              type="date"
-              class="f-date"
-              value="${
-                e.start_date || ""
-              }"
-            >
-
-          </td>
-
-
-          <td>
-
-            ${
-              e.is_active === false
-
-              ?
-
-              `<span
-                style="
-                  color:var(--danger);
-                  font-weight:700;
-                  font-size:12px
-                "
-              >
-                مجمد
-              </span>`
-
-              :
-
-              `<span
-                style="
-                  color:var(--success);
-                  font-weight:700;
-                  font-size:12px
-                "
-              >
-                نشط
-              </span>`
-            }
-
-          </td>
-
-
-          <td
-            style="
-              display:flex;
-              gap:6px;
-              justify-content:center;
-              flex-wrap:wrap
-            "
+          <input
+            type="text"
+            class="f-name"
+            value="${e.full_name || ""}"
           >
 
-            <button
-              class="btn small outline save-btn"
-            >
-              حفظ
-            </button>
+        </td>
+
+        <td>
+
+          <input
+            type="text"
+            class="f-job"
+            value="${e.job_title || ""}"
+          >
+
+        </td>
+
+        <td>
+
+          <input
+            type="date"
+            class="f-date"
+            value="${e.start_date || ""}"
+          >
+
+        </td>
+
+        <td>
+
+          ${
+            e.is_active === false
+
+              ? `
+                <span
+                  style="
+                    color:var(--danger);
+                    font-weight:700;
+                    font-size:12px
+                  "
+                >
+                  مجمّد
+                </span>
+              `
+
+              : `
+                <span
+                  style="
+                    color:var(--success);
+                    font-weight:700;
+                    font-size:12px
+                  "
+                >
+                  نشط
+                </span>
+              `
+          }
+
+        </td>
+
+        <td
+          style="
+            display:flex;
+            gap:6px;
+            justify-content:center;
+            flex-wrap:wrap
+          "
+        >
+
+          <button
+            class="btn small outline save-btn"
+          >
+            حفظ
+          </button>
 
 
-            <button
-              class="btn small ${
-                e.is_active === false
-                  ? "gold"
-                  : "outline"
-              } freeze-btn"
-            >
-              ${
-                e.is_active === false
-                  ? "تفعيل"
-                  : "تجميد"
-              }
-            </button>
+          <button
+            class="btn small ${
+              e.is_active === false
+                ? "gold"
+                : "outline"
+            } freeze-btn"
+          >
+            ${
+              e.is_active === false
+                ? "تفعيل"
+                : "تجميد"
+            }
+          </button>
 
 
-            <button
-              class="btn small danger-outline delete-btn"
-            >
-              حذف
-            </button>
+          <button
+            class="btn small danger-outline delete-btn"
+          >
+            حذف
+          </button>
 
-          </td>
+        </td>
 
-        </tr>
+      </tr>
 
-      `)
-      .join("");
+    `
+    ).join("");
 
 
   body
     .querySelectorAll(".save-btn")
-    .forEach(saveBtn => {
+    .forEach(
+      saveBtn => {
 
-      saveBtn.addEventListener(
-        "click",
-        async ev => {
+        saveBtn.addEventListener(
+          "click",
+          async ev => {
 
-          const tr =
-            ev.target.closest("tr");
-
-
-          const id =
-            tr.dataset.id;
+            const tr =
+              ev.target.closest("tr");
 
 
-          const full_name =
-            tr
-              .querySelector(".f-name")
-              .value
-              .trim();
+            const id =
+              tr.dataset.id;
 
 
-          const job_title =
-            tr
-              .querySelector(".f-job")
-              .value
-              .trim();
+            const full_name =
+              tr
+                .querySelector(".f-name")
+                .value
+                .trim();
 
 
-          const start_date =
-            tr
-              .querySelector(".f-date")
-              .value || null;
+            const job_title =
+              tr
+                .querySelector(".f-job")
+                .value
+                .trim();
 
 
-          saveBtn.disabled =
-            true;
+            const start_date =
+              tr
+                .querySelector(".f-date")
+                .value ||
+              null;
 
 
-          saveBtn.textContent =
-            "...";
+            saveBtn.disabled =
+              true;
 
 
-          const {
-            error
-          } =
-            await supabase
-              .from("employees")
-              .update({
-                full_name,
-                job_title,
-                start_date,
-                updated_at:
-                  new Date().toISOString()
-              })
-              .eq(
-                "id",
-                id
-              );
+            saveBtn.textContent =
+              "...";
 
 
-          saveBtn.disabled =
-            false;
+            const {
+              error
+            } =
+              await supabase
+                .from("employees")
+                .update({
+                  full_name,
+                  job_title,
+                  start_date,
+                  updated_at:
+                    new Date()
+                      .toISOString()
+                })
+                .eq(
+                  "id",
+                  id
+                );
 
 
-          saveBtn.textContent =
-            error
-              ? "خطأ"
-              : "تم ✓";
+            saveBtn.disabled =
+              false;
 
 
-          setTimeout(
-            () =>
-              saveBtn.textContent =
-                "حفظ",
-            1500
-          );
+            saveBtn.textContent =
+              error
+                ? "خطأ"
+                : "تم ✓";
 
-        }
-      );
 
-    });
+            setTimeout(
+              () =>
+                (
+                  saveBtn.textContent =
+                    "حفظ"
+                ),
+              1500
+            );
+
+          }
+        );
+
+      }
+    );
 
 
   body
     .querySelectorAll(".freeze-btn")
-    .forEach(freezeBtn => {
+    .forEach(
+      freezeBtn => {
 
-      freezeBtn.addEventListener(
-        "click",
-        async ev => {
+        freezeBtn.addEventListener(
+          "click",
+          async ev => {
 
-          const tr =
-            ev.target.closest("tr");
-
-
-          const id =
-            tr.dataset.id;
+            const tr =
+              ev.target.closest("tr");
 
 
-          const currentlyFrozen =
-            freezeBtn
-              .textContent
-              .trim() ===
+            const id =
+              tr.dataset.id;
+
+
+            const currentlyFrozen =
+              freezeBtn
+                .textContent
+                .trim() ===
               "تفعيل";
 
 
-          freezeBtn.disabled =
-            true;
+            freezeBtn.disabled =
+              true;
 
 
-          const {
-            error
-          } =
-            await supabase
-              .from("employees")
-              .update({
-                is_active:
-                  currentlyFrozen,
-                updated_at:
-                  new Date().toISOString()
-              })
-              .eq(
-                "id",
-                id
+            const {
+              error
+            } =
+              await supabase
+                .from("employees")
+                .update({
+                  is_active:
+                    currentlyFrozen,
+                  updated_at:
+                    new Date()
+                      .toISOString()
+                })
+                .eq(
+                  "id",
+                  id
+                );
+
+
+            freezeBtn.disabled =
+              false;
+
+
+            if (error) {
+
+              alert(
+                "حدث خطأ: " +
+                error.message
               );
 
+              return;
 
-          freezeBtn.disabled =
-            false;
+            }
 
 
-          if (error) {
-
-            alert(
-              "حدث خطأ: " +
-              error.message
-            );
-
-            return;
+            await loadEmployees();
 
           }
+        );
 
-
-          await loadEmployees();
-
-        }
-      );
-
-    });
+      }
+    );
 
 
   body
     .querySelectorAll(".delete-btn")
-    .forEach(delBtn => {
+    .forEach(
+      delBtn => {
 
-      delBtn.addEventListener(
-        "click",
-        async ev => {
+        delBtn.addEventListener(
+          "click",
+          async ev => {
 
-          const tr =
-            ev.target.closest("tr");
-
-
-          const id =
-            tr.dataset.id;
+            const tr =
+              ev.target.closest("tr");
 
 
-          const name =
-            tr
-              .querySelector(".f-name")
-              .value
-              .trim();
+            const id =
+              tr.dataset.id;
 
 
-          if (
-            !confirm(
-              `متأكد تبي تحذف "${name}"؟ سيتم حذف كل سجلات المسير الخاصة به أيضًا ولا يمكن التراجع.`
+            const name =
+              tr
+                .querySelector(".f-name")
+                .value
+                .trim();
+
+
+            if (
+              !confirm(
+                `متأكد تبي تحذف "${name}"؟ سيتم حذف كل سجلات المسير الخاصة به أيضًا ولا يمكن التراجع.`
+              )
             )
-          ) {
-
-            return;
-
-          }
-
-
-          delBtn.disabled =
-            true;
-
-
-          delBtn.textContent =
-            "...";
-
-
-          const {
-            error
-          } =
-            await supabase
-              .from("employees")
-              .delete()
-              .eq(
-                "id",
-                id
-              );
-
-
-          if (error) {
-
-            alert(
-              "حدث خطأ أثناء الحذف: " +
-              error.message
-            );
+              return;
 
 
             delBtn.disabled =
-              false;
+              true;
 
 
             delBtn.textContent =
-              "حذف";
+              "...";
 
 
-            return;
+            const {
+              error
+            } =
+              await supabase
+                .from("employees")
+                .delete()
+                .eq(
+                  "id",
+                  id
+                );
+
+
+            if (error) {
+
+              alert(
+                "حدث خطأ أثناء الحذف: " +
+                error.message
+              );
+
+
+              delBtn.disabled =
+                false;
+
+
+              delBtn.textContent =
+                "حذف";
+
+
+              return;
+
+            }
+
+
+            await loadEmployees();
 
           }
+        );
 
-
-          await loadEmployees();
-
-        }
-      );
-
-    });
+      }
+    );
 
 }
 
 
-/* ============================================================
-   المسير الشهري
-   ============================================================ */
-
-function monthToDate(monthStr) {
+function monthToDate(
+  monthStr
+) {
 
   return `${monthStr}-01`;
 
@@ -2946,10 +2811,6 @@ async function loadSheet() {
       .from("employees")
       .select("*")
       .eq(
-        "department_id",
-        myDepartmentId
-      )
-      .eq(
         "is_active",
         true
       )
@@ -2995,7 +2856,9 @@ async function loadSheet() {
     data: entries
   } =
     await supabase
-      .from("attendance_entries")
+      .from(
+        "attendance_entries"
+      )
       .select("*")
       .eq(
         "month",
@@ -3013,77 +2876,86 @@ async function loadSheet() {
 
 
   (entries || [])
-    .forEach(e =>
-      entryMap[
-        e.employee_id
-      ] = e
+    .forEach(
+      e =>
+        (
+          entryMap[
+            e.employee_id
+          ] = e
+        )
     );
 
 
   body.innerHTML =
     employees
-      .map((emp,i) => {
+      .map(
+        (emp,i) => {
 
-        const en =
-          entryMap[emp.id] || {};
+          const en =
+            entryMap[
+              emp.id
+            ] || {};
 
 
-        return `
+          return `
 
-          <tr data-emp="${emp.id}">
+          <tr
+            data-emp="${emp.id}"
+          >
 
             <td>
-              ${i+1}
+              ${i + 1}
             </td>
-
 
             <td class="name-cell">
               ${emp.full_name}
             </td>
 
-
             <td>
               ${emp.job_title || "-"}
             </td>
-
 
             <td>
               ${emp.start_date || "-"}
             </td>
 
-
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-exc"
                 value="${
-                  en.absence_excused ?? 0
+                  en.absence_excused ??
+                  0
                 }"
               >
+
             </td>
 
-
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-unexc"
                 value="${
-                  en.absence_unexcused ?? 0
+                  en.absence_unexcused ??
+                  0
                 }"
               >
+
             </td>
 
-
             <td class="f-total">
+
               ${
                 (en.absence_excused ?? 0)
                 +
                 (en.absence_unexcused ?? 0)
               }
-            </td>
 
+            </td>
 
             <td>
 
@@ -3098,7 +2970,6 @@ async function loadSheet() {
 
             </td>
 
-
             <td>
 
               <input
@@ -3111,7 +2982,6 @@ async function loadSheet() {
               >
 
             </td>
-
 
             <td>
 
@@ -3126,7 +2996,6 @@ async function loadSheet() {
 
             </td>
 
-
             <td>
 
               <input
@@ -3139,7 +3008,6 @@ async function loadSheet() {
               >
 
             </td>
-
 
             <td>
 
@@ -3154,7 +3022,6 @@ async function loadSheet() {
 
             </td>
 
-
             <td>
 
               <input
@@ -3167,7 +3034,6 @@ async function loadSheet() {
               >
 
             </td>
-
 
             <td>
 
@@ -3183,7 +3049,6 @@ async function loadSheet() {
 
             </td>
 
-
             <td>
 
               <input
@@ -3198,63 +3063,62 @@ async function loadSheet() {
 
           </tr>
 
-        `;
+          `;
 
-      })
+        }
+      )
       .join("");
 
 
   body
     .querySelectorAll("tr")
-    .forEach(tr => {
+    .forEach(
+      tr => {
 
-      const exc =
-        tr.querySelector(
-          ".f-exc"
+        const exc =
+          tr.querySelector(
+            ".f-exc"
+          );
+
+
+        const unexc =
+          tr.querySelector(
+            ".f-unexc"
+          );
+
+
+        const total =
+          tr.querySelector(
+            ".f-total"
+          );
+
+
+        function updateTotal() {
+
+          total.textContent =
+            (Number(exc.value) || 0)
+            +
+            (Number(unexc.value) || 0);
+
+        }
+
+
+        exc.addEventListener(
+          "input",
+          updateTotal
         );
 
 
-      const unexc =
-        tr.querySelector(
-          ".f-unexc"
+        unexc.addEventListener(
+          "input",
+          updateTotal
         );
-
-
-      const total =
-        tr.querySelector(
-          ".f-total"
-        );
-
-
-      function updateTotal() {
-
-        total.textContent =
-          (Number(exc.value) || 0)
-          +
-          (Number(unexc.value) || 0);
 
       }
-
-
-      exc.addEventListener(
-        "input",
-        updateTotal
-      );
-
-
-      unexc.addEventListener(
-        "input",
-        updateTotal
-      );
-
-    });
+    );
 
 }
 
-
-/* ============================================================
-   حفظ المسير
-   ============================================================ */
 
 async function saveSheet() {
 
@@ -3295,9 +3159,7 @@ async function saveSheet() {
       .getElementById(
         "sheetBody"
       )
-      .querySelectorAll(
-        "tr"
-      );
+      .querySelectorAll("tr");
 
 
   if (!rows.length)
@@ -3306,89 +3168,94 @@ async function saveSheet() {
 
   const payload =
     Array.from(rows)
-      .map(tr => ({
+      .map(
+        tr => ({
 
-        employee_id:
-          tr.dataset.emp,
+          employee_id:
+            tr.dataset.emp,
 
-        month:
-          monthDate,
+          month:
+            monthDate,
 
-        absence_excused:
-          Number(
+          absence_excused:
+            Number(
+              tr.querySelector(
+                ".f-exc"
+              ).value
+            ) || 0,
+
+          absence_unexcused:
+            Number(
+              tr.querySelector(
+                ".f-unexc"
+              ).value
+            ) || 0,
+
+          absence_dates:
             tr.querySelector(
-              ".f-exc"
-            ).value
-          ) || 0,
+              ".f-absdates"
+            ).value.trim(),
 
-        absence_unexcused:
-          Number(
+          late_minutes:
+            Number(
+              tr.querySelector(
+                ".f-late"
+              ).value
+            ) || 0,
+
+          early_leave_minutes:
+            Number(
+              tr.querySelector(
+                ".f-early"
+              ).value
+            ) || 0,
+
+          no_fingerprint_days:
+            Number(
+              tr.querySelector(
+                ".f-nofp"
+              ).value
+            ) || 0,
+
+          permission_days:
+            Number(
+              tr.querySelector(
+                ".f-perm"
+              ).value
+            ) || 0,
+
+          extra_classes:
+            Number(
+              tr.querySelector(
+                ".f-extra"
+              ).value
+            ) || 0,
+
+          teacher_ack:
             tr.querySelector(
-              ".f-unexc"
-            ).value
-          ) || 0,
+              ".f-ack"
+            ).checked,
 
-        absence_dates:
-          tr.querySelector(
-            ".f-absdates"
-          ).value.trim(),
-
-        late_minutes:
-          Number(
+          notes:
             tr.querySelector(
-              ".f-late"
-            ).value
-          ) || 0,
+              ".f-notes"
+            ).value.trim(),
 
-        early_leave_minutes:
-          Number(
-            tr.querySelector(
-              ".f-early"
-            ).value
-          ) || 0,
+          updated_at:
+            new Date()
+              .toISOString()
 
-        no_fingerprint_days:
-          Number(
-            tr.querySelector(
-              ".f-nofp"
-            ).value
-          ) || 0,
-
-        permission_days:
-          Number(
-            tr.querySelector(
-              ".f-perm"
-            ).value
-          ) || 0,
-
-        extra_classes:
-          Number(
-            tr.querySelector(
-              ".f-extra"
-            ).value
-          ) || 0,
-
-        teacher_ack:
-          tr.querySelector(
-            ".f-ack"
-          ).checked,
-
-        notes:
-          tr.querySelector(
-            ".f-notes"
-          ).value.trim(),
-
-        updated_at:
-          new Date().toISOString()
-
-      }));
+        })
+      );
 
 
   const {
     error
   } =
     await supabase
-      .from("attendance_entries")
+      .from(
+        "attendance_entries"
+      )
       .upsert(
         payload,
         {
@@ -3420,10 +3287,6 @@ async function saveSheet() {
 }
 
 
-/* ============================================================
-   تصدير / طباعة
-   ============================================================ */
-
 const arabicMonths = [
   "يناير",
   "فبراير",
@@ -3447,9 +3310,7 @@ function exportPDF() {
       .getElementById(
         "sheetBody"
       )
-      .querySelectorAll(
-        "tr"
-      );
+      .querySelectorAll("tr");
 
 
   if (!rows.length) {
@@ -3476,141 +3337,143 @@ function exportPDF() {
 
 
   const monthLabel =
-    `${arabicMonths[
-      parseInt(m,10)-1
-    ]} ${y}`;
+    `${
+      arabicMonths[
+        parseInt(m,10) - 1
+      ]
+    } ${y}`;
 
 
   let rowsHtml = "";
 
 
-  rows.forEach((tr,i) => {
+  rows.forEach(
+    (tr,i) => {
 
-    const name =
-      tr
-        .querySelector(
+      const name =
+        tr.querySelector(
           ".name-cell"
-        )
-        .textContent;
+        ).textContent;
 
 
-    const job =
-      tr.children[2]
-        .textContent;
+      const job =
+        tr.children[2]
+          .textContent;
 
 
-    const start =
-      tr.children[3]
-        .textContent;
+      const start =
+        tr.children[3]
+          .textContent;
 
 
-    const exc =
-      tr.querySelector(
-        ".f-exc"
-      ).value || "0";
+      const exc =
+        tr.querySelector(
+          ".f-exc"
+        ).value || "0";
 
 
-    const unexc =
-      tr.querySelector(
-        ".f-unexc"
-      ).value || "0";
+      const unexc =
+        tr.querySelector(
+          ".f-unexc"
+        ).value || "0";
 
 
-    const total =
-      tr.querySelector(
-        ".f-total"
-      ).textContent;
+      const total =
+        tr.querySelector(
+          ".f-total"
+        ).textContent;
 
 
-    const absdates =
-      tr.querySelector(
-        ".f-absdates"
-      ).value;
+      const absdates =
+        tr.querySelector(
+          ".f-absdates"
+        ).value;
 
 
-    const late =
-      tr.querySelector(
-        ".f-late"
-      ).value || "0";
+      const late =
+        tr.querySelector(
+          ".f-late"
+        ).value || "0";
 
 
-    const early =
-      tr.querySelector(
-        ".f-early"
-      ).value || "0";
+      const early =
+        tr.querySelector(
+          ".f-early"
+        ).value || "0";
 
 
-    const nofp =
-      tr.querySelector(
-        ".f-nofp"
-      ).value || "0";
+      const nofp =
+        tr.querySelector(
+          ".f-nofp"
+        ).value || "0";
 
 
-    const perm =
-      tr.querySelector(
-        ".f-perm"
-      ).value || "0";
+      const perm =
+        tr.querySelector(
+          ".f-perm"
+        ).value || "0";
 
 
-    const extra =
-      tr.querySelector(
-        ".f-extra"
-      ).value || "0";
+      const extra =
+        tr.querySelector(
+          ".f-extra"
+        ).value || "0";
 
 
-    const ack =
-      tr.querySelector(
-        ".f-ack"
-      ).checked
-        ? "✓"
-        : "";
+      const ack =
+        tr.querySelector(
+          ".f-ack"
+        ).checked
+          ? "✓"
+          : "";
 
 
-    const notes =
-      tr.querySelector(
-        ".f-notes"
-      ).value;
+      const notes =
+        tr.querySelector(
+          ".f-notes"
+        ).value;
 
 
-    rowsHtml += `
+      rowsHtml += `
 
-      <tr>
+        <tr>
 
-        <td>${i+1}</td>
+          <td>${i + 1}</td>
 
-        <td>${name}</td>
+          <td>${name}</td>
 
-        <td>${job}</td>
+          <td>${job}</td>
 
-        <td>${start}</td>
+          <td>${start}</td>
 
-        <td>${exc}</td>
+          <td>${exc}</td>
 
-        <td>${unexc}</td>
+          <td>${unexc}</td>
 
-        <td>${total}</td>
+          <td>${total}</td>
 
-        <td>${absdates}</td>
+          <td>${absdates}</td>
 
-        <td>${late}</td>
+          <td>${late}</td>
 
-        <td>${early}</td>
+          <td>${early}</td>
 
-        <td>${nofp}</td>
+          <td>${nofp}</td>
 
-        <td>${perm}</td>
+          <td>${perm}</td>
 
-        <td>${extra}</td>
+          <td>${extra}</td>
 
-        <td>${ack}</td>
+          <td>${ack}</td>
 
-        <td>${notes}</td>
+          <td>${notes}</td>
 
-      </tr>
+        </tr>
 
-    `;
+      `;
 
-  });
+    }
+  );
 
 
   const today =
@@ -3620,13 +3483,13 @@ function exportPDF() {
   const todayLabel =
     `${String(
       today.getDate()
-    ).padStart(2,"0")}
-     /
-     ${String(
-       today.getMonth()+1
-     ).padStart(2,"0")}
-     /
-     ${today.getFullYear()}م`;
+    ).padStart(2,"0")} / ${
+      String(
+        today.getMonth() + 1
+      ).padStart(2,"0")
+    } / ${
+      today.getFullYear()
+    }م`;
 
 
   const printArea =
@@ -3686,38 +3549,34 @@ function exportPDF() {
         ${
           mySchoolInfo?.logo_url
 
-          ?
+            ? `
+              <div
+                style="
+                  width:78px;
+                  height:78px;
+                  border-radius:50%;
+                  border:2px solid #C9A24B;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  overflow:hidden;
+                  margin:0 auto
+                "
+              >
 
-          `
-          <div
-            style="
-              width:78px;
-              height:78px;
-              border-radius:50%;
-              border:2px solid #C9A24B;
-              display:flex;
-              align-items:center;
-              justify-content:center;
-              overflow:hidden;
-              margin:0 auto
-            "
-          >
+                <img
+                  src="${mySchoolInfo.logo_url}"
+                  style="
+                    width:90%;
+                    height:90%;
+                    object-fit:contain
+                  "
+                >
 
-            <img
-              src="${mySchoolInfo.logo_url}"
-              style="
-                width:90%;
-                height:90%;
-                object-fit:contain
-              "
-            >
+              </div>
+            `
 
-          </div>
-          `
-
-          :
-
-          ""
+            : ""
         }
 
       </div>
@@ -3836,6 +3695,7 @@ function exportPDF() {
 
       </thead>
 
+
       <tbody>
 
         ${rowsHtml}
@@ -3866,9 +3726,7 @@ window.addEventListener(
 );
 
 
-/* ============================================================
-   تشغيل النظام
-   ============================================================ */
+/* ---------- تشغيل النظام ---------- */
 
 bootstrap();
 
