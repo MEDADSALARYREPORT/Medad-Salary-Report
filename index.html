@@ -62,7 +62,7 @@ h1,h2,h3 {
   border-radius:50%;
   background:var(--white);
   border:3px solid var(--gold);
-  box-shadow:0 0 0 4px var(--navy), var(--shadow);
+  box-shadow:0 0 0 4px var(--navy),var(--shadow);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -520,12 +520,12 @@ tbody td.name-cell {
 
 <body>
 
-<!-- =========================
-     شاشة تسجيل الدخول
-========================= -->
+<!-- ================= شاشة تسجيل الدخول ================= -->
+
 <div id="loginView">
 
   <header class="site-header">
+
     <div class="seal"></div>
 
     <div class="school-name">
@@ -535,6 +535,7 @@ tbody td.name-cell {
     <div class="page-title">
       تسجيل الدخول
     </div>
+
   </header>
 
   <div class="wrap">
@@ -580,12 +581,12 @@ tbody td.name-cell {
     </div>
 
   </div>
+
 </div>
 
 
-<!-- =========================
-     لوحة الأدمن العام
-========================= -->
+<!-- ================= لوحة الأدمن العام ================= -->
+
 <div id="adminView" class="hidden">
 
   <div class="topbar">
@@ -629,6 +630,7 @@ tbody td.name-cell {
   >
 
     <!-- المدارس -->
+
     <div id="tab-schools">
 
       <div class="card">
@@ -692,7 +694,6 @@ tbody td.name-cell {
 
       </div>
 
-
       <h3 style="margin:10px 0 14px">
         المدارس الحالية
       </h3>
@@ -714,6 +715,7 @@ tbody td.name-cell {
 
 
     <!-- الأقسام -->
+
     <div
       id="tab-departments"
       class="hidden"
@@ -755,7 +757,6 @@ tbody td.name-cell {
 
       </div>
 
-
       <h3 style="margin:10px 0 14px">
         أقسام المدرسة المختارة
       </h3>
@@ -788,12 +789,12 @@ tbody td.name-cell {
     </div>
 
   </div>
+
 </div>
 
 
-<!-- =========================
-     لوحة القسم
-========================= -->
+<!-- ================= لوحة القسم ================= -->
+
 <div id="deptView" class="hidden">
 
   <div class="topbar">
@@ -837,6 +838,7 @@ tbody td.name-cell {
   >
 
     <!-- الموظفين -->
+
     <div id="tab-employees">
 
       <div class="card">
@@ -846,7 +848,11 @@ tbody td.name-cell {
         </h3>
 
         <div
-          style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px"
+          style="
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:0 16px
+          "
         >
 
           <div>
@@ -863,7 +869,6 @@ tbody td.name-cell {
 
           </div>
 
-
           <div>
 
             <label for="empJob">
@@ -879,7 +884,6 @@ tbody td.name-cell {
           </div>
 
         </div>
-
 
         <label for="empStart">
           تاريخ المباشرة
@@ -944,6 +948,7 @@ tbody td.name-cell {
 
 
     <!-- المسير -->
+
     <div
       id="tab-sheet"
       class="hidden"
@@ -984,7 +989,6 @@ tbody td.name-cell {
 
       </div>
 
-
       <div
         class="alert error"
         id="sheetError"
@@ -996,7 +1000,6 @@ tbody td.name-cell {
       >
         تم حفظ المسير بنجاح.
       </div>
-
 
       <div class="table-card">
 
@@ -1028,23 +1031,28 @@ tbody td.name-cell {
               </th>
 
               <th rowspan="2">
-                تاريخ الغياب<br>(ميلادي)
+                تاريخ الغياب<br>
+                (ميلادي)
               </th>
 
               <th rowspan="2">
-                عدد دقائق<br>التأخير
+                عدد دقائق<br>
+                التأخير
               </th>
 
               <th rowspan="2">
-                عدد دقائق<br>الانصراف المبكر
+                عدد دقائق<br>
+                الانصراف المبكر
               </th>
 
               <th rowspan="2">
-                عدد أيام<br>عدم البصمة
+                عدد أيام<br>
+                عدم البصمة
               </th>
 
               <th rowspan="2">
-                عدد أيام<br>الاستئذان
+                عدد أيام<br>
+                الاستئذان
               </th>
 
               <th rowspan="2">
@@ -1052,7 +1060,8 @@ tbody td.name-cell {
               </th>
 
               <th rowspan="2">
-                توقيع المعلم<br>بالعلم
+                توقيع المعلم<br>
+                بالعلم
               </th>
 
               <th rowspan="2">
@@ -1093,7 +1102,6 @@ tbody td.name-cell {
 
       </div>
 
-
       <button
         class="btn full gold"
         id="saveAllBtn2"
@@ -1105,14 +1113,17 @@ tbody td.name-cell {
     </div>
 
   </div>
+
 </div>
 
 
-<!-- منطقة الطباعة -->
+<!-- ================= منطقة الطباعة ================= -->
+
 <div id="printArea"></div>
 
 
-<!-- نافذة بيانات دخول القسم -->
+<!-- ================= نافذة بيانات القسم ================= -->
+
 <div
   class="modal-bg"
   id="credModal"
@@ -1125,21 +1136,35 @@ tbody td.name-cell {
     </h3>
 
     <p
-      style="color:var(--slate);font-size:13.5px"
+      style="
+        color:var(--slate);
+        font-size:13.5px
+      "
     >
-      احفظوا هذه البيانات الآن وسلّموها للقسم — لن تظهر كلمة المرور مرة أخرى.
+      احفظوا هذه البيانات الآن وسلّموها للقسم —
+      لن تظهر كلمة المرور مرة أخرى.
     </p>
 
     <div class="cred-box">
 
       <div class="row">
-        <span>اسم المستخدم:</span>
+
+        <span>
+          اسم المستخدم:
+        </span>
+
         <b id="credUser"></b>
+
       </div>
 
       <div class="row">
-        <span>كلمة المرور:</span>
+
+        <span>
+          كلمة المرور:
+        </span>
+
         <b id="credPass"></b>
+
       </div>
 
     </div>
@@ -1165,7 +1190,7 @@ import {
 
 
 /* ============================================================
-   إعدادات Supabase
+   SUPABASE
    ============================================================ */
 
 const SUPABASE_URL =
@@ -1175,17 +1200,12 @@ const SUPABASE_KEY =
   "sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW";
 
 
-const url =
-  SUPABASE_URL.startsWith("http")
-    ? SUPABASE_URL
-    : `https://${SUPABASE_URL}`;
+const url = SUPABASE_URL;
 
-
-const supabase =
-  createClient(
-    url,
-    SUPABASE_KEY
-  );
+const supabase = createClient(
+  url,
+  SUPABASE_KEY
+);
 
 
 /* ============================================================
@@ -1205,10 +1225,13 @@ const deptView =
 function showView(view) {
 
   loginView.classList.add("hidden");
+
   adminView.classList.add("hidden");
+
   deptView.classList.add("hidden");
 
   view.classList.remove("hidden");
+
 }
 
 
@@ -1219,10 +1242,10 @@ function showView(view) {
 async function bootstrap() {
 
   const {
-    data: { session }
-  } =
-    await supabase.auth.getSession();
-
+    data: {
+      session
+    }
+  } = await supabase.auth.getSession();
 
   if (session) {
 
@@ -1235,37 +1258,19 @@ async function bootstrap() {
     showView(loginView);
 
   }
+
 }
 
 
 async function routeByRole(userId) {
 
   const {
-    data: profile,
-    error
-  } =
-    await supabase
-      .from("profiles")
-      .select("role, department_id")
-      .eq("id", userId)
-      .single();
-
-
-  if (error) {
-
-    document.getElementById(
-      "loginError"
-    ).textContent =
-      "تعذر قراءة بيانات الحساب من Supabase.";
-
-    document.getElementById(
-      "loginError"
-    ).classList.add("show");
-
-    showView(loginView);
-
-    return;
-  }
+    data: profile
+  } = await supabase
+    .from("profiles")
+    .select("role, department_id")
+    .eq("id", userId)
+    .single();
 
 
   if (profile?.role === "super_admin") {
@@ -1288,108 +1293,102 @@ async function routeByRole(userId) {
 
   else {
 
-    document.getElementById(
-      "loginError"
-    ).textContent =
+    const err =
+      document.getElementById("loginError");
+
+    err.textContent =
       "لم يتم العثور على صلاحية لهذا الحساب.";
 
-    document.getElementById(
-      "loginError"
-    ).classList.add("show");
+    err.classList.add("show");
 
     showView(loginView);
 
   }
+
 }
 
 
 document
   .getElementById("loginBtn")
-  .addEventListener(
-    "click",
-    async () => {
+  .addEventListener("click", async () => {
 
-      const errBox =
-        document.getElementById(
-          "loginError"
-        );
+    const errBox =
+      document.getElementById("loginError");
 
-      errBox.classList.remove("show");
+    errBox.classList.remove("show");
 
 
-      const user =
-        document
-          .getElementById("userInput")
-          .value
-          .trim();
+    let user =
+      document
+        .getElementById("userInput")
+        .value
+        .trim();
 
 
-      const password =
-        document
-          .getElementById("passInput")
-          .value;
+    const password =
+      document.getElementById("passInput").value;
 
 
-      if (!user || !password) {
+    if (!user || !password) {
 
-        errBox.textContent =
-          "يرجى تعبئة اسم المستخدم وكلمة المرور.";
+      errBox.textContent =
+        "يرجى تعبئة اسم المستخدم وكلمة المرور.";
 
-        errBox.classList.add("show");
+      errBox.classList.add("show");
 
-        return;
-      }
-
-
-      const email =
-        user.includes("@")
-          ? user
-          : `${user}@dept.internal`;
-
-
-      const btn =
-        document.getElementById(
-          "loginBtn"
-        );
-
-
-      btn.disabled = true;
-      btn.textContent =
-        "جارٍ الدخول...";
-
-
-      const {
-        data,
-        error
-      } =
-        await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
-
-
-      btn.disabled = false;
-      btn.textContent =
-        "دخول";
-
-
-      if (error) {
-
-        errBox.textContent =
-          "بيانات الدخول غير صحيحة.";
-
-        errBox.classList.add("show");
-
-        return;
-      }
-
-
-      await routeByRole(
-        data.user.id
-      );
+      return;
 
     }
-  );
+
+
+    const email =
+      user.includes("@")
+        ? user
+        : `${user}@dept.internal`;
+
+
+    const btn =
+      document.getElementById("loginBtn");
+
+
+    btn.disabled = true;
+
+    btn.textContent =
+      "جارٍ الدخول...";
+
+
+    const {
+      data,
+      error
+    } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+
+    btn.disabled = false;
+
+    btn.textContent =
+      "دخول";
+
+
+    if (error) {
+
+      errBox.textContent =
+        "بيانات الدخول غير صحيحة.";
+
+      errBox.classList.add("show");
+
+      return;
+
+    }
+
+
+    await routeByRole(
+      data.user.id
+    );
+
+  });
 
 
 document
@@ -1418,7 +1417,7 @@ async function doLogout() {
 
 
 /* ============================================================
-   لوحة الأدمن العام
+   لوحة الأدمن
    ============================================================ */
 
 let adminInitialized = false;
@@ -1465,29 +1464,21 @@ async function initAdmin() {
     });
 
 
-  if (adminInitialized)
-    return;
-
+  if (adminInitialized) return;
 
   adminInitialized = true;
 
 
   const logoFile =
-    document.getElementById(
-      "logoFile"
-    );
+    document.getElementById("logoFile");
 
 
   const logoDrop =
-    document.getElementById(
-      "logoDrop"
-    );
+    document.getElementById("logoDrop");
 
 
   const logoDropText =
-    document.getElementById(
-      "logoDropText"
-    );
+    document.getElementById("logoDropText");
 
 
   logoFile.addEventListener(
@@ -1497,15 +1488,11 @@ async function initAdmin() {
       const f =
         logoFile.files[0];
 
-
-      if (!f)
-        return;
-
+      if (!f) return;
 
       logoDrop.classList.add(
         "has-file"
       );
-
 
       logoDropText.innerHTML =
         `<b>تم اختيار:</b> ${f.name}`;
@@ -1521,24 +1508,16 @@ async function initAdmin() {
       async () => {
 
         const errorBox =
-          document.getElementById(
-            "schoolError"
-          );
+          document.getElementById("schoolError");
 
 
         const successBox =
-          document.getElementById(
-            "schoolSuccess"
-          );
+          document.getElementById("schoolSuccess");
 
 
-        errorBox.classList.remove(
-          "show"
-        );
+        errorBox.classList.remove("show");
 
-        successBox.classList.remove(
-          "show"
-        );
+        successBox.classList.remove("show");
 
 
         const name =
@@ -1553,21 +1532,19 @@ async function initAdmin() {
           errorBox.textContent =
             "يرجى إدخال اسم المدرسة.";
 
-          errorBox.classList.add(
-            "show"
-          );
+          errorBox.classList.add("show");
 
           return;
+
         }
 
 
         const btn =
-          document.getElementById(
-            "addSchoolBtn"
-          );
+          document.getElementById("addSchoolBtn");
 
 
         btn.disabled = true;
+
         btn.textContent =
           "جارٍ الحفظ...";
 
@@ -1589,7 +1566,8 @@ async function initAdmin() {
             const {
               error: upErr
             } =
-              await supabase.storage
+              await supabase
+                .storage
                 .from("logos")
                 .upload(
                   path,
@@ -1604,11 +1582,10 @@ async function initAdmin() {
             const {
               data: pub
             } =
-              supabase.storage
+              supabase
+                .storage
                 .from("logos")
-                .getPublicUrl(
-                  path
-                );
+                .getPublicUrl(path);
 
 
             logo_url =
@@ -1637,13 +1614,12 @@ async function initAdmin() {
           );
 
 
-          document.getElementById(
-            "schoolName"
-          ).value = "";
+          document
+            .getElementById("schoolName")
+            .value = "";
 
 
           logoFile.value = "";
-
 
           logoDrop.classList.remove(
             "has-file"
@@ -1655,19 +1631,16 @@ async function initAdmin() {
 
 
           await loadSchools();
-          await loadSchoolOptions();
+
 
         }
 
         catch (err) {
 
           errorBox.textContent =
-            "حدث خطأ: " +
-            err.message;
+            "حدث خطأ: " + err.message;
 
-          errorBox.classList.add(
-            "show"
-          );
+          errorBox.classList.add("show");
 
         }
 
@@ -1721,18 +1694,18 @@ async function initAdmin() {
 }
 
 
+/* ============================================================
+   المدارس
+   ============================================================ */
+
 async function loadSchools() {
 
   const grid =
-    document.getElementById(
-      "schoolsGrid"
-    );
+    document.getElementById("schoolsGrid");
 
 
   const emptyState =
-    document.getElementById(
-      "schoolsEmpty"
-    );
+    document.getElementById("schoolsEmpty");
 
 
   const {
@@ -1762,6 +1735,7 @@ async function loadSchools() {
       "block";
 
     return;
+
   }
 
 
@@ -1778,17 +1752,23 @@ async function loadSchools() {
 
           ${
             s.logo_url
-              ? `<img
-                   src="${s.logo_url}"
-                   style="width:100%;height:100%;object-fit:contain"
-                 >`
+              ? `
+                <img
+                  src="${s.logo_url}"
+                  style="
+                    width:100%;
+                    height:100%;
+                    object-fit:contain
+                  "
+                >
+              `
               : ""
           }
 
         </div>
 
         <div class="name">
-          ${escapeHtml(s.name)}
+          ${s.name}
         </div>
 
         <button
@@ -1818,10 +1798,12 @@ async function loadSchools() {
             .click();
 
 
-          document.getElementById(
-            "deptSchoolSelect"
-          ).value =
-            btn.dataset.id;
+          document
+            .getElementById(
+              "deptSchoolSelect"
+            )
+            .value =
+              btn.dataset.id;
 
 
           loadDepartments();
@@ -1833,6 +1815,10 @@ async function loadSchools() {
 
 }
 
+
+/* ============================================================
+   قائمة المدارس
+   ============================================================ */
 
 async function loadSchoolOptions() {
 
@@ -1858,11 +1844,10 @@ async function loadSchoolOptions() {
 
   select.innerHTML =
     (schools || [])
-      .map(
-        s =>
-          `<option value="${s.id}">
-            ${escapeHtml(s.name)}
-          </option>`
+      .map(s =>
+        `<option value="${s.id}">
+          ${s.name}
+        </option>`
       )
       .join("");
 
@@ -1878,6 +1863,10 @@ async function loadSchoolOptions() {
 
 }
 
+
+/* ============================================================
+   الأقسام
+   ============================================================ */
 
 async function loadDepartments() {
 
@@ -1934,6 +1923,7 @@ async function loadDepartments() {
       "block";
 
     return;
+
   }
 
 
@@ -1942,17 +1932,23 @@ async function loadDepartments() {
 
 
   body.innerHTML =
-    data.map(
-      d =>
-        `<tr>
+    data
+      .map(d => `
+
+        <tr>
+
           <td>
-            ${escapeHtml(d.name)}
+            ${d.name}
           </td>
+
           <td style="direction:ltr">
-            ${escapeHtml(d.username)}
+            ${d.username}
           </td>
-        </tr>`
-    ).join("");
+
+        </tr>
+
+      `)
+      .join("");
 
 }
 
@@ -2000,6 +1996,7 @@ async function addDepartment() {
     );
 
     return;
+
   }
 
 
@@ -2027,10 +2024,12 @@ async function addDepartment() {
     const password =
       Math.random()
         .toString(36)
-        .slice(2,6) +
+        .slice(2,6)
+      +
       Math.random()
         .toString(36)
-        .slice(2,6) +
+        .slice(2,6)
+      +
       "A1";
 
 
@@ -2043,7 +2042,7 @@ async function addDepartment() {
         url,
         SUPABASE_KEY,
         {
-          auth: {
+          auth:{
             persistSession:false,
             autoRefreshToken:false
           }
@@ -2065,10 +2064,13 @@ async function addDepartment() {
       throw signUpErr;
 
 
-    if (!signUpData.user)
+    if (!signUpData.user) {
+
       throw new Error(
-        "لم يتم إنشاء المستخدم."
+        "لم يتم إنشاء المستخدم — تأكد من إعدادات تأكيد البريد الإلكتروني في Supabase."
       );
+
+    }
 
 
     const newUserId =
@@ -2111,26 +2113,26 @@ async function addDepartment() {
       throw profErr;
 
 
-    document.getElementById(
-      "credUser"
-    ).textContent =
-      username;
+    document
+      .getElementById("credUser")
+      .textContent =
+        username;
 
 
-    document.getElementById(
-      "credPass"
-    ).textContent =
-      password;
+    document
+      .getElementById("credPass")
+      .textContent =
+        password;
 
 
-    document.getElementById(
-      "credModal"
-    ).classList.add("show");
+    document
+      .getElementById("credModal")
+      .classList.add("show");
 
 
-    document.getElementById(
-      "deptName"
-    ).value = "";
+    document
+      .getElementById("deptName")
+      .value = "";
 
 
     await loadDepartments();
@@ -2140,8 +2142,7 @@ async function addDepartment() {
   catch (err) {
 
     errorBox.textContent =
-      "حدث خطأ: " +
-      err.message;
+      "حدث خطأ: " + err.message;
 
     errorBox.classList.add(
       "show"
@@ -2195,9 +2196,7 @@ async function initDept(
       .single();
 
 
-  if (
-    deptRow?.school_id
-  ) {
+  if (deptRow?.school_id) {
 
     const {
       data: schoolRow
@@ -2231,7 +2230,9 @@ async function initDept(
           document
             .querySelectorAll(".dept-tab")
             .forEach(t =>
-              t.classList.remove("active")
+              t.classList.remove(
+                "active"
+              )
             );
 
 
@@ -2246,8 +2247,7 @@ async function initDept(
             )
             .classList.toggle(
               "hidden",
-              tab.dataset.tab !==
-              "employees"
+              tab.dataset.tab !== "employees"
             );
 
 
@@ -2257,8 +2257,7 @@ async function initDept(
             )
             .classList.toggle(
               "hidden",
-              tab.dataset.tab !==
-              "sheet"
+              tab.dataset.tab !== "sheet"
             );
 
 
@@ -2282,6 +2281,7 @@ async function initDept(
     await loadEmployees();
 
     return;
+
   }
 
 
@@ -2383,8 +2383,7 @@ async function addEmployee() {
   const start_date =
     document
       .getElementById("empStart")
-      .value ||
-    null;
+      .value || null;
 
 
   if (!full_name) {
@@ -2397,6 +2396,7 @@ async function addEmployee() {
     );
 
     return;
+
   }
 
 
@@ -2437,22 +2437,23 @@ async function addEmployee() {
     );
 
     return;
+
   }
 
 
-  document.getElementById(
-    "empName"
-  ).value = "";
+  document
+    .getElementById("empName")
+    .value = "";
 
 
-  document.getElementById(
-    "empJob"
-  ).value = "";
+  document
+    .getElementById("empJob")
+    .value = "";
 
 
-  document.getElementById(
-    "empStart"
-  ).value = "";
+  document
+    .getElementById("empStart")
+    .value = "";
 
 
   await loadEmployees();
@@ -2509,6 +2510,7 @@ async function loadEmployees() {
       "block";
 
     return;
+
   }
 
 
@@ -2517,98 +2519,138 @@ async function loadEmployees() {
 
 
   body.innerHTML =
-    data.map(
-      (e,i) => `
+    data
+      .map((e,i) => `
 
-      <tr
-        data-id="${e.id}"
-        style="${
-          e.is_active === false
-            ? "opacity:.55"
-            : ""
-        }"
-      >
-
-        <td>
-          ${i+1}
-        </td>
-
-        <td class="name-cell">
-          <input
-            type="text"
-            class="f-name"
-            value="${escapeHtml(e.full_name || "")}"
-          >
-        </td>
-
-        <td>
-          <input
-            type="text"
-            class="f-job"
-            value="${escapeHtml(e.job_title || "")}"
-          >
-        </td>
-
-        <td>
-          <input
-            type="date"
-            class="f-date"
-            value="${e.start_date || ""}"
-          >
-        </td>
-
-        <td>
-
-          ${
+        <tr
+          data-id="${e.id}"
+          style="${
             e.is_active === false
-              ?
-              `<span style="color:var(--danger);font-weight:700;font-size:12px">
-                مجمّد
-              </span>`
-              :
-              `<span style="color:var(--success);font-weight:700;font-size:12px">
-                نشط
-              </span>`
-          }
-
-        </td>
-
-        <td
-          style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"
+              ? "opacity:.55"
+              : ""
+          }"
         >
 
-          <button
-            class="btn small outline save-btn"
-          >
-            حفظ
-          </button>
+          <td>
+            ${i+1}
+          </td>
 
-          <button
-            class="btn small ${
-              e.is_active === false
-                ? "gold"
-                : "outline"
-            } freeze-btn"
-          >
+
+          <td class="name-cell">
+
+            <input
+              type="text"
+              class="f-name"
+              value="${
+                e.full_name || ""
+              }"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="text"
+              class="f-job"
+              value="${
+                e.job_title || ""
+              }"
+            >
+
+          </td>
+
+
+          <td>
+
+            <input
+              type="date"
+              class="f-date"
+              value="${
+                e.start_date || ""
+              }"
+            >
+
+          </td>
+
+
+          <td>
+
             ${
               e.is_active === false
-                ? "تفعيل"
-                : "تجميد"
+
+              ?
+
+              `<span
+                style="
+                  color:var(--danger);
+                  font-weight:700;
+                  font-size:12px
+                "
+              >
+                مجمد
+              </span>`
+
+              :
+
+              `<span
+                style="
+                  color:var(--success);
+                  font-weight:700;
+                  font-size:12px
+                "
+              >
+                نشط
+              </span>`
             }
-          </button>
 
-          <button
-            class="btn small danger-outline delete-btn"
+          </td>
+
+
+          <td
+            style="
+              display:flex;
+              gap:6px;
+              justify-content:center;
+              flex-wrap:wrap
+            "
           >
-            حذف
-          </button>
 
-        </td>
+            <button
+              class="btn small outline save-btn"
+            >
+              حفظ
+            </button>
 
-      </tr>
 
-    `
-    ).join("");
+            <button
+              class="btn small ${
+                e.is_active === false
+                  ? "gold"
+                  : "outline"
+              } freeze-btn"
+            >
+              ${
+                e.is_active === false
+                  ? "تفعيل"
+                  : "تجميد"
+              }
+            </button>
+
+
+            <button
+              class="btn small danger-outline delete-btn"
+            >
+              حذف
+            </button>
+
+          </td>
+
+        </tr>
+
+      `)
+      .join("");
 
 
   body
@@ -2628,22 +2670,23 @@ async function loadEmployees() {
 
 
           const full_name =
-            tr.querySelector(
-              ".f-name"
-            ).value.trim();
+            tr
+              .querySelector(".f-name")
+              .value
+              .trim();
 
 
           const job_title =
-            tr.querySelector(
-              ".f-job"
-            ).value.trim();
+            tr
+              .querySelector(".f-job")
+              .value
+              .trim();
 
 
           const start_date =
-            tr.querySelector(
-              ".f-date"
-            ).value ||
-            null;
+            tr
+              .querySelector(".f-date")
+              .value || null;
 
 
           saveBtn.disabled =
@@ -2664,16 +2707,11 @@ async function loadEmployees() {
                 job_title,
                 start_date,
                 updated_at:
-                  new Date()
-                    .toISOString()
+                  new Date().toISOString()
               })
               .eq(
                 "id",
                 id
-              )
-              .eq(
-                "department_id",
-                myDepartmentId
               );
 
 
@@ -2689,10 +2727,8 @@ async function loadEmployees() {
 
           setTimeout(
             () =>
-              (
-                saveBtn.textContent =
-                "حفظ"
-              ),
+              saveBtn.textContent =
+                "حفظ",
             1500
           );
 
@@ -2719,9 +2755,10 @@ async function loadEmployees() {
 
 
           const currentlyFrozen =
-            freezeBtn.textContent
+            freezeBtn
+              .textContent
               .trim() ===
-            "تفعيل";
+              "تفعيل";
 
 
           freezeBtn.disabled =
@@ -2737,16 +2774,11 @@ async function loadEmployees() {
                 is_active:
                   currentlyFrozen,
                 updated_at:
-                  new Date()
-                    .toISOString()
+                  new Date().toISOString()
               })
               .eq(
                 "id",
                 id
-              )
-              .eq(
-                "department_id",
-                myDepartmentId
               );
 
 
@@ -2762,6 +2794,7 @@ async function loadEmployees() {
             );
 
             return;
+
           }
 
 
@@ -2790,17 +2823,21 @@ async function loadEmployees() {
 
 
           const name =
-            tr.querySelector(
-              ".f-name"
-            ).value.trim();
+            tr
+              .querySelector(".f-name")
+              .value
+              .trim();
 
 
           if (
             !confirm(
               `متأكد تبي تحذف "${name}"؟ سيتم حذف كل سجلات المسير الخاصة به أيضًا ولا يمكن التراجع.`
             )
-          )
+          ) {
+
             return;
+
+          }
 
 
           delBtn.disabled =
@@ -2820,10 +2857,6 @@ async function loadEmployees() {
               .eq(
                 "id",
                 id
-              )
-              .eq(
-                "department_id",
-                myDepartmentId
               );
 
 
@@ -2834,13 +2867,17 @@ async function loadEmployees() {
               error.message
             );
 
+
             delBtn.disabled =
               false;
+
 
             delBtn.textContent =
               "حذف";
 
+
             return;
+
           }
 
 
@@ -2858,9 +2895,7 @@ async function loadEmployees() {
    المسير الشهري
    ============================================================ */
 
-function monthToDate(
-  monthStr
-) {
+function monthToDate(monthStr) {
 
   return `${monthStr}-01`;
 
@@ -2938,6 +2973,7 @@ async function loadSheet() {
       "block";
 
     return;
+
   }
 
 
@@ -2947,9 +2983,11 @@ async function loadSheet() {
 
   const monthDate =
     monthToDate(
-      document.getElementById(
-        "monthPicker"
-      ).value
+      document
+        .getElementById(
+          "monthPicker"
+        )
+        .value
     );
 
 
@@ -2975,129 +3013,164 @@ async function loadSheet() {
 
 
   (entries || [])
-    .forEach(
-      e =>
-        (
-          entryMap[
-            e.employee_id
-          ] = e
-        )
+    .forEach(e =>
+      entryMap[
+        e.employee_id
+      ] = e
     );
 
 
   body.innerHTML =
     employees
-      .map(
-        (emp,i) => {
+      .map((emp,i) => {
 
-          const en =
-            entryMap[
-              emp.id
-            ] || {};
+        const en =
+          entryMap[emp.id] || {};
 
 
-          return `
+        return `
 
-          <tr
-            data-emp="${emp.id}"
-          >
+          <tr data-emp="${emp.id}">
 
             <td>
               ${i+1}
             </td>
 
+
             <td class="name-cell">
-              ${escapeHtml(emp.full_name)}
+              ${emp.full_name}
             </td>
 
+
             <td>
-              ${escapeHtml(emp.job_title || "-")}
+              ${emp.job_title || "-"}
             </td>
+
 
             <td>
               ${emp.start_date || "-"}
             </td>
+
 
             <td>
               <input
                 type="number"
                 min="0"
                 class="f-exc"
-                value="${en.absence_excused ?? 0}"
+                value="${
+                  en.absence_excused ?? 0
+                }"
               >
             </td>
+
 
             <td>
               <input
                 type="number"
                 min="0"
                 class="f-unexc"
-                value="${en.absence_unexcused ?? 0}"
+                value="${
+                  en.absence_unexcused ?? 0
+                }"
               >
             </td>
 
+
             <td class="f-total">
               ${
-                (en.absence_excused ?? 0) +
+                (en.absence_excused ?? 0)
+                +
                 (en.absence_unexcused ?? 0)
               }
             </td>
 
+
             <td>
+
               <input
                 type="text"
                 class="f-absdates"
-                value="${escapeHtml(en.absence_dates || "")}"
+                value="${
+                  en.absence_dates || ""
+                }"
                 placeholder="مثال: 2026-06-05"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-late"
-                value="${en.late_minutes ?? 0}"
+                value="${
+                  en.late_minutes ?? 0
+                }"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-early"
-                value="${en.early_leave_minutes ?? 0}"
+                value="${
+                  en.early_leave_minutes ?? 0
+                }"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-nofp"
-                value="${en.no_fingerprint_days ?? 0}"
+                value="${
+                  en.no_fingerprint_days ?? 0
+                }"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-perm"
-                value="${en.permission_days ?? 0}"
+                value="${
+                  en.permission_days ?? 0
+                }"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="number"
                 min="0"
                 class="f-extra"
-                value="${en.extra_classes ?? 0}"
+                value="${
+                  en.extra_classes ?? 0
+                }"
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="checkbox"
                 class="f-ack"
@@ -3107,22 +3180,27 @@ async function loadSheet() {
                     : ""
                 }
               >
+
             </td>
 
+
             <td>
+
               <input
                 type="text"
                 class="f-notes"
-                value="${escapeHtml(en.notes || "")}"
+                value="${
+                  en.notes || ""
+                }"
               >
+
             </td>
 
           </tr>
 
         `;
 
-        }
-      )
+      })
       .join("");
 
 
@@ -3151,7 +3229,8 @@ async function loadSheet() {
       function updateTotal() {
 
         total.textContent =
-          (Number(exc.value) || 0) +
+          (Number(exc.value) || 0)
+          +
           (Number(unexc.value) || 0);
 
       }
@@ -3203,9 +3282,11 @@ async function saveSheet() {
 
   const monthDate =
     monthToDate(
-      document.getElementById(
-        "monthPicker"
-      ).value
+      document
+        .getElementById(
+          "monthPicker"
+        )
+        .value
     );
 
 
@@ -3214,7 +3295,9 @@ async function saveSheet() {
       .getElementById(
         "sheetBody"
       )
-      .querySelectorAll("tr");
+      .querySelectorAll(
+        "tr"
+      );
 
 
   if (!rows.length)
@@ -3296,8 +3379,7 @@ async function saveSheet() {
           ).value.trim(),
 
         updated_at:
-          new Date()
-            .toISOString()
+          new Date().toISOString()
 
       }));
 
@@ -3327,6 +3409,7 @@ async function saveSheet() {
     );
 
     return;
+
   }
 
 
@@ -3338,7 +3421,7 @@ async function saveSheet() {
 
 
 /* ============================================================
-   تصدير / طباعة PDF
+   تصدير / طباعة
    ============================================================ */
 
 const arabicMonths = [
@@ -3364,7 +3447,9 @@ function exportPDF() {
       .getElementById(
         "sheetBody"
       )
-      .querySelectorAll("tr");
+      .querySelectorAll(
+        "tr"
+      );
 
 
   if (!rows.length) {
@@ -3374,6 +3459,7 @@ function exportPDF() {
     );
 
     return;
+
   }
 
 
@@ -3398,131 +3484,133 @@ function exportPDF() {
   let rowsHtml = "";
 
 
-  rows.forEach(
-    (tr,i) => {
+  rows.forEach((tr,i) => {
 
-      const name =
-        tr.querySelector(
+    const name =
+      tr
+        .querySelector(
           ".name-cell"
-        ).textContent;
+        )
+        .textContent;
 
 
-      const job =
-        tr.children[2]
-          .textContent;
+    const job =
+      tr.children[2]
+        .textContent;
 
 
-      const start =
-        tr.children[3]
-          .textContent;
+    const start =
+      tr.children[3]
+        .textContent;
 
 
-      const exc =
-        tr.querySelector(
-          ".f-exc"
-        ).value ||
-        "0";
+    const exc =
+      tr.querySelector(
+        ".f-exc"
+      ).value || "0";
 
 
-      const unexc =
-        tr.querySelector(
-          ".f-unexc"
-        ).value ||
-        "0";
+    const unexc =
+      tr.querySelector(
+        ".f-unexc"
+      ).value || "0";
 
 
-      const total =
-        tr.querySelector(
-          ".f-total"
-        ).textContent;
+    const total =
+      tr.querySelector(
+        ".f-total"
+      ).textContent;
 
 
-      const absdates =
-        tr.querySelector(
-          ".f-absdates"
-        ).value;
+    const absdates =
+      tr.querySelector(
+        ".f-absdates"
+      ).value;
 
 
-      const late =
-        tr.querySelector(
-          ".f-late"
-        ).value ||
-        "0";
+    const late =
+      tr.querySelector(
+        ".f-late"
+      ).value || "0";
 
 
-      const early =
-        tr.querySelector(
-          ".f-early"
-        ).value ||
-        "0";
+    const early =
+      tr.querySelector(
+        ".f-early"
+      ).value || "0";
 
 
-      const nofp =
-        tr.querySelector(
-          ".f-nofp"
-        ).value ||
-        "0";
+    const nofp =
+      tr.querySelector(
+        ".f-nofp"
+      ).value || "0";
 
 
-      const perm =
-        tr.querySelector(
-          ".f-perm"
-        ).value ||
-        "0";
+    const perm =
+      tr.querySelector(
+        ".f-perm"
+      ).value || "0";
 
 
-      const extra =
-        tr.querySelector(
-          ".f-extra"
-        ).value ||
-        "0";
+    const extra =
+      tr.querySelector(
+        ".f-extra"
+      ).value || "0";
 
 
-      const ack =
-        tr.querySelector(
-          ".f-ack"
-        ).checked
-          ? "✓"
-          : "";
+    const ack =
+      tr.querySelector(
+        ".f-ack"
+      ).checked
+        ? "✓"
+        : "";
 
 
-      const notes =
-        tr.querySelector(
-          ".f-notes"
-        ).value;
+    const notes =
+      tr.querySelector(
+        ".f-notes"
+      ).value;
 
 
-      rowsHtml += `
+    rowsHtml += `
 
-        <tr>
+      <tr>
 
-          <td>${i+1}</td>
-          <td>${escapeHtml(name)}</td>
-          <td>${escapeHtml(job)}</td>
-          <td>${start}</td>
+        <td>${i+1}</td>
 
-          <td>${exc}</td>
-          <td>${unexc}</td>
-          <td>${total}</td>
+        <td>${name}</td>
 
-          <td>${escapeHtml(absdates)}</td>
+        <td>${job}</td>
 
-          <td>${late}</td>
-          <td>${early}</td>
-          <td>${nofp}</td>
-          <td>${perm}</td>
-          <td>${extra}</td>
+        <td>${start}</td>
 
-          <td>${ack}</td>
+        <td>${exc}</td>
 
-          <td>${escapeHtml(notes)}</td>
+        <td>${unexc}</td>
 
-        </tr>
+        <td>${total}</td>
 
-      `;
+        <td>${absdates}</td>
 
-    }
-  );
+        <td>${late}</td>
+
+        <td>${early}</td>
+
+        <td>${nofp}</td>
+
+        <td>${perm}</td>
+
+        <td>${extra}</td>
+
+        <td>${ack}</td>
+
+        <td>${notes}</td>
+
+      </tr>
+
+    `;
+
+  });
 
 
   const today =
@@ -3533,12 +3621,12 @@ function exportPDF() {
     `${String(
       today.getDate()
     ).padStart(2,"0")}
-    /
-    ${String(
-      today.getMonth()+1
-    ).padStart(2,"0")}
-    /
-    ${today.getFullYear()}م`;
+     /
+     ${String(
+       today.getMonth()+1
+     ).padStart(2,"0")}
+     /
+     ${today.getFullYear()}م`;
 
 
   const printArea =
@@ -3574,9 +3662,7 @@ function exportPDF() {
             font-size:14px
           "
         >
-          ${escapeHtml(
-            mySchoolInfo?.name || ""
-          )}
+          ${mySchoolInfo?.name || ""}
         </div>
 
         <div>
@@ -3602,7 +3688,8 @@ function exportPDF() {
 
           ?
 
-          `<div
+          `
+          <div
             style="
               width:78px;
               height:78px;
@@ -3625,7 +3712,8 @@ function exportPDF() {
               "
             >
 
-          </div>`
+          </div>
+          `
 
           :
 
@@ -3699,12 +3787,17 @@ function exportPDF() {
         <tr>
 
           <th>م</th>
+
           <th>اسم الموظف</th>
+
           <th>المسمى الوظيفي</th>
+
           <th>تاريخ المباشرة</th>
 
           <th>بعذر</th>
+
           <th>بدون عذر</th>
+
           <th>مجموع</th>
 
           <th>
@@ -3744,7 +3837,9 @@ function exportPDF() {
       </thead>
 
       <tbody>
+
         ${rowsHtml}
+
       </tbody>
 
     </table>
@@ -3769,37 +3864,6 @@ window.addEventListener(
       "printing"
     )
 );
-
-
-/* ============================================================
-   حماية بسيطة للنصوص التي تدخل HTML
-   ============================================================ */
-
-function escapeHtml(value) {
-
-  return String(value ?? "")
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
 
 
 /* ============================================================
