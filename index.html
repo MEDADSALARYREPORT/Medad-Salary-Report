@@ -6,66 +6,933 @@
 <title>نظام إدارة المدارس</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <style>
-:root{--navy:#12243F;--navy2:#1B3358;--gold:#C9A24B;--gold2:#FFE59A;--paper:#F7F4EE;--ink:#1B1B1B;--slate:#5B6472;--line:#D8D2C5;--white:#fff;--ok:#2F7A4F;--bad:#B3432E;--r:14px;--shadow:0 10px 30px -12px rgba(18,36,63,.25)}
-*{box-sizing:border-box}html,body{margin:0;background:var(--paper);color:var(--ink);font-family:Tajawal,Arial,sans-serif}h1,h2,h3{font-family:Cairo,Tajawal,sans-serif;color:var(--navy);margin:0}.hidden{display:none!important}.site-header{text-align:center;padding:36px 20px 20px}.seal{width:86px;height:86px;margin:auto;border-radius:50%;background:#fff;border:3px solid var(--gold);box-shadow:0 0 0 4px var(--navy),var(--shadow);display:flex;align-items:center;justify-content:center}.seal:after{content:'شعار';color:var(--slate);font-weight:700}.school-name{font-size:22px;font-weight:800}.page-title{margin-top:10px;color:var(--gold);font-weight:700}.wrap{max-width:440px;margin:auto;padding:0 18px 60px}.wide{max-width:1250px!important}.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:24px;margin-bottom:18px}label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin:12px 0 6px}input,select{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);font:14px Tajawal}input:focus,select:focus{outline:none;border-color:var(--gold)}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:10px;padding:11px 17px;background:var(--navy);color:#fff;font:700 14px Cairo;cursor:pointer}.btn:hover{background:var(--navy2)}.btn.gold{background:var(--gold);color:var(--navy)}.btn.outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}.btn.danger{background:transparent;color:var(--bad);border:1.5px solid var(--bad)}.btn.small{padding:7px 12px;font-size:12px}.full{width:100%;margin-top:16px}.alert{display:none;padding:11px;border-radius:10px;margin-top:12px;font-size:13px}.alert.show{display:block}.error{background:#FBEAE6;color:var(--bad)}.success{background:#E9F4EC;color:var(--ok)}.topbar{background:var(--navy);color:#fff;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:10px;font:700 15px Cairo}.seal-mini{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--gold)}nav{display:flex;gap:7px;flex-wrap:wrap;align-items:center}nav a{color:#fff;padding:7px 11px;border-radius:8px;background:#ffffff12;cursor:pointer;font-size:13px}nav a.active{background:var(--gold);color:var(--navy);font-weight:700}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.entity{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}.logo{width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;overflow:hidden;margin-bottom:8px}.logo img{width:100%;height:100%;object-fit:contain}.table-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:auto;box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;min-width:1100px;font-size:12px}th{background:var(--paper);color:var(--navy);font-family:Cairo;padding:9px 6px;border:1px solid var(--line);white-space:nowrap}th.group{background:var(--gold2)}td{padding:7px;border:1px solid var(--line);text-align:center}td input{padding:6px;font-size:12px;min-width:60px}.name-cell{text-align:right;font-weight:700;color:var(--navy);min-width:150px}.toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:15px}.toolbar input{max-width:160px}.modal-bg{position:fixed;inset:0;background:#12243f99;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal-bg.show{display:flex}.modal{background:#fff;padding:22px;border-radius:14px;width:100%;max-width:400px}.cred{direction:ltr;background:var(--paper);padding:14px;border:1px dashed var(--gold);border-radius:10px;margin-top:12px}.empty{text-align:center;padding:35px;color:var(--slate)}#printArea{display:none}
-.print-page{direction:rtl;background:#fff;color:#222;padding:15px;font-family:Arial,Tahoma,sans-serif}.print-header{display:grid;grid-template-columns:1fr 150px 1fr;align-items:center;gap:12px}.print-header .right,.print-header .left{font-size:14px;line-height:2}.print-header .right{text-align:right}.print-header .left{text-align:left}.print-logo{text-align:center}.print-logo img{max-width:120px;max-height:120px}.print-line{border-top:2px solid #777;margin:10px 0 14px}.print-title{text-align:center;font-size:20px;font-weight:700;margin:10px 0 15px}.export-table{width:100%;border-collapse:collapse;table-layout:fixed;direction:rtl;font-size:9.5px}.export-table th,.export-table td{border:1px solid #777;padding:5px 3px;text-align:center;vertical-align:middle;word-break:break-word}.export-table th{background:#FFE59A}.print-footer{display:flex;justify-content:space-between;margin-top:12px;font-size:10px}
-@media print{@page{size:A4 landscape;margin:7mm}body.printing>*:not(#printArea){display:none!important}body.printing #printArea{display:block!important}.print-page{padding:0}.export-table{font-size:8.5px}.export-table th,.export-table td{padding:4px 2px}}
-@media(max-width:700px){.print-header{grid-template-columns:1fr}.print-header .left,.print-header .right{text-align:center}}
+:root {
+  --navy:#12243F; --navy-2:#1B3358; --gold:#C9A24B; --gold-light:#E4C979;
+  --paper:#F7F4EE; --ink:#1B1B1B; --slate:#5B6472; --line:#E4DFD3; --white:#FFFFFF;
+  --success:#2F7A4F; --success-bg:#E9F4EC; --danger:#B3432E; --danger-bg:#FBEAE6;
+  --radius:14px; --shadow:0 10px 30px -12px rgba(18,36,63,.25);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; background:var(--paper); color:var(--ink); font-family:'Tajawal','Segoe UI',sans-serif; direction:rtl; }
+h1,h2,h3 { font-family:'Cairo','Tajawal',sans-serif; color:var(--navy); margin:0; }
+.hidden { display:none !important; }
+.site-header { padding:36px 20px 20px; text-align:center; }
+.seal { width:86px; height:86px; margin:0 auto 12px; border-radius:50%; background:var(--white); border:3px solid var(--gold);
+  box-shadow:0 0 0 4px var(--navy), var(--shadow); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.seal::after { content:"شعار"; font-family:'Cairo',sans-serif; font-size:13px; color:var(--slate); }
+.school-name { font-size:22px; font-weight:800; }
+.page-title { margin-top:12px; font-size:14.5px; color:var(--gold); font-weight:700; }
+.wrap { max-width:440px; margin:0 auto; padding:0 18px 60px; }
+.wrap.wide { max-width:1050px; }
+.card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px; margin-bottom:18px; }
+label { display:block; font-size:13.5px; font-weight:700; color:var(--navy); margin:13px 0 6px; }
+input[type=text],input[type=date],input[type=month],input[type=number],input[type=password],input[type=email],select {
+  width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:10px; font-family:'Tajawal',sans-serif;
+  font-size:14.5px; background:var(--paper); color:var(--ink);
+}
+input:focus,select:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,162,75,.25); }
+.checkbox-row { display:flex; align-items:center; gap:8px; }
+.checkbox-row input { width:auto; }
+.file-drop { border:1.5px dashed var(--line); border-radius:10px; padding:16px; text-align:center; background:var(--paper); cursor:pointer; position:relative; }
+.file-drop.has-file { border-color:var(--success); background:var(--success-bg); }
+.file-drop input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.file-drop-text { font-size:13px; color:var(--slate); }
+.file-drop-text b { color:var(--navy); }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border:none; border-radius:10px;
+  background:var(--navy); color:var(--white); font-family:'Cairo',sans-serif; font-weight:700; font-size:14.5px; cursor:pointer; }
+.btn.full { width:100%; margin-top:18px; }
+.btn:hover { background:var(--navy-2); }
+.btn:disabled { background:#9aa4b2; cursor:not-allowed; }
+.btn.gold { background:var(--gold); color:var(--navy); } .btn.gold:hover { background:var(--gold-light); }
+.btn.outline { background:transparent; color:var(--navy); border:1.5px solid var(--navy); }
+.btn.danger-outline { background:transparent; color:var(--danger); border:1.5px solid var(--danger); }
+.btn.small { padding:7px 13px; font-size:12.5px; }
+.alert { padding:12px 14px; border-radius:10px; font-size:13.5px; margin-top:14px; display:none; }
+.alert.show { display:block; }
+.alert.error { background:var(--danger-bg); color:var(--danger); }
+.alert.success { background:var(--success-bg); color:var(--success); }
+.center { text-align:center; } .foot-note { text-align:center; font-size:12px; color:var(--slate); margin-top:10px; }
+.topbar { background:var(--navy); color:var(--white); padding:14px 22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.topbar .brand { display:flex; align-items:center; gap:10px; font-family:'Cairo',sans-serif; font-weight:700; }
+.topbar .seal-mini { width:28px; height:28px; border-radius:50%; background:var(--white); border:2px solid var(--gold); }
+.topbar nav { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.topbar nav a { color:var(--white); text-decoration:none; font-size:13.5px; padding:7px 12px; border-radius:8px; background:rgba(255,255,255,.08); cursor:pointer; }
+.topbar nav a.active { background:var(--gold); color:var(--navy); font-weight:700; }
+.table-card { background:var(--white); border:1px solid var(--line); border-radius:var(--radius); overflow-x:auto; box-shadow:var(--shadow); }
+table { width:100%; border-collapse:collapse; font-size:13px; min-width:640px; }
+thead th { background:var(--paper); color:var(--navy); font-family:'Cairo',sans-serif; text-align:center; padding:10px 8px; border-bottom:2px solid var(--line); white-space:nowrap; font-size:12.5px; }
+thead th.group-head { background:var(--gold-light); }
+tbody td { padding:8px; border-bottom:1px solid var(--line); vertical-align:middle; text-align:center; }
+tbody tr:hover { background:rgba(201,162,75,.06); }
+tbody td input,tbody td select { padding:6px 8px; font-size:12.5px; min-width:70px; }
+tbody td.name-cell { text-align:right; font-weight:700; color:var(--navy); min-width:140px; }
+.empty-state { text-align:center; padding:46px 20px; color:var(--slate); }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.entity-card { background:var(--white); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px; }
+.entity-card .logo-mini { width:44px; height:44px; border-radius:50%; background:var(--paper); border:2px solid var(--gold); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.entity-card .logo-mini img { width:100%; height:100%; object-fit:contain; }
+.entity-card .name { font-family:'Cairo',sans-serif; font-weight:700; color:var(--navy); }
+.modal-bg { position:fixed; inset:0; background:rgba(18,36,63,.55); display:none; align-items:center; justify-content:center; padding:20px; z-index:50; }
+.modal-bg.show { display:flex; }
+.modal { background:var(--white); border-radius:var(--radius); padding:22px; max-width:400px; width:100%; }
+.cred-box { background:var(--paper); border:1.5px dashed var(--gold); border-radius:10px; padding:14px; margin-top:12px; font-family:monospace; direction:ltr; text-align:left; }
+.cred-box .row { display:flex; justify-content:space-between; padding:4px 0; font-size:14px; }
+.toolbar { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+.toolbar select,.toolbar input { max-width:230px; }
+#printArea { display:none; }
+@media print {
+  @page { size: landscape; margin: 8mm; }
+  body.printing > *:not(#printArea) { display:none !important; }
+  body.printing #printArea { display:block !important; direction:rtl; padding:0; }
+  body.printing #printArea table { width:100%; border-collapse:collapse; table-layout:fixed; font-size:9px; }
+  body.printing #printArea th, body.printing #printArea td {
+    border:1px solid #999; padding:3px 2px; text-align:center; word-wrap:break-word; overflow-wrap:break-word;
+    white-space:normal; line-height:1.3; vertical-align:middle;
+  }
+  body.printing #printArea td.pr-name { text-align:right; font-weight:700; }
+  body.printing #printArea th { background:#eee2c2 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; font-size:8.6px; font-weight:700; }
+  body.printing #printArea tr { page-break-inside:avoid; }
+}
+@media (max-width:560px){ .card{padding:18px} }
 </style>
 </head>
 <body>
-<div id="loginView"><header class="site-header"><div class="seal"></div><div class="school-name">نظام إدارة المدارس</div><div class="page-title">تسجيل الدخول</div></header><div class="wrap"><div class="card"><label>اسم المستخدم</label><input id="userInput" placeholder="اسم مستخدم القسم، أو بريد الأدمن العام"><label>كلمة المرور</label><input id="passInput" type="password" placeholder="••••••••"><button class="btn gold full" id="loginBtn">دخول</button><div class="alert error" id="loginError"></div></div><div style="text-align:center;color:var(--slate);font-size:12px">حسابات الأقسام تُنشأ من قِبل أدمن المدرسة العام</div></div></div>
 
-<div id="adminView" class="hidden"><div class="topbar"><div class="brand"><div class="seal-mini"></div>لوحة الأدمن العام</div><nav><a class="admin-tab active" data-tab="schools">المدارس</a><a class="admin-tab" data-tab="departments">الأقسام</a><button class="btn small gold" id="adminLogout">تسجيل الخروج</button></nav></div><div class="wrap wide" style="margin-top:24px">
-<div id="tab-schools"><div class="card"><h3>إضافة مدرسة جديدة</h3><label>اسم المدرسة</label><input id="schoolName" placeholder="مثال: مدارس مداد البيان الأهلية"><label>شعار المدرسة</label><input type="file" id="logoFile" accept="image/*"><button class="btn full" id="addSchool">إضافة المدرسة</button><div class="alert error" id="schoolError"></div><div class="alert success" id="schoolSuccess">تمت إضافة المدرسة بنجاح.</div></div><h3 style="margin-bottom:12px">المدارس الحالية</h3><div class="grid" id="schoolsGrid"></div><div class="empty" id="schoolsEmpty">لا توجد مدارس بعد</div></div>
-<div id="tab-departments" class="hidden"><div class="card"><h3>إضافة قسم جديد</h3><label>المدرسة</label><select id="deptSchool"></select><label>اسم القسم</label><input id="deptName" placeholder="مثال: الابتدائي بنين"><button class="btn full" id="addDept">إضافة القسم وتوليد بيانات الدخول</button><div class="alert error" id="deptError"></div></div><h3>أقسام المدرسة المختارة</h3><div class="table-card"><table><thead><tr><th>اسم القسم</th><th>اسم المستخدم</th></tr></thead><tbody id="deptBody"></tbody></table><div class="empty" id="deptEmpty">لا توجد أقسام لهذه المدرسة بعد</div></div></div>
-</div></div>
+<!-- ============ شاشة تسجيل الدخول ============ -->
+<div id="loginView">
+  <header class="site-header">
+    <div class="seal"></div>
+    <div class="school-name">نظام إدارة المدارس</div>
+    <div class="page-title">تسجيل الدخول</div>
+  </header>
+  <div class="wrap">
+    <div class="card">
+      <label for="userInput">اسم المستخدم</label>
+      <input type="text" id="userInput" placeholder="اسم مستخدم القسم، أو بريد الأدمن العام">
+      <label for="passInput">كلمة المرور</label>
+      <input type="password" id="passInput" placeholder="••••••••">
+      <button class="btn full gold" id="loginBtn">دخول</button>
+      <div class="alert error" id="loginError"></div>
+    </div>
+    <div class="foot-note">حسابات الأقسام تُنشأ من قِبل أدمن المدرسة العام</div>
+  </div>
+</div>
 
-<div id="deptView" class="hidden"><div class="topbar"><div class="brand"><div class="seal-mini"></div>حساب القسم</div><nav><a class="dept-tab active" data-tab="employees">قائمة الموظفين</a><a class="dept-tab" data-tab="sheet">المسير الشهري</a><button class="btn small gold" id="deptLogout">تسجيل الخروج</button></nav></div><div class="wrap wide" style="margin-top:24px">
-<div id="tab-employees"><div class="card"><h3>إضافة موظف</h3><label>اسم الموظف</label><input id="empName"><label>المسمى الوظيفي</label><input id="empJob"><label>تاريخ المباشرة</label><input id="empStart" type="date"><button class="btn full" id="addEmp">إضافة الموظف</button><div class="alert error" id="empError"></div></div><h3>قائمة الموظفين</h3><div class="table-card"><table><thead><tr><th>م</th><th>اسم الموظف</th><th>المسمى الوظيفي</th><th>تاريخ المباشرة</th><th>الحالة</th><th>تعديل</th></tr></thead><tbody id="empBody"></tbody></table><div class="empty" id="empEmpty">لا يوجد موظفون بعد</div></div></div>
-<div id="tab-sheet" class="hidden"><div class="toolbar"><label style="margin:0">الشهر:</label><input type="month" id="monthPicker"><button class="btn small outline" id="loadSheet">تحميل / تحديث</button><button class="btn small gold" id="saveSheet">حفظ الكل</button><button class="btn small gold" id="pdfBtn">PDF / طباعة</button><button class="btn small outline" id="wordBtn">تصدير Word</button><button class="btn small outline" id="excelBtn">تصدير Excel</button></div><div class="alert error" id="sheetError"></div><div class="alert success" id="sheetSuccess">تم حفظ المسير بنجاح.</div><div class="table-card"><table id="sheetTable"><thead><tr><th rowspan="2">م</th><th rowspan="2">اسم الموظف</th><th rowspan="2">المسمى الوظيفي</th><th rowspan="2">تاريخ المباشرة</th><th colspan="3" class="group">عدد أيام الغياب</th><th rowspan="2">تاريخ الغياب<br>ميلادي</th><th rowspan="2">دقائق التأخير</th><th rowspan="2">دقائق الانصراف المبكر</th><th rowspan="2">أيام عدم البصمة</th><th rowspan="2">أيام الاستئذان</th><th rowspan="2">حصص إضافية</th><th rowspan="2">توقيع المعلم بالعلم</th><th rowspan="2">ملاحظات</th></tr><tr><th class="group">بعذر</th><th class="group">بدون عذر</th><th class="group">مجموع</th></tr></thead><tbody id="sheetBody"></tbody></table><div class="empty" id="sheetEmpty">لا يوجد موظفون بعد — أضيفوهم أولًا</div></div></div>
-</div></div>
+<!-- ============ لوحة الأدمن العام ============ -->
+<div id="adminView" class="hidden">
+  <div class="topbar">
+    <div class="brand"><div class="seal-mini"></div><span>لوحة الأدمن العام</span></div>
+    <nav>
+      <a data-tab="schools" class="admin-tab active">المدارس</a>
+      <a data-tab="departments" class="admin-tab">الأقسام</a>
+      <button class="btn small gold" id="adminLogoutBtn">تسجيل الخروج</button>
+    </nav>
+  </div>
 
-<div id="printArea"></div><div class="modal-bg" id="credModal"><div class="modal"><h3>تم إنشاء القسم بنجاح</h3><p>احفظ بيانات الدخول الآن.</p><div class="cred"><div>اسم المستخدم: <b id="credUser"></b></div><div>كلمة المرور: <b id="credPass"></b></div></div><button class="btn gold full" id="closeCred">تم، أغلق</button></div></div>
+  <div class="wrap wide" style="margin-top:24px">
+
+    <!-- تبويب المدارس -->
+    <div id="tab-schools">
+      <div class="card">
+        <h3 style="margin-bottom:14px">إضافة مدرسة جديدة</h3>
+        <label for="schoolName">اسم المدرسة</label>
+        <input type="text" id="schoolName" placeholder="مثال: مدارس مداد البيان الأهلية">
+        <label>شعار المدرسة</label>
+        <div class="file-drop" id="logoDrop">
+          <input type="file" id="logoFile" accept="image/*">
+          <div class="file-drop-text" id="logoDropText"><b>اضغط لاختيار الشعار</b></div>
+        </div>
+        <button class="btn full" id="addSchoolBtn">إضافة المدرسة</button>
+        <div class="alert error" id="schoolError"></div>
+        <div class="alert success" id="schoolSuccess">تمت إضافة المدرسة بنجاح.</div>
+      </div>
+      <h3 style="margin:10px 0 14px">المدارس الحالية</h3>
+      <div class="grid" id="schoolsGrid"></div>
+      <div class="empty-state" id="schoolsEmpty" style="display:none">لا توجد مدارس بعد</div>
+    </div>
+
+    <!-- تبويب الأقسام -->
+    <div id="tab-departments" class="hidden">
+      <div class="card">
+        <h3 style="margin-bottom:14px">إضافة قسم جديد</h3>
+        <label for="deptSchoolSelect">المدرسة</label>
+        <select id="deptSchoolSelect"></select>
+        <label for="deptName">اسم القسم</label>
+        <input type="text" id="deptName" placeholder="مثال: الابتدائي بنين">
+        <button class="btn full" id="addDeptBtn">إضافة القسم وتوليد بيانات الدخول</button>
+        <div class="alert error" id="deptError"></div>
+      </div>
+      <h3 style="margin:10px 0 14px">أقسام المدرسة المختارة</h3>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>اسم القسم</th><th>اسم المستخدم</th></tr></thead>
+          <tbody id="deptBody"></tbody>
+        </table>
+        <div class="empty-state" id="deptEmpty" style="display:none">لا توجد أقسام لهذه المدرسة بعد</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ لوحة القسم ============ -->
+<div id="deptView" class="hidden">
+  <div class="topbar">
+    <div class="brand"><div class="seal-mini"></div><span>حساب القسم</span></div>
+    <nav>
+      <a data-tab="employees" class="dept-tab active">قائمة الموظفين</a>
+      <a data-tab="sheet" class="dept-tab">المسير الشهري</a>
+      <button class="btn small gold" id="deptLogoutBtn">تسجيل الخروج</button>
+    </nav>
+  </div>
+
+  <div class="wrap wide" style="margin-top:24px">
+
+    <!-- تبويب الموظفين -->
+    <div id="tab-employees">
+      <div class="card">
+        <h3 style="margin-bottom:14px">إضافة موظف</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 16px">
+          <div><label for="empName">اسم الموظف</label><input type="text" id="empName" placeholder="الاسم الكامل"></div>
+          <div><label for="empJob">المسمى الوظيفي</label><input type="text" id="empJob" placeholder="مثال: معلم لغة عربية"></div>
+        </div>
+        <label for="empStart">تاريخ المباشرة</label>
+        <input type="date" id="empStart">
+        <button class="btn full" id="addEmpBtn">إضافة الموظف</button>
+        <div class="alert error" id="empError"></div>
+      </div>
+      <h3 style="margin:10px 0 14px">قائمة الموظفين</h3>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>م</th><th>اسم الموظف</th><th>المسمى الوظيفي</th><th>تاريخ المباشرة</th><th>الحالة</th><th>تعديل</th></tr></thead>
+          <tbody id="empBody"></tbody>
+        </table>
+        <div class="empty-state" id="empEmpty" style="display:none">لا يوجد موظفون بعد</div>
+      </div>
+    </div>
+
+    <!-- تبويب المسير -->
+    <div id="tab-sheet" class="hidden">
+      <div class="toolbar">
+        <label style="margin:0">الشهر:</label>
+        <input type="month" id="monthPicker">
+        <button class="btn small outline" id="loadSheetBtn">تحميل / تحديث</button>
+        <button class="btn small outline" id="exportPdfBtn">تصدير / طباعة PDF</button>
+        <button class="btn small outline" id="exportExcelBtn">تصدير Excel</button>
+        <button class="btn small outline" id="exportWordBtn">تصدير Word</button>
+        <button class="btn small gold" id="saveAllBtn" style="margin-inline-start:auto">حفظ الكل</button>
+      </div>
+      <div class="alert error" id="sheetError"></div>
+      <div class="alert success" id="sheetSuccess">تم حفظ المسير بنجاح.</div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">م</th><th rowspan="2">اسم الموظف</th><th rowspan="2">المسمى الوظيفي</th><th rowspan="2">تاريخ المباشرة</th>
+              <th colspan="3" class="group-head">عدد أيام الغياب</th>
+              <th rowspan="2">تاريخ الغياب<br>(ميلادي)</th>
+              <th rowspan="2">عدد دقائق<br>التأخير</th>
+              <th rowspan="2">عدد دقائق<br>الانصراف المبكر</th>
+              <th rowspan="2">عدد أيام<br>عدم البصمة</th>
+              <th rowspan="2">عدد أيام<br>الاستئذان</th>
+              <th rowspan="2">حصص إضافية</th>
+              <th rowspan="2">توقيع المعلم<br>بالعلم</th>
+              <th rowspan="2">ملاحظات</th>
+            </tr>
+            <tr><th class="group-head">بعذر</th><th class="group-head">بدون عذر</th><th class="group-head">مجموع</th></tr>
+          </thead>
+          <tbody id="sheetBody"></tbody>
+        </table>
+        <div class="empty-state" id="sheetEmpty" style="display:none">لا يوجد موظفون بعد — أضيفوهم أولًا من "قائمة الموظفين"</div>
+      </div>
+      <button class="btn full gold" id="saveAllBtn2" style="margin-top:16px">حفظ الكل</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- منطقة الطباعة (تظهر فقط عند الطباعة/تصدير PDF) -->
+<div id="printArea"></div>
+
+<!-- نافذة بيانات دخول القسم الجديد -->
+<div class="modal-bg" id="credModal">
+  <div class="modal">
+    <h3>تم إنشاء القسم بنجاح</h3>
+    <p style="color:var(--slate); font-size:13.5px">احفظوا هذه البيانات الآن وسلّموها للقسم — لن تظهر كلمة المرور مرة أخرى.</p>
+    <div class="cred-box">
+      <div class="row"><span>اسم المستخدم:</span><b id="credUser"></b></div>
+      <div class="row"><span>كلمة المرور:</span><b id="credPass"></b></div>
+    </div>
+    <button class="btn full gold" id="closeModalBtn" style="margin-top:16px">تم، أغلق النافذة</button>
+  </div>
+</div>
 
 <script type="module">
-import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-/* ===== Supabase: الرابط والمفتاح ===== */
-const SUPABASE_URL='https://zlqlxneqjtmgfocmyqwi.supabase.co';
-const SUPABASE_KEY='sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW';
-const supabase=createClient(SUPABASE_URL,SUPABASE_KEY);
+/* ============================================================
+   الإعدادات — عدّلوا فقط رابط المشروع (URL) أدناه
+   تجدونه في: Supabase Dashboard → Settings → API → Project URL
+   ============================================================ */
+const SUPABASE_URL = "ضع-هنا-رابط-مشروعك.supabase.co";
+const SUPABASE_KEY = "sb_publishable_LV_Epn9mXfFj_GvNRs4lIQ_mbOfoYmW";
 
-const $=id=>document.getElementById(id);const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-const loginView=$('loginView'),adminView=$('adminView'),deptView=$('deptView');function show(v){[loginView,adminView,deptView].forEach(x=>x.classList.add('hidden'));v.classList.remove('hidden')}
-async function boot(){const {data:{session}}=await supabase.auth.getSession();if(session)await route(session.user.id);else show(loginView)}
-async function route(uid){const {data:p}=await supabase.from('profiles').select('role,department_id').eq('id',uid).single();if(p?.role==='super_admin'){show(adminView);initAdmin()}else if(p?.role==='department'){show(deptView);initDept(p.department_id)}else{show(loginView);$('loginError').textContent='لم يتم العثور على صلاحية لهذا الحساب.';$('loginError').classList.add('show')}}
-$('loginBtn').onclick=async()=>{const e=$('loginError');e.classList.remove('show');let u=$('userInput').value.trim(),pw=$('passInput').value;if(!u||!pw){e.textContent='يرجى تعبئة اسم المستخدم وكلمة المرور.';e.classList.add('show');return}if(!u.includes('@'))u+='@dept.internal';const b=$('loginBtn');b.disabled=true;b.textContent='جارٍ الدخول...';const {data,error}=await supabase.auth.signInWithPassword({email:u,password:pw});b.disabled=false;b.textContent='دخول';if(error){e.textContent='بيانات الدخول غير صحيحة.';e.classList.add('show');return}route(data.user.id)};
-async function logout(){await supabase.auth.signOut();location.reload()}$('adminLogout').onclick=logout;$('deptLogout').onclick=logout;
+const url = SUPABASE_URL.startsWith("http") ? SUPABASE_URL : `https://${SUPABASE_URL}`;
+const supabase = createClient(url, SUPABASE_KEY);
 
-let adminReady=false;async function initAdmin(){document.querySelectorAll('.admin-tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.admin-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');$('tab-schools').classList.toggle('hidden',t.dataset.tab!=='schools');$('tab-departments').classList.toggle('hidden',t.dataset.tab!=='departments')});if(adminReady)return;adminReady=true;$('addSchool').onclick=addSchool;$('addDept').onclick=addDept;$('deptSchool').onchange=loadDepts;$('closeCred').onclick=()=>$('credModal').classList.remove('show');await loadSchools();await loadSchoolOptions()}
-async function loadSchools(){const {data,error}=await supabase.from('schools').select('*').order('created_at',{ascending:false});const g=$('schoolsGrid');g.innerHTML='';if(error||!data?.length){$('schoolsEmpty').style.display='block';return}$('schoolsEmpty').style.display='none';g.innerHTML=data.map(s=>`<div class="entity"><div class="logo">${s.logo_url?`<img src="${esc(s.logo_url)}">`:''}</div><b>${esc(s.name)}</b><button class="btn small outline" data-id="${s.id}">إدارة الأقسام</button></div>`).join('');g.querySelectorAll('button').forEach(b=>b.onclick=()=>{document.querySelector('.admin-tab[data-tab="departments"]').click();$('deptSchool').value=b.dataset.id;loadDepts()})}
-async function loadSchoolOptions(){const {data}=await supabase.from('schools').select('*').order('created_at',{ascending:false});$('deptSchool').innerHTML=(data||[]).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');if(data?.length)loadDepts()}
-async function loadDepts(){const id=$('deptSchool').value,{data,error}=await supabase.from('departments').select('*').eq('school_id',id).order('created_at',{ascending:false});$('deptBody').innerHTML='';if(error||!data?.length){$('deptEmpty').style.display='block';return}$('deptEmpty').style.display='none';$('deptBody').innerHTML=data.map(d=>`<tr><td>${esc(d.name)}</td><td dir="ltr">${esc(d.username)}</td></tr>`).join('')}
-async function addSchool(){const e=$('schoolError'),s=$('schoolSuccess');e.classList.remove('show');s.classList.remove('show');const name=$('schoolName').value.trim();if(!name){e.textContent='يرجى إدخال اسم المدرسة.';e.classList.add('show');return}const b=$('addSchool');b.disabled=true;try{let logo_url=null,f=$('logoFile').files[0];if(f){const path=Date.now()+'_'+f.name;const u=await supabase.storage.from('logos').upload(path,f);if(u.error)throw u.error;logo_url=supabase.storage.from('logos').getPublicUrl(path).data.publicUrl}const r=await supabase.from('schools').insert({name,logo_url});if(r.error)throw r.error;$('schoolName').value='';$('logoFile').value='';s.classList.add('show');await loadSchools();await loadSchoolOptions()}catch(x){e.textContent='حدث خطأ: '+x.message;e.classList.add('show')}finally{b.disabled=false}}
-async function addDept(){const e=$('deptError');e.classList.remove('show');const school_id=$('deptSchool').value,name=$('deptName').value.trim();if(!school_id||!name){e.textContent='يرجى اختيار المدرسة وإدخال اسم القسم.';e.classList.add('show');return}const b=$('addDept');b.disabled=true;try{const username='d'+Math.random().toString(36).slice(2,8),password=Math.random().toString(36).slice(2,6)+Math.random().toString(36).slice(2,6)+'A1',email=username+'@dept.internal';const temp=createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});const a=await temp.auth.signUp({email,password});if(a.error)throw a.error;if(!a.data.user)throw new Error('لم يتم إنشاء المستخدم.');const d=await supabase.from('departments').insert({school_id,name,username,auth_user_id:a.data.user.id}).select().single();if(d.error)throw d.error;const p=await supabase.from('profiles').insert({id:a.data.user.id,role:'department',department_id:d.data.id});if(p.error)throw p.error;$('credUser').textContent=username;$('credPass').textContent=password;$('credModal').classList.add('show');$('deptName').value='';loadDepts()}catch(x){e.textContent='حدث خطأ: '+x.message;e.classList.add('show')}finally{b.disabled=false}}
+/* ---------- عناصر الشاشات ---------- */
+const loginView = document.getElementById("loginView");
+const adminView = document.getElementById("adminView");
+const deptView = document.getElementById("deptView");
 
-let deptReady=false,myDepartmentId=null,mySchoolInfo=null;async function initDept(id){myDepartmentId=id;const {data:d}=await supabase.from('departments').select('school_id').eq('id',id).single();if(d?.school_id){const {data:s}=await supabase.from('schools').select('name,logo_url').eq('id',d.school_id).single();mySchoolInfo=s||null}document.querySelectorAll('.dept-tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.dept-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');$('tab-employees').classList.toggle('hidden',t.dataset.tab!=='employees');$('tab-sheet').classList.toggle('hidden',t.dataset.tab!=='sheet');if(t.dataset.tab==='sheet')loadSheet()});if(deptReady){loadEmployees();return}deptReady=true;const n=new Date();$('monthPicker').value=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0');$('addEmp').onclick=addEmployee;$('loadSheet').onclick=loadSheet;$('saveSheet').onclick=saveSheet;$('pdfBtn').onclick=exportPDF;$('wordBtn').onclick=exportWord;$('excelBtn').onclick=exportExcel;loadEmployees()}
-async function addEmployee(){const e=$('empError');e.classList.remove('show');const full_name=$('empName').value.trim(),job_title=$('empJob').value.trim(),start_date=$('empStart').value||null;if(!full_name){e.textContent='يرجى إدخال اسم الموظف.';e.classList.add('show');return}const r=await supabase.from('employees').insert({department_id:myDepartmentId,full_name,job_title,start_date});if(r.error){e.textContent='حدث خطأ: '+r.error.message;e.classList.add('show');return}$('empName').value='';$('empJob').value='';$('empStart').value='';loadEmployees()}
-async function loadEmployees(){const {data,error}=await supabase.from('employees').select('*').eq('department_id',myDepartmentId).order('created_at',{ascending:true});$('empBody').innerHTML='';if(error||!data?.length){$('empEmpty').style.display='block';return}$('empEmpty').style.display='none';$('empBody').innerHTML=data.map((e,i)=>`<tr data-id="${e.id}"><td>${i+1}</td><td class="name-cell"><input class="en" value="${esc(e.full_name||'')}"></td><td><input class="ej" value="${esc(e.job_title||'')}"></td><td><input type="date" class="ed" value="${e.start_date||''}"></td><td>${e.is_active===false?'مجمّد':'نشط'}</td><td><button class="btn small outline save">حفظ</button> <button class="btn small ${e.is_active===false?'gold':'outline'} freeze">${e.is_active===false?'تفعيل':'تجميد'}</button> <button class="btn small danger del">حذف</button></td></tr>`).join('');$('empBody').querySelectorAll('.save').forEach(b=>b.onclick=async ev=>{const tr=ev.target.closest('tr');await supabase.from('employees').update({full_name:tr.querySelector('.en').value.trim(),job_title:tr.querySelector('.ej').value.trim(),start_date:tr.querySelector('.ed').value||null,updated_at:new Date().toISOString()}).eq('id',tr.dataset.id);b.textContent='تم ✓';setTimeout(()=>b.textContent='حفظ',1200)});$('empBody').querySelectorAll('.freeze').forEach(b=>b.onclick=async ev=>{const tr=ev.target.closest('tr'),f=b.textContent==='تفعيل';await supabase.from('employees').update({is_active:f}).eq('id',tr.dataset.id);loadEmployees()});$('empBody').querySelectorAll('.del').forEach(b=>b.onclick=async ev=>{const tr=ev.target.closest('tr');if(confirm('متأكد من حذف الموظف؟')){await supabase.from('employees').delete().eq('id',tr.dataset.id);loadEmployees()}})}
-function monthDate(){return $('monthPicker').value+'-01'}
-async function loadSheet(){const {data:emps,error}=await supabase.from('employees').select('*').eq('department_id',myDepartmentId).eq('is_active',true).order('created_at',{ascending:true});$('sheetBody').innerHTML='';if(error||!emps?.length){$('sheetEmpty').style.display='block';return}$('sheetEmpty').style.display='none';const {data:entries}=await supabase.from('attendance_entries').select('*').eq('month',monthDate()).in('employee_id',emps.map(e=>e.id));const map={};(entries||[]).forEach(e=>map[e.employee_id]=e);$('sheetBody').innerHTML=emps.map((e,i)=>{const x=map[e.id]||{};return `<tr data-emp="${e.id}"><td>${i+1}</td><td class="name-cell">${esc(e.full_name)}</td><td>${esc(e.job_title||'-')}</td><td>${e.start_date||'-'}</td><td><input class="exc" type="number" min="0" value="${x.absence_excused??0}"></td><td><input class="unexc" type="number" min="0" value="${x.absence_unexcused??0}"></td><td class="total">${(x.absence_excused??0)+(x.absence_unexcused??0)}</td><td><input class="absdates" value="${esc(x.absence_dates||'')}"></td><td><input class="late" type="number" min="0" value="${x.late_minutes??0}"></td><td><input class="early" type="number" min="0" value="${x.early_leave_minutes??0}"></td><td><input class="nofp" type="number" min="0" value="${x.no_fingerprint_days??0}"></td><td><input class="perm" type="number" min="0" value="${x.permission_days??0}"></td><td><input class="extra" type="number" min="0" value="${x.extra_classes??0}"></td><td><input class="ack" type="checkbox" ${x.teacher_ack?'checked':''}></td><td><input class="notes" value="${esc(x.notes||'')}"></td></tr>`}).join('');$('sheetBody').querySelectorAll('tr').forEach(tr=>{const a=tr.querySelector('.exc'),b=tr.querySelector('.unexc'),t=tr.querySelector('.total');const f=()=>t.textContent=(+a.value||0)+(+b.value||0);a.oninput=f;b.oninput=f})}
-async function saveSheet(){const rows=[...$('sheetBody').querySelectorAll('tr')];if(!rows.length)return;const payload=rows.map(tr=>({employee_id:tr.dataset.emp,month:monthDate(),absence_excused:+tr.querySelector('.exc').value||0,absence_unexcused:+tr.querySelector('.unexc').value||0,absence_dates:tr.querySelector('.absdates').value,late_minutes:+tr.querySelector('.late').value||0,early_leave_minutes:+tr.querySelector('.early').value||0,no_fingerprint_days:+tr.querySelector('.nofp').value||0,permission_days:+tr.querySelector('.perm').value||0,extra_classes:+tr.querySelector('.extra').value||0,teacher_ack:tr.querySelector('.ack').checked,notes:tr.querySelector('.notes').value,updated_at:new Date().toISOString()}));const {error}=await supabase.from('attendance_entries').upsert(payload,{onConflict:'employee_id,month'});if(error){$('sheetError').textContent='حدث خطأ أثناء الحفظ: '+error.message;$('sheetError').classList.add('show');return}$('sheetSuccess').classList.add('show');setTimeout(()=>$('sheetSuccess').classList.remove('show'),1800)}
+function showView(view) {
+  loginView.classList.add("hidden");
+  adminView.classList.add("hidden");
+  deptView.classList.add("hidden");
+  view.classList.remove("hidden");
+}
 
-function reportData(){const rows=[...$('sheetBody').querySelectorAll('tr')],m=$('monthPicker').value,[y,mo]=m.split('-'),months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];return {monthLabel:months[+mo-1]+' '+y+'م',rows:rows.map((tr,i)=>({n:i+1,name:tr.children[1].textContent.trim(),job:tr.children[2].textContent.trim(),start:tr.children[3].textContent.trim(),exc:tr.querySelector('.exc').value||0,unexc:tr.querySelector('.unexc').value||0,total:tr.querySelector('.total').textContent,abs:tr.querySelector('.absdates').value,late:tr.querySelector('.late').value||0,early:tr.querySelector('.early').value||0,nofp:tr.querySelector('.nofp').value||0,perm:tr.querySelector('.perm').value||0,extra:tr.querySelector('.extra').value||0,ack:tr.querySelector('.ack').checked?'✓':'',notes:tr.querySelector('.notes').value}))}}
-function reportHTML(){const d=reportData(),today=new Date(),date=`${String(today.getDate()).padStart(2,'0')} / ${String(today.getMonth()+1).padStart(2,'0')} / ${today.getFullYear()}م`,rows=d.rows.map(r=>`<tr><td>${r.n}</td><td>${esc(r.name)}</td><td>${esc(r.job)}</td><td>${r.start}</td><td>${r.exc}</td><td>${r.unexc}</td><td>${r.total}</td><td>${esc(r.abs)}</td><td>${r.late}</td><td>${r.early}</td><td>${r.nofp}</td><td>${r.perm}</td><td>${r.extra}</td><td>${r.ack}</td><td>${esc(r.notes)}</td></tr>`).join('');return `<div class="print-page"><div class="print-header"><div class="right"><b style="font-size:17px">${esc(mySchoolInfo?.name||'')}</b><div>تحت إشراف وزارة التعليم - منطقة الرياض</div><div>الإدارة العامة للمدارس</div></div><div class="print-logo">${mySchoolInfo?.logo_url?`<img src="${esc(mySchoolInfo.logo_url)}">`:''}</div><div class="left"><div>الرقيم: ................................</div><div>التاريخ: ................................</div><div>الموافق: ${date}</div><div>المرفقات: ................................</div></div></div><div class="print-line"></div><div class="print-title">مسير شهر ${esc(d.monthLabel)}</div><table class="export-table"><thead><tr><th>م</th><th>اسم الموظف</th><th>المسمى الوظيفي</th><th>تاريخ المباشرة</th><th>بعذر</th><th>بدون عذر</th><th>مجموع</th><th>تاريخ الغياب ميلادي</th><th>دقائق التأخير</th><th>دقائق الانصراف المبكر</th><th>أيام عدم البصمة</th><th>أيام الاستئذان</th><th>حصص إضافية</th><th>توقيع المعلم بالعلم</th><th>ملاحظات</th></tr></thead><tbody>${rows}</tbody></table><div class="print-footer"><span>مسير الموظفين الشهري</span><span>${date}</span></div></div>`}
-function canExport(){if(!$('sheetBody').querySelector('tr')){alert('لا يوجد بيانات لتصديرها — حمّل المسير أولاً.');return false}return true}
-function exportPDF(){if(!canExport())return;$('printArea').innerHTML=reportHTML();document.body.classList.add('printing');setTimeout(()=>window.print(),100)}window.onafterprint=()=>{document.body.classList.remove('printing');$('printArea').innerHTML=''}
-function exportWord(){if(!canExport())return;const css='<style>body{direction:rtl;font-family:Arial,Tahoma}.print-header{display:grid;grid-template-columns:1fr 150px 1fr}.print-header .right,.print-header .left{font-size:14px;line-height:2}.print-header .left{text-align:left}.print-logo{text-align:center}.print-logo img{max-width:120px;max-height:120px}.print-line{border-top:2px solid #777}.print-title{text-align:center;font-size:20px;font-weight:bold;margin:15px}.export-table{width:100%;border-collapse:collapse;direction:rtl;font-size:9px}.export-table th,.export-table td{border:1px solid #777;padding:5px;text-align:center}.export-table th{background:#FFE59A}.print-footer{display:flex;justify-content:space-between}</style>';const html='<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">'+css+'</head><body>'+reportHTML()+'</body></html>';const blob=new Blob(['\ufeff',html],{type:'application/msword;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='مسير-'+reportData().monthLabel.replace(/\s+/g,'-')+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-function exportExcel(){if(!canExport())return;const d=reportData(),rows=[['مدارس '+(mySchoolInfo?.name||'')],['تحت إشراف وزارة التعليم - منطقة الرياض'],['مسير شهر '+d.monthLabel],['م','اسم الموظف','المسمى الوظيفي','تاريخ المباشرة','بعذر','بدون عذر','مجموع','تاريخ الغياب ميلادي','دقائق التأخير','دقائق الانصراف المبكر','أيام عدم البصمة','أيام الاستئذان','حصص إضافية','توقيع المعلم بالعلم','ملاحظات'],...d.rows.map(r=>[r.n,r.name,r.job,r.start,r.exc,r.unexc,r.total,r.abs,r.late,r.early,r.nofp,r.perm,r.extra,r.ack,r.notes])];const ws=XLSX.utils.aoa_to_sheet(rows);ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:14}},{s:{r:1,c:0},e:{r:1,c:14}},{s:{r:2,c:0},e:{r:2,c:14}}];ws['!cols']=[{wch:5},{wch:25},{wch:22},{wch:15},{wch:9},{wch:10},{wch:9},{wch:22},{wch:15},{wch:18},{wch:16},{wch:15},{wch:13},{wch:18},{wch:25}];const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'المسير');XLSX.writeFile(wb,'مسير-'+d.monthLabel.replace(/\s+/g,'-')+'.xlsx')}
-boot();
+/* ---------- تسجيل الدخول ---------- */
+async function bootstrap() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    await routeByRole(session.user.id);
+  } else {
+    showView(loginView);
+  }
+}
+
+async function routeByRole(userId) {
+  const { data: profile } = await supabase.from("profiles").select("role, department_id").eq("id", userId).single();
+  if (profile?.role === "super_admin") {
+    showView(adminView);
+    await initAdmin();
+  } else if (profile?.role === "department") {
+    showView(deptView);
+    await initDept(profile.department_id);
+  } else {
+    document.getElementById("loginError").textContent = "لم يتم العثور على صلاحية لهذا الحساب.";
+    document.getElementById("loginError").classList.add("show");
+    showView(loginView);
+  }
+}
+
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const errBox = document.getElementById("loginError");
+  errBox.classList.remove("show");
+  let user = document.getElementById("userInput").value.trim();
+  const password = document.getElementById("passInput").value;
+  if (!user || !password) {
+    errBox.textContent = "يرجى تعبئة اسم المستخدم وكلمة المرور.";
+    errBox.classList.add("show");
+    return;
+  }
+  const email = user.includes("@") ? user : `${user}@dept.internal`;
+  const btn = document.getElementById("loginBtn");
+  btn.disabled = true; btn.textContent = "جارٍ الدخول...";
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = "دخول";
+  if (error) {
+    errBox.textContent = "بيانات الدخول غير صحيحة.";
+    errBox.classList.add("show");
+    return;
+  }
+  await routeByRole(data.user.id);
+});
+
+document.getElementById("adminLogoutBtn").addEventListener("click", doLogout);
+document.getElementById("deptLogoutBtn").addEventListener("click", doLogout);
+async function doLogout() {
+  await supabase.auth.signOut();
+  location.reload();
+}
+
+/* ============================================================
+   لوحة الأدمن العام
+   ============================================================ */
+let adminInitialized = false;
+async function initAdmin() {
+  document.querySelectorAll(".admin-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById("tab-schools").classList.toggle("hidden", tab.dataset.tab !== "schools");
+      document.getElementById("tab-departments").classList.toggle("hidden", tab.dataset.tab !== "departments");
+    });
+  });
+
+  if (adminInitialized) return;
+  adminInitialized = true;
+
+  const logoFile = document.getElementById("logoFile");
+  const logoDrop = document.getElementById("logoDrop");
+  const logoDropText = document.getElementById("logoDropText");
+  logoFile.addEventListener("change", () => {
+    const f = logoFile.files[0];
+    if (!f) return;
+    logoDrop.classList.add("has-file");
+    logoDropText.innerHTML = `<b>تم اختيار:</b> ${f.name}`;
+  });
+
+  document.getElementById("addSchoolBtn").addEventListener("click", async () => {
+    const errorBox = document.getElementById("schoolError");
+    const successBox = document.getElementById("schoolSuccess");
+    errorBox.classList.remove("show"); successBox.classList.remove("show");
+    const name = document.getElementById("schoolName").value.trim();
+    if (!name) {
+      errorBox.textContent = "يرجى إدخال اسم المدرسة.";
+      errorBox.classList.add("show");
+      return;
+    }
+    const btn = document.getElementById("addSchoolBtn");
+    btn.disabled = true; btn.textContent = "جارٍ الحفظ...";
+    try {
+      let logo_url = null;
+      const file = logoFile.files[0];
+      if (file) {
+        const path = `${Date.now()}_${file.name}`;
+        const { error: upErr } = await supabase.storage.from("logos").upload(path, file);
+        if (upErr) throw upErr;
+        const { data: pub } = supabase.storage.from("logos").getPublicUrl(path);
+        logo_url = pub.publicUrl;
+      }
+      const { error: insErr } = await supabase.from("schools").insert({ name, logo_url });
+      if (insErr) throw insErr;
+      successBox.classList.add("show");
+      document.getElementById("schoolName").value = "";
+      logoFile.value = "";
+      logoDrop.classList.remove("has-file");
+      logoDropText.innerHTML = "<b>اضغط لاختيار الشعار</b>";
+      await loadSchools();
+    } catch (err) {
+      errorBox.textContent = "حدث خطأ: " + err.message;
+      errorBox.classList.add("show");
+    } finally {
+      btn.disabled = false; btn.textContent = "إضافة المدرسة";
+    }
+  });
+
+  document.getElementById("addDeptBtn").addEventListener("click", addDepartment);
+  document.getElementById("deptSchoolSelect").addEventListener("change", loadDepartments);
+  document.getElementById("closeModalBtn").addEventListener("click", () => {
+    document.getElementById("credModal").classList.remove("show");
+  });
+
+  await loadSchools();
+  await loadSchoolOptions();
+}
+
+async function loadSchools() {
+  const grid = document.getElementById("schoolsGrid");
+  const emptyState = document.getElementById("schoolsEmpty");
+  const { data, error } = await supabase.from("schools").select("*").order("created_at", { ascending: false });
+  if (error || !data || !data.length) {
+    grid.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
+  emptyState.style.display = "none";
+  grid.innerHTML = data.map(s => `
+    <div class="entity-card">
+      <div class="logo-mini">${s.logo_url ? `<img src="${s.logo_url}" style="width:100%;height:100%;object-fit:contain">` : ""}</div>
+      <div class="name">${s.name}</div>
+      <button class="btn small outline goto-dept" data-id="${s.id}">إدارة الأقسام</button>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".goto-dept").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelector('.admin-tab[data-tab="departments"]').click();
+      document.getElementById("deptSchoolSelect").value = btn.dataset.id;
+      loadDepartments();
+    });
+  });
+}
+
+async function loadSchoolOptions() {
+  const { data: schools } = await supabase.from("schools").select("*").order("created_at", { ascending: false });
+  const select = document.getElementById("deptSchoolSelect");
+  select.innerHTML = (schools || []).map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+  if (schools && schools.length) await loadDepartments();
+}
+
+async function loadDepartments() {
+  const schoolId = document.getElementById("deptSchoolSelect").value;
+  const body = document.getElementById("deptBody");
+  const emptyState = document.getElementById("deptEmpty");
+  if (!schoolId) return;
+  const { data, error } = await supabase.from("departments").select("*").eq("school_id", schoolId).order("created_at", { ascending: false });
+  if (error || !data || !data.length) {
+    body.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
+  emptyState.style.display = "none";
+  body.innerHTML = data.map(d => `<tr><td>${d.name}</td><td style="direction:ltr">${d.username}</td></tr>`).join("");
+}
+
+// إنشاء حساب قسم جديد مباشرة من المتصفح، دون أي سيرفر إضافي:
+// نستخدم عميل Supabase منفصل ومؤقت (لا يحفظ الجلسة) لإنشاء المستخدم،
+// حتى لا تنقطع جلسة دخول الأدمن الحالية.
+async function addDepartment() {
+  const errorBox = document.getElementById("deptError");
+  errorBox.classList.remove("show");
+  const schoolId = document.getElementById("deptSchoolSelect").value;
+  const deptName = document.getElementById("deptName").value.trim();
+  if (!schoolId || !deptName) {
+    errorBox.textContent = "يرجى اختيار المدرسة وإدخال اسم القسم.";
+    errorBox.classList.add("show");
+    return;
+  }
+  const btn = document.getElementById("addDeptBtn");
+  btn.disabled = true; btn.textContent = "جارٍ الإنشاء...";
+
+  try {
+    const username = "d" + Math.random().toString(36).slice(2, 8);
+    const password = Math.random().toString(36).slice(2, 6) + Math.random().toString(36).slice(2, 6) + "A1";
+    const email = `${username}@dept.internal`;
+
+    // عميل مؤقت منفصل — persistSession:false يمنعه من الكتابة فوق جلسة الأدمن الحالية
+    const tempClient = createClient(url, SUPABASE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false }
+    });
+
+    const { data: signUpData, error: signUpErr } = await tempClient.auth.signUp({ email, password });
+    if (signUpErr) throw signUpErr;
+    if (!signUpData.user) throw new Error("لم يتم إنشاء المستخدم — تأكدوا أن خيار 'Confirm email' مُعطَّل في إعدادات Supabase.");
+
+    const newUserId = signUpData.user.id;
+
+    const { data: dept, error: deptErr } = await supabase.from("departments").insert({
+      school_id: schoolId, name: deptName, username, auth_user_id: newUserId
+    }).select().single();
+    if (deptErr) throw deptErr;
+
+    const { error: profErr } = await supabase.from("profiles").insert({
+      id: newUserId, role: "department", department_id: dept.id
+    });
+    if (profErr) throw profErr;
+
+    document.getElementById("credUser").textContent = username;
+    document.getElementById("credPass").textContent = password;
+    document.getElementById("credModal").classList.add("show");
+    document.getElementById("deptName").value = "";
+    await loadDepartments();
+  } catch (err) {
+    errorBox.textContent = "حدث خطأ: " + err.message;
+    errorBox.classList.add("show");
+  } finally {
+    btn.disabled = false; btn.textContent = "إضافة القسم وتوليد بيانات الدخول";
+  }
+}
+
+/* ============================================================
+   لوحة القسم
+   ============================================================ */
+let deptInitialized = false;
+let myDepartmentId = null;
+let mySchoolInfo = null;
+
+async function initDept(departmentId) {
+  myDepartmentId = departmentId;
+
+  const { data: deptRow } = await supabase.from("departments").select("school_id, name").eq("id", departmentId).single();
+  if (deptRow?.school_id) {
+    const { data: schoolRow } = await supabase.from("schools").select("name, logo_url").eq("id", deptRow.school_id).single();
+    mySchoolInfo = schoolRow || null;
+  }
+
+  document.querySelectorAll(".dept-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".dept-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById("tab-employees").classList.toggle("hidden", tab.dataset.tab !== "employees");
+      document.getElementById("tab-sheet").classList.toggle("hidden", tab.dataset.tab !== "sheet");
+      if (tab.dataset.tab === "sheet") loadSheet();
+    });
+  });
+
+  if (deptInitialized) { await loadEmployees(); return; }
+  deptInitialized = true;
+
+  const monthPicker = document.getElementById("monthPicker");
+  const now = new Date();
+  monthPicker.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+  document.getElementById("addEmpBtn").addEventListener("click", addEmployee);
+  document.getElementById("loadSheetBtn").addEventListener("click", loadSheet);
+  document.getElementById("saveAllBtn").addEventListener("click", saveSheet);
+  document.getElementById("saveAllBtn2").addEventListener("click", saveSheet);
+  document.getElementById("exportPdfBtn").addEventListener("click", exportPDF);
+  document.getElementById("exportExcelBtn").addEventListener("click", exportExcel);
+  document.getElementById("exportWordBtn").addEventListener("click", exportWord);
+
+  await loadEmployees();
+}
+
+async function addEmployee() {
+  const errorBox = document.getElementById("empError");
+  errorBox.classList.remove("show");
+  const full_name = document.getElementById("empName").value.trim();
+  const job_title = document.getElementById("empJob").value.trim();
+  const start_date = document.getElementById("empStart").value || null;
+  if (!full_name) {
+    errorBox.textContent = "يرجى إدخال اسم الموظف.";
+    errorBox.classList.add("show");
+    return;
+  }
+  const btn = document.getElementById("addEmpBtn");
+  btn.disabled = true;
+  const { error } = await supabase.from("employees").insert({ department_id: myDepartmentId, full_name, job_title, start_date });
+  btn.disabled = false;
+  if (error) {
+    errorBox.textContent = "حدث خطأ: " + error.message;
+    errorBox.classList.add("show");
+    return;
+  }
+  document.getElementById("empName").value = "";
+  document.getElementById("empJob").value = "";
+  document.getElementById("empStart").value = "";
+  await loadEmployees();
+}
+
+async function loadEmployees() {
+  const body = document.getElementById("empBody");
+  const emptyState = document.getElementById("empEmpty");
+  const { data, error } = await supabase.from("employees").select("*").order("created_at", { ascending: true });
+  if (error || !data || !data.length) {
+    body.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
+  emptyState.style.display = "none";
+  body.innerHTML = data.map((e, i) => `
+    <tr data-id="${e.id}" style="${e.is_active === false ? "opacity:.55" : ""}">
+      <td>${i + 1}</td>
+      <td class="name-cell"><input type="text" class="f-name" value="${e.full_name || ""}"></td>
+      <td><input type="text" class="f-job" value="${e.job_title || ""}"></td>
+      <td><input type="date" class="f-date" value="${e.start_date || ""}"></td>
+      <td>${e.is_active === false
+        ? `<span style="color:var(--danger); font-weight:700; font-size:12px">مجمّد</span>`
+        : `<span style="color:var(--success); font-weight:700; font-size:12px">نشط</span>`}</td>
+      <td style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap">
+        <button class="btn small outline save-btn">حفظ</button>
+        <button class="btn small ${e.is_active === false ? "gold" : "outline"} freeze-btn">${e.is_active === false ? "تفعيل" : "تجميد"}</button>
+        <button class="btn small danger-outline delete-btn">حذف</button>
+      </td>
+    </tr>`).join("");
+  body.querySelectorAll(".save-btn").forEach(saveBtn => {
+    saveBtn.addEventListener("click", async (ev) => {
+      const tr = ev.target.closest("tr");
+      const id = tr.dataset.id;
+      const full_name = tr.querySelector(".f-name").value.trim();
+      const job_title = tr.querySelector(".f-job").value.trim();
+      const start_date = tr.querySelector(".f-date").value || null;
+      saveBtn.disabled = true; saveBtn.textContent = "...";
+      const { error } = await supabase.from("employees").update({ full_name, job_title, start_date, updated_at: new Date().toISOString() }).eq("id", id);
+      saveBtn.disabled = false; saveBtn.textContent = error ? "خطأ" : "تم ✓";
+      setTimeout(() => (saveBtn.textContent = "حفظ"), 1500);
+    });
+  });
+  body.querySelectorAll(".freeze-btn").forEach(freezeBtn => {
+    freezeBtn.addEventListener("click", async (ev) => {
+      const tr = ev.target.closest("tr");
+      const id = tr.dataset.id;
+      const currentlyFrozen = freezeBtn.textContent.trim() === "تفعيل";
+      freezeBtn.disabled = true;
+      const { error } = await supabase.from("employees").update({ is_active: currentlyFrozen, updated_at: new Date().toISOString() }).eq("id", id);
+      freezeBtn.disabled = false;
+      if (error) { alert("حدث خطأ: " + error.message); return; }
+      await loadEmployees();
+    });
+  });
+  body.querySelectorAll(".delete-btn").forEach(delBtn => {
+    delBtn.addEventListener("click", async (ev) => {
+      const tr = ev.target.closest("tr");
+      const id = tr.dataset.id;
+      const name = tr.querySelector(".f-name").value.trim();
+      if (!confirm(`متأكد تبي تحذف "${name}"؟ سيتم حذف كل سجلات المسير الخاصة به أيضًا ولا يمكن التراجع.`)) return;
+      delBtn.disabled = true; delBtn.textContent = "...";
+      const { error } = await supabase.from("employees").delete().eq("id", id);
+      if (error) {
+        alert("حدث خطأ أثناء الحذف: " + error.message);
+        delBtn.disabled = false; delBtn.textContent = "حذف";
+        return;
+      }
+      await loadEmployees();
+    });
+  });
+}
+
+function monthToDate(monthStr) { return `${monthStr}-01`; }
+
+async function loadSheet() {
+  const errorBox = document.getElementById("sheetError");
+  const successBox = document.getElementById("sheetSuccess");
+  errorBox.classList.remove("show"); successBox.classList.remove("show");
+  const body = document.getElementById("sheetBody");
+  const emptyState = document.getElementById("sheetEmpty");
+
+  const { data: employees, error: empErr } = await supabase.from("employees").select("*").eq("is_active", true).order("created_at", { ascending: true });
+  if (empErr || !employees || !employees.length) {
+    body.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
+  emptyState.style.display = "none";
+
+  const monthDate = monthToDate(document.getElementById("monthPicker").value);
+  const { data: entries } = await supabase.from("attendance_entries").select("*").eq("month", monthDate).in("employee_id", employees.map(e => e.id));
+  const entryMap = {};
+  (entries || []).forEach(e => (entryMap[e.employee_id] = e));
+
+  body.innerHTML = employees.map((emp, i) => {
+    const en = entryMap[emp.id] || {};
+    return `
+    <tr data-emp="${emp.id}">
+      <td>${i + 1}</td>
+      <td class="name-cell">${emp.full_name}</td>
+      <td>${emp.job_title || "-"}</td>
+      <td>${emp.start_date || "-"}</td>
+      <td><input type="number" min="0" class="f-exc" value="${en.absence_excused ?? 0}"></td>
+      <td><input type="number" min="0" class="f-unexc" value="${en.absence_unexcused ?? 0}"></td>
+      <td class="f-total">${(en.absence_excused ?? 0) + (en.absence_unexcused ?? 0)}</td>
+      <td><input type="text" class="f-absdates" value="${en.absence_dates || ""}" placeholder="مثال: 2026-06-05"></td>
+      <td><input type="number" min="0" class="f-late" value="${en.late_minutes ?? 0}"></td>
+      <td><input type="number" min="0" class="f-early" value="${en.early_leave_minutes ?? 0}"></td>
+      <td><input type="number" min="0" class="f-nofp" value="${en.no_fingerprint_days ?? 0}"></td>
+      <td><input type="number" min="0" class="f-perm" value="${en.permission_days ?? 0}"></td>
+      <td><input type="number" min="0" class="f-extra" value="${en.extra_classes ?? 0}"></td>
+      <td><input type="checkbox" class="f-ack" ${en.teacher_ack ? "checked" : ""}></td>
+      <td><input type="text" class="f-notes" value="${en.notes || ""}"></td>
+    </tr>`;
+  }).join("");
+
+  body.querySelectorAll("tr").forEach(tr => {
+    const exc = tr.querySelector(".f-exc"), unexc = tr.querySelector(".f-unexc"), total = tr.querySelector(".f-total");
+    function updateTotal() { total.textContent = (Number(exc.value) || 0) + (Number(unexc.value) || 0); }
+    exc.addEventListener("input", updateTotal);
+    unexc.addEventListener("input", updateTotal);
+  });
+}
+
+async function saveSheet() {
+  const errorBox = document.getElementById("sheetError");
+  const successBox = document.getElementById("sheetSuccess");
+  errorBox.classList.remove("show"); successBox.classList.remove("show");
+
+  const monthDate = monthToDate(document.getElementById("monthPicker").value);
+  const rows = document.getElementById("sheetBody").querySelectorAll("tr");
+  if (!rows.length) return;
+
+  const payload = Array.from(rows).map(tr => ({
+    employee_id: tr.dataset.emp,
+    month: monthDate,
+    absence_excused: Number(tr.querySelector(".f-exc").value) || 0,
+    absence_unexcused: Number(tr.querySelector(".f-unexc").value) || 0,
+    absence_dates: tr.querySelector(".f-absdates").value.trim(),
+    late_minutes: Number(tr.querySelector(".f-late").value) || 0,
+    early_leave_minutes: Number(tr.querySelector(".f-early").value) || 0,
+    no_fingerprint_days: Number(tr.querySelector(".f-nofp").value) || 0,
+    permission_days: Number(tr.querySelector(".f-perm").value) || 0,
+    extra_classes: Number(tr.querySelector(".f-extra").value) || 0,
+    teacher_ack: tr.querySelector(".f-ack").checked,
+    notes: tr.querySelector(".f-notes").value.trim(),
+    updated_at: new Date().toISOString()
+  }));
+
+  const { error } = await supabase.from("attendance_entries").upsert(payload, { onConflict: "employee_id,month" });
+  if (error) {
+    errorBox.textContent = "حدث خطأ أثناء الحفظ: " + error.message;
+    errorBox.classList.add("show");
+    return;
+  }
+  successBox.classList.add("show");
+}
+
+const arabicMonths = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+
+// عناوين نظيفة (بدون فواصل أسطر) — تُستخدم في Excel حيث لا يصح ظهور وسوم HTML
+const REPORT_HEADERS = ["م","اسم الموظف","المسمى الوظيفي","تاريخ المباشرة","بعذر","بدون عذر","مجموع","تاريخ الغياب (ميلادي)","دقائق التأخير","دقائق الانصراف المبكر","أيام عدم البصمة","أيام الاستئذان","حصص إضافية","توقيع العلم","ملاحظات"];
+// نفس العناوين لكن مقسّمة على سطرين حيث يلزم — لعرض أنظف في PDF/Word (لا مشكلة إطلاقًا أن يظهر العنوان تحت بعضه)
+const REPORT_HEADERS_DISPLAY = ["م","اسم الموظف","المسمى<br>الوظيفي","تاريخ<br>المباشرة","بعذر","بدون<br>عذر","مجموع","تاريخ الغياب<br>(ميلادي)","دقائق<br>التأخير","دقائق الانصراف<br>المبكر","أيام عدم<br>البصمة","أيام<br>الاستئذان","حصص<br>إضافية","توقيع<br>العلم","ملاحظات"];
+// عرض كل عمود كنسبة مئوية (المجموع = 100) — يمنع تداخل الأعمدة في PDF/Word
+const REPORT_COL_WIDTHS = [3, 12, 9, 7, 4, 5, 4, 9, 6, 7, 7, 6, 6, 6, 9];
+
+// يجمع بيانات المسير الحالية المعروضة على الشاشة (تشمل أي تعديل لسا ما انحفظ)
+// ليستخدمها كل من تصدير PDF وExcel وWord بنفس البيانات بالضبط
+function getReportData() {
+  const rows = document.getElementById("sheetBody").querySelectorAll("tr");
+  if (!rows.length) return null;
+
+  const [y, m] = document.getElementById("monthPicker").value.split("-");
+  const monthLabel = `${arabicMonths[parseInt(m, 10) - 1]} ${y}`;
+  const today = new Date();
+  const todayLabel = `${String(today.getDate()).padStart(2,"0")} / ${String(today.getMonth()+1).padStart(2,"0")} / ${today.getFullYear()}م`;
+
+  const dataRows = Array.from(rows).map((tr, i) => [
+    String(i + 1),
+    tr.querySelector(".name-cell").textContent,
+    tr.children[2].textContent,
+    tr.children[3].textContent,
+    tr.querySelector(".f-exc").value || "0",
+    tr.querySelector(".f-unexc").value || "0",
+    tr.querySelector(".f-total").textContent,
+    tr.querySelector(".f-absdates").value,
+    tr.querySelector(".f-late").value || "0",
+    tr.querySelector(".f-early").value || "0",
+    tr.querySelector(".f-nofp").value || "0",
+    tr.querySelector(".f-perm").value || "0",
+    tr.querySelector(".f-extra").value || "0",
+    tr.querySelector(".f-ack").checked ? "✓" : "",
+    tr.querySelector(".f-notes").value
+  ]);
+
+  return { monthLabel, todayLabel, dataRows };
+}
+
+// ترويسة موحّدة (مبنية كجدول وليس flexbox، لأن Word لا يدعم flexbox إطلاقًا)
+// تُستخدم في كل من PDF وWord لضمان تطابق الشكل
+function buildHeaderHtml(todayLabel) {
+  const logoCell = mySchoolInfo?.logo_url
+    ? `<img src="${mySchoolInfo.logo_url}" style="width:72px; height:72px; object-fit:contain; border-radius:50%; border:2px solid #C9A24B;">`
+    : "";
+  return `
+    <table style="width:100%; border-collapse:collapse; margin-bottom:8px;" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="width:38%; vertical-align:top; text-align:right; line-height:1.9; font-size:12px;">
+          <div style="font-weight:bold; font-size:14px;">${mySchoolInfo?.name || ""}</div>
+          <div>تحت إشراف وزارة التعليم ـ منطقة الرياض</div>
+          <div>الادارة العامة للمدارس</div>
+        </td>
+        <td style="width:24%; vertical-align:top; text-align:center;">${logoCell}</td>
+        <td style="width:38%; vertical-align:top; text-align:right; line-height:1.9; font-size:12px;">
+          <div>الرقيم: ................................</div>
+          <div>التاريخ: ................................</div>
+          <div>الموافق: ${todayLabel}</div>
+          <div>المرفقات: ................................</div>
+        </td>
+      </tr>
+    </table>`;
+}
+
+function buildColgroupHtml() {
+  return `<colgroup>${REPORT_COL_WIDTHS.map(w => `<col style="width:${w}%">`).join("")}</colgroup>`;
+}
+
+function exportPDF() {
+  const report = getReportData();
+  if (!report) { alert("لا يوجد بيانات لتصديرها — حمّلوا المسير أولاً."); return; }
+
+  const rowsHtml = report.dataRows.map(r => `
+    <tr>
+      <td>${r[0]}</td><td class="pr-name">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td>
+      <td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td>
+      <td>${r[8]}</td><td>${r[9]}</td><td>${r[10]}</td><td>${r[11]}</td>
+      <td>${r[12]}</td><td>${r[13]}</td><td>${r[14]}</td>
+    </tr>`).join("");
+
+  const printArea = document.getElementById("printArea");
+  printArea.innerHTML = `
+    ${buildHeaderHtml(report.todayLabel)}
+    <hr style="border:none; border-top:1.5px solid #999; margin:8px 0 14px">
+    <div style="text-align:center; margin-bottom:12px">
+      <h3 style="margin:0; font-size:15px">مسير شهر ${report.monthLabel}</h3>
+    </div>
+    <table>
+      ${buildColgroupHtml()}
+      <thead><tr>${REPORT_HEADERS_DISPLAY.map(h => `<th>${h}</th>`).join("")}</tr></thead>
+      <tbody>${rowsHtml}</tbody>
+    </table>
+  `;
+
+  document.body.classList.add("printing");
+  window.print();
+}
+
+window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+async function exportExcel() {
+  const report = getReportData();
+  if (!report) { alert("لا يوجد بيانات لتصديرها — حمّلوا المسير أولاً."); return; }
+
+  const XLSX = await import("https://esm.sh/xlsx@0.18.5");
+
+  const titleRows = [
+    [mySchoolInfo?.name || ""],
+    ["تحت إشراف وزارة التعليم ـ منطقة الرياض"],
+    ["الادارة العامة للمدارس"],
+    [`مسير شهر ${report.monthLabel}`],
+    []
+  ];
+  const sheetData = [...titleRows, REPORT_HEADERS, ...report.dataRows];
+
+  const ws = XLSX.utils.aoa_to_sheet(sheetData);
+  ws["!cols"] = REPORT_HEADERS.map((_, i) => ({ wch: Math.max(10, Math.round(REPORT_COL_WIDTHS[i] * 1.3)) }));
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "المسير");
+
+  const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  downloadBlob(new Blob([wbout], { type: "application/octet-stream" }), `مسير-${report.monthLabel}.xlsx`);
+}
+
+function exportWord() {
+  const report = getReportData();
+  if (!report) { alert("لا يوجد بيانات لتصديرها — حمّلوا المسير أولاً."); return; }
+
+  const rowsHtml = report.dataRows.map(r => `
+    <tr>${r.map((v, idx) => `<td style="${idx === 1 ? "text-align:right;font-weight:bold;" : "text-align:center;"} border:1px solid #999; padding:4px 6px">${v}</td>`).join("")}</tr>
+  `).join("");
+
+  const html = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+      <meta charset="UTF-8">
+      <title>مسير ${report.monthLabel}</title>
+      <!--[if gte mso 9]>
+      <xml>
+        <w:WordDocument>
+          <w:View>Print</w:View>
+        </w:WordDocument>
+      </xml>
+      <![endif]-->
+      <style>
+        @page { size: 842pt 595pt; mso-page-orientation: landscape; margin: 1.5cm; }
+        div.WordSection1 { page: WordSection1; }
+        body { font-family: Tahoma, Arial; font-size: 11.5pt; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #999; padding: 4px 6px; }
+      </style>
+    </head>
+    <body dir="rtl">
+      <div class="WordSection1">
+        ${buildHeaderHtml(report.todayLabel)}
+        <hr>
+        <div style="text-align:center; margin:10px 0"><h3>مسير شهر ${report.monthLabel}</h3></div>
+        <table style="width:100%">
+          ${buildColgroupHtml()}
+          <thead><tr>${REPORT_HEADERS_DISPLAY.map(h => `<th style="background:#E4C979">${h}</th>`).join("")}</tr></thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      </div>
+    </body>
+    </html>`;
+
+  downloadBlob(new Blob(["\ufeff", html], { type: "application/msword" }), `مسير-${report.monthLabel}.doc`);
+}
+
+bootstrap();
 </script>
+
 </body>
 </html>
